@@ -29,7 +29,7 @@ try {
     let allowedEdgeBane = undefined;
     if (getAllowedEdgeBaneFunc)
       allowedEdgeBane = await getAllowedEdgeBaneFunc(actualResourceCost);
-    rollResult = (await game.macros.getName(`PowerRoll`).execute({ powerRollStat, allowedEdgeBane }));
+    rollResult = (await game.macros.getName(`Power roll`).execute({ powerRollStat, allowedEdgeBane }));
 
     // Calculate the damage of the ability
     const effect = [ tier1Effect, tier2Effect, tier3Effect ][rollResult.tier - 1];
