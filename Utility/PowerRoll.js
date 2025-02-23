@@ -1,49 +1,18 @@
 try {
-  // Show the quick modifier dialog
-  let modButtons = {
-    negOne: { label: `-1`, callback: () => -1, color: `#8B0000` },
-    zero: { label: `+0`, callback: () => 0, color: `#000000` },
-    one: { label: `+1`, callback: () => 1, color: `#003300` },
-    two: { label: `+2`, callback: () => 2, color: `#004D00` },
-    three: { label: `+3`, callback: () => 3, color: `#006400` },
-    four: { label: `+4`, callback: () => 4, color: `#008000` },
-    custom: { label: `Other`, callback: () => `custom`, color: `#808080` }
-  };
+  const powerRollStat = await game.macros.getName(`ValidateParameter`).execute({ name: `powerRollStat`, value: scope.powerRollStat, type: `string`, nullable: true });
 
-  const modButtonStyles = `
-    <style>
-      button.negOne {
-        color: ${modButtons.negOne.color};
-      }
-      button.zero {
-        color: ${modButtons.zero.color};
-      }
-      button.one {
-        color: ${modButtons.one.color};
-      }
-      button.two {
-        color: ${modButtons.two.color};
-      }
-      button.three {
-        color: ${modButtons.three.color};
-      }
-      button.four {
-        color: ${modButtons.four.color};
-      }
-      button.custom {
-        color: ${modButtons.custom.color};
-      }
-    </style>`
+  // Show the modifier dialog
+  let defaultValue = 0;
+  if (powerRollStat) {
+    const characteristics = await game.macros.getName(`GetCharacteristics`).execute();
+    for (const charName in characteristics)
+      if (powerRollStat.toLowerCase().includes(charName) && characteristics[charName] > defaultValue)
+        defaultValue = characteristics[charName];
+  }
+  else
+    defaultValue = 2;
 
-  let modifier = await Dialog.wait({
-    title: `Modifier`,
-    buttons: modButtons,
-    content: modButtonStyles
-  });
-
-  // Show the custom modifier dialog (if neccessary)
-  if (modifier === `custom`)
-    modifier = await game.macros.getName(`ShowSimpleInputDialog`).execute({ label: `Modifier` });
+  modifier = await game.macros.getName(`ShowSimpleInputDialog`).execute({ label: `Modifier`, defaultValue });
   if (modifier === ``)
     modifier = 0;
 
