@@ -3,7 +3,7 @@ try {
 
   const resourceCost = await game.macros.getName(`ValidateParameter`).execute({ name: `resourceCost`, value: scope.resourceCost, type: `number`, nullable: true });
   const extraResourceCost = await game.macros.getName(`ValidateParameter`).execute({ name: `extraResourceCost`, value: scope.extraResourceCost, type: `string`, nullable: true });
-  const persistentCost = scope.persistentCost;await game.macros.getName(`ValidateParameter`).execute({ name: `persistentCost`, value: scope.persistentCost, type: `number`, nullable: true });
+  const persistentCost = await game.macros.getName(`ValidateParameter`).execute({ name: `persistentCost`, value: scope.persistentCost, type: `number`, nullable: true });
   const powerRollStat = await game.macros.getName(`ValidateParameter`).execute({ name: `powerRollStat`, value: scope.powerRollStat, type: `string`, nullable: true });
   const tier1Effect = await game.macros.getName(`ValidateParameter`).execute({ name: `tier1Effect`, value: scope.tier1Effect, type: `string`, nullable: true });
   const tier2Effect = await game.macros.getName(`ValidateParameter`).execute({ name: `tier2Effect`, value: scope.tier2Effect, type: `string`, nullable: true });
@@ -13,9 +13,10 @@ try {
 
   const calculateCostFunc = await game.macros.getName(`ValidateParameter`).execute({ name: `calculateCostFunc`, value: scope.calculateCostFunc, type: `function`, nullable: true });
   const getAllowedEdgeBaneFunc = await game.macros.getName(`ValidateParameter`).execute({ name: `getAllowedEdgeBaneFunc`, value: scope.getAllowedEdgeBaneFunc, type: `function`, nullable: true });
+  const onSurgeFunc = await game.macros.getName(`ValidateParameter`).execute({ name: `onSurgeFunc`, value: scope.onSurgeFunc, type: `function`, nullable: true });
 
   // Determine if the ability can actually be used
-  const currResource = await game.macros.getName(`GetAttribute`).execute({ attributeName: `resource` });
+  let currResource = await game.macros.getName(`GetAttribute`).execute({ attributeName: `resource` });
   let actualResourceCost = calculateCostFunc ? await calculateCostFunc() : resourceCost;
   if (actualResourceCost && currResource.value < actualResourceCost) {
     ui.notifications.info(`Not enough ${currResource.label}!`);
@@ -27,7 +28,7 @@ try {
   if (powerRollStat) {
     let allowedEdgeBane = undefined;
     if (getAllowedEdgeBaneFunc)
-      allowedEdgeBane = getAllowedEdgeBaneFunc(actualResourceCost);
+      allowedEdgeBane = await getAllowedEdgeBaneFunc(actualResourceCost);
     rollResult = (await game.macros.getName(`PowerRoll`).execute({ powerRollStat, allowedEdgeBane }));
 
     // Calculate the damage of the ability
@@ -93,6 +94,9 @@ try {
 
         // If surges should be used, send an additional roll for surge damage
         if (surgesUsed > 0) {
+          if (onSurgeFunc)
+            await onSurgeFunc();
+
           const maxChar = Math.max(...(Object.keys(characteristics).map((key) => characteristics[key])));
           const surgeDamage = (surgesUsed * maxChar);
           const surgeRoll = await new Roll(surgeDamage.toString()).evaluate();
@@ -129,6 +133,9 @@ try {
 
       const isExtraResourceCostVariable = extraResourceCost.endsWith(`+`);
       const minExtraResourceCost = Number(isExtraResourceCostVariable ? extraResourceCost.substring(0, extraResourceCost.length - 1) : extraResourceCost);
+
+      // Get the current resource again, as it might have been changed by a callback function
+      currResource = await game.macros.getName(`GetAttribute`).execute({ attributeName: `resource` });
 
       // If the extra resource ends with a "+", then a variable amount can be used
       if (isExtraResourceCostVariable) {

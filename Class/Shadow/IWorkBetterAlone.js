@@ -9,5 +9,8 @@ await game.macros.getName("ShareAbility").execute({
   tier1Effect: "3 + A damage",
   tier2Effect: "6 + A damage",
   tier3Effect: "9 + A damage",
-  effect: "If the target has no allies adjacent to them, this strike deals extra damage equal to your Agility score."
+  effect: "If the target has no allies adjacent to them, this strike deals extra damage equal to your Agility score.",
+  onSurgeFunc: async function() {
+    return await game.macros.getName(`OnSurgeShadow`).execute();
+  }
 });

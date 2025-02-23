@@ -18,5 +18,8 @@ await game.macros.getName("ShareAbility").execute({
   },
   getAllowedEdgeBaneFunc: async function(currResourceCost) {
     return await game.macros.getName(`GetShadowAllowedEdgeBane`).execute({ defaultResourceCost: resourceCost, currResourceCost });
+  },
+  onSurgeFunc: async function() {
+    return await game.macros.getName(`OnSurgeShadow`).execute();
   }
 });
