@@ -111,6 +111,13 @@ try {
     }
   }
 
+  // Set the persistent cost, if the ability has a persistent cost
+  if (persistentCost) {
+    await game.macros.getName(`UpdateAttribute`).execute({
+      attributeName: `persistentCost`,
+      value: persistentCost
+    });
+  }
 
   // Subtract the resource cost, if the ability has a resource cost
   if (resourceCost || extraResourceCost) {

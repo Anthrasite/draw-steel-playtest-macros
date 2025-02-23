@@ -17,6 +17,10 @@ else {
       value: gainedVictories,
       add: true
     });
+    await game.macros.getName("UpdateAttribute").execute({
+      attributeName: "persistentCost",
+      value: 0
+    });
 
   if (actor.sheet.rendered)
     actor.sheet.render(true);
