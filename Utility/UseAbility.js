@@ -86,7 +86,8 @@ try {
 
         const surgesUsed = Number(await Dialog.wait({
           title: `Surges to use`,
-          buttons: surgeButtons 
+          buttons: surgeButtons,
+          close: () => { return 0; }
         }));
 
         // If surges should be used, send an additional roll for surge damage
@@ -127,7 +128,7 @@ try {
       // If the extra resource ends with a "+", then a variable amount can be used
       if (isExtraResourceCostVariable) {
         if (currResource.value >= totalResourceCost + minExtraResourceCost) {
-          extraResourceUsed = Number(await game.macros.getName(`ShowSimpleInputDialog`).execute({ title: `Extra ${currResource.label}`, label: `Extra ${currResource.label} to use`, defaultValue: minExtraResourceCost, allowNegative: false }));
+          extraResourceUsed = Number((await game.macros.getName(`ShowSimpleInputDialog`).execute({ title: `Extra ${currResource.label}`, label: `Extra ${currResource.label} to use`, defaultValue: minExtraResourceCost, allowNegative: false, rejectClose: false })) ?? 0);
 
           // Ensure the minimum resource was used
           if (extraResourceUsed > 0 && extraResourceUsed < minExtraResourceCost) {
@@ -145,7 +146,8 @@ try {
       else if (currResource.value >= totalResourceCost + minExtraResourceCost)
         extraResourceUsed = await Dialog.confirm({
           title: `Extra ${currResource.label}`,
-          content: `<p>Use extra ${minExtraResourceCost} ${currResource.label}?</p>`
+          content: `<p>Use extra ${minExtraResourceCost} ${currResource.label}?</p>`,
+          defaultYes: false
         }) ? minExtraResourceCost : 0;
 
       totalResourceCost += extraResourceUsed;

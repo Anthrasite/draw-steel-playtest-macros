@@ -11,7 +11,8 @@ try {
   if (activePersistentCost > 0) {
     const continuePersistent = await Dialog.confirm({
       title: `Persistent magic`,
-      content: `<p>Continue persistent effect for ${activePersistentCost} ${resourceAttribute.label}?</p>`
+      content: `<p>Continue persistent effect for ${activePersistentCost} ${resourceAttribute.label}?</p>`,
+      rejectClose: true
     });
 
     if (continuePersistent)
@@ -32,5 +33,6 @@ try {
     actor.sheet.render(true);
 }
 catch (error) {
-  ui.notifications.error(error);
+  if (error.message !== "The Dialog was closed without a choice being made.")
+    ui.notifications.error(error);
 }

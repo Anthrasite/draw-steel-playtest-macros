@@ -2,7 +2,8 @@ const resourceCost = await game.macros.getName(`ValidateParameter`).execute({ na
 
 const decreaseCost = await Dialog.confirm({
   title: `Edge?`,
-  content: `<p>Will you have an edge on the power roll (against at least one target)?</p>`
+  content: `<p>Will you have an edge on the power roll (against at least one target)?</p>`,
+  rejectClose: true
 });
 
 return decreaseCost ? resourceCost - 1 : resourceCost;
