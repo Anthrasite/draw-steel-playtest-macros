@@ -34,5 +34,5 @@ try {
 }
 catch (error) {
   ui.notifications.error(error);
-  throw error;
 }
+
