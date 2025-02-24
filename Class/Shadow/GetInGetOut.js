@@ -13,7 +13,7 @@ await game.macros.getName("ShareAbility").execute({
   tier2Effect: "8 + A damage",
   tier3Effect: "11 + A damage",
   effect: "You can shift up to your speed, dividing that movement before or after your strike as desired.",
-  calculateCostFunc: async function() {
+  getResourceCostFunc: async function() {
     return await game.macros.getName(`CalculateShadowAbilityCost`).execute({ resourceCost });
   },
   getAllowedEdgeBaneFunc: async function(currResourceCost) {

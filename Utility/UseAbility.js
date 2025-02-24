@@ -11,13 +11,14 @@ try {
   const keywords = await game.macros.getName(`ValidateParameter`).execute({ name: `keywords`, value: scope.keywords, type: `string` });
   const isKit = (await game.macros.getName(`ValidateParameter`).execute({ name: `isKit`, value: scope.isKit, type: `boolean`, nullable: true })) ?? false;
 
-  const calculateCostFunc = await game.macros.getName(`ValidateParameter`).execute({ name: `calculateCostFunc`, value: scope.calculateCostFunc, type: `function`, nullable: true });
+  const getResourceCostFunc = await game.macros.getName(`ValidateParameter`).execute({ name: `getResourceCostFunc`, value: scope.getResourceCostFunc, type: `function`, nullable: true });
   const getAllowedEdgeBaneFunc = await game.macros.getName(`ValidateParameter`).execute({ name: `getAllowedEdgeBaneFunc`, value: scope.getAllowedEdgeBaneFunc, type: `function`, nullable: true });
+  const getExtraDamageFunc = await game.macros.getName(`ValidateParameter`).execute({ name: `getExtraDamageFunc`, value: scope.getExtraDamageFunc, type: `function`, nullable: true });
   const onSurgeFunc = await game.macros.getName(`ValidateParameter`).execute({ name: `onSurgeFunc`, value: scope.onSurgeFunc, type: `function`, nullable: true });
 
   // Determine if the ability can actually be used
   const currResource = await game.macros.getName(`GetAttribute`).execute({ attributeName: `resource` });
-  const actualResourceCost = calculateCostFunc ? await calculateCostFunc() : resourceCost;
+  const actualResourceCost = getResourceCostFunc ? await getResourceCostFunc() : resourceCost;
   if (actualResourceCost && currResource.value < actualResourceCost) {
     ui.notifications.info(`Not enough ${currResource.label}!`);
     return;
@@ -57,6 +58,10 @@ try {
       const isRanged = keywords.toLowerCase().includes("ranged");
       const kitDamage = (!isMelee && !isRanged) || isKit ? 0 : await game.macros.getName(`GetKitDamage`).execute({ isMelee, tier: rollResult.tier });
 
+      let extraDamage = undefined;
+      if (getExtraDamageFunc)
+        extraDamage = await getExtraDamageFunc();
+
       let damageRollString = ``;
       if (diceDamage)
         damageRollString += diceDamage + ` + `;
@@ -65,6 +70,8 @@ try {
         damageRollString += ` + ` + charDamage + `[${maxCharName[0].toUpperCase()}]`;
       if (!isKit)
         damageRollString += ` + ` + kitDamage + `[kit]`;
+      if (extraDamage)
+        damageRollString += extraDamage;
 
       const damageRoll = await new Roll(damageRollString).evaluate();
       await damageRoll.toMessage({

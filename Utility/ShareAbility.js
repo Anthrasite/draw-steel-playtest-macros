@@ -20,8 +20,9 @@ try {
   const persistentCost = await game.macros.getName(`ValidateParameter`).execute({ name: `persistentCost`, value: scope.persistentCost, type: `number`, nullable: true });
   const persistentEffect = await game.macros.getName(`ValidateParameter`).execute({ name: `persistentEffect`, value: scope.persistentEffect, type: `string`, nullable: true });
 
-  const calculateCostFunc = await game.macros.getName(`ValidateParameter`).execute({ name: `calculateCostFunc`, value: scope.calculateCostFunc, type: `function`, nullable: true });
+  const getResourceCostFunc = await game.macros.getName(`ValidateParameter`).execute({ name: `getResourceCostFunc`, value: scope.getResourceCostFunc, type: `function`, nullable: true });
   const getAllowedEdgeBaneFunc = await game.macros.getName(`ValidateParameter`).execute({ name: `getAllowedEdgeBaneFunc`, value: scope.getAllowedEdgeBaneFunc, type: `function`, nullable: true });
+  const getExtraDamageFunc = await game.macros.getName(`ValidateParameter`).execute({ name: `getExtraDamageFunc`, value: scope.getExtraDamageFunc, type: `function`, nullable: true });
   const onSurgeFunc = await game.macros.getName(`ValidateParameter`).execute({ name: `onSurgeFunc`, value: scope.onSurgeFunc, type: `function`, nullable: true });
 
   // Perform additional validation
@@ -38,8 +39,8 @@ try {
   if (typeof(persistentCost) !== `undefined` && persistentCost === 0)
     throw `Error: persistentCost cannot be 0`;
 
-  if (typeof(resourceCost) === `undefined` && typeof(calculateCostFunc) !== `undefined`)
-    throw `Error: calculateCostFunc cannot be specified if resourceCost is not specified`;
+  if (typeof(resourceCost) === `undefined` && typeof(getResourceCostFunc) !== `undefined`)
+    throw `Error: getResourceCostFunc cannot be specified if resourceCost is not specified`;
   if (typeof(powerRollStat) === `undefined` && typeof(getAllowedEdgeBaneFunc) !== `undefined`)
     throw `Error: getAllowedEdgeBaneFunc cannot be specified if powerRollStat is not specified`;
   if (typeof(powerRollStat) === `undefined` && typeof(onSurgeFunc) !== `undefined`)
@@ -117,8 +118,9 @@ try {
         tier1Effect,
         tier2Effect,
         tier3Effect,
-        calculateCostFunc,
+        getResourceCostFunc,
         getAllowedEdgeBaneFunc,
+        getExtraDamageFunc,
         onSurgeFunc
       });
     });

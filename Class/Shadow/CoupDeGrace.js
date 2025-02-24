@@ -12,7 +12,7 @@ await game.macros.getName("ShareAbility").execute({
   tier1Effect: "1d6 + 7 + A damage",
   tier2Effect: "1d6 + 11 + A damage",
   tier3Effect: "1d6 + 16 + A damage",
-  calculateCostFunc: async function() {
+  getResourceCostFunc: async function() {
     return await game.macros.getName(`CalculateShadowAbilityCost`).execute({ resourceCost });
   },
   getAllowedEdgeBaneFunc: async function(currResourceCost) {

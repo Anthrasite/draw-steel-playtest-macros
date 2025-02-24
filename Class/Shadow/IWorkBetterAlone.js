@@ -12,5 +12,13 @@ await game.macros.getName("ShareAbility").execute({
   effect: "If the target has no allies adjacent to them, this strike deals extra damage equal to your Agility score.",
   onSurgeFunc: async function() {
     return await game.macros.getName(`OnSurgeShadow`).execute();
+  },
+  getExtraDamageFunc: async function() {
+    const isAlone = await Dialog.confirm({
+      title: `Target alone?`,
+      content: `<p>Does the target have any allies adjacent to them?</p>`,
+      defaultYes: false
+    });
+    return isAlone ? ` + ${await game.macros.getName(`GetCharacteristic`).execute({ characteristicName: `Agility` })}` : undefined;
   }
 });
