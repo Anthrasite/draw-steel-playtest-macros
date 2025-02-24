@@ -4,11 +4,4 @@ const tier = await game.macros.getName(`ValidateParameter`).execute({ name: `tie
 const kitDamageGroupName = `kit${isMelee ? `Melee` : `Ranged`}Damage`;
 const kitDamageAttributeName = `tier${tier}`;
 
-if (!actor)
-  throw `Error: No token is selected`;
-else if (!Object.hasOwn(actor.system.attributes, kitDamageGroupName))
-  return 0;
-else if (!Object.hasOwn(actor.system.attributes[kitDamageGroupName], kitDamageAttributeName))
-  throw `Error: Attribute "${kitDamageAttributeName}" doesn't exist in attribute group "${kitDamageGroupName}" for ${actor.name}`;
-else
-  return actor.system.attributes[kitDamageGroupName][kitDamageAttributeName].value;
+return Object.hasOwn(actor.system.attributes, kitDamageGroupName) ? actor.system.attributes[kitDamageGroupName][kitDamageAttributeName].value : 0;
