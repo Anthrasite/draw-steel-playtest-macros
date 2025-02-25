@@ -10,9 +10,6 @@ try {
     speaker: ChatMessage.implementation.getSpeaker({actor}),
     flavor: `Initial ${resource.label}`
   });
-
-  if (actor.sheet.rendered)
-    actor.sheet.render(true);
 }
 catch (error) {
   ui.notifications.error(error);

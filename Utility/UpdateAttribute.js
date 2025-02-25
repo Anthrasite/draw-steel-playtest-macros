@@ -3,6 +3,10 @@ const value = await game.macros.getName(`ValidateParameter`).execute({ name: `va
 const isDelta = (await game.macros.getName(`ValidateParameter`).execute({ name: `isDelta`, value: scope.isDelta, type: `boolean`, nullable: true })) ?? false;
 
 const attribute = await game.macros.getName(`GetAttribute`).execute({ attributeName });
-attribute.value = isDelta ? attribute.value + value : value;
+const attributePath = attributeName === `health` ? `health`
+  : attributeName === `recoveries` ? `power`
+  : `attributes.${attributeName}`;
 
-return attribute;
+await actor.update({ [`system.${attributePath}.value`]: isDelta ? attribute.value + value : value });
+
+return await game.macros.getName(`GetAttribute`).execute({ attributeName });
