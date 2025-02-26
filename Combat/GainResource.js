@@ -7,8 +7,8 @@ try {
 
   if (resourceGain > 0) {
     const roll = await new Roll(`${resource.value} + ${resourceGain}`).evaluate();
-    await roll.toMessage({
-      speaker: ChatMessage.implementation.getSpeaker({actor}),
+    await game.macros.getName(`SendRollToChat`).execute({
+      roll,
       flavor: resourceLabel
     });
 

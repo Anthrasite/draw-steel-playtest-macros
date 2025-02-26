@@ -78,8 +78,8 @@ try {
         damageRollString += extraDamage;
 
       const damageRoll = await new Roll(damageRollString).evaluate();
-      await damageRoll.toMessage({
-        speaker: ChatMessage.implementation.getSpeaker({actor: actor}),
+      await game.macros.getName(`SendRollToChat`).execute({
+        roll: damageRoll,
         flavor: damageType ? `${damageType.capitalize()} damage` : `Damage`
       });
 
@@ -109,8 +109,8 @@ try {
           const maxChar = Math.max(...(Object.keys(characteristics).map((key) => characteristics[key].value)));
           const surgeDamage = (surgesUsed * maxChar);
           const surgeRoll = await new Roll(surgeDamage.toString()).evaluate();
-          await surgeRoll.toMessage({
-            speaker: ChatMessage.implementation.getSpeaker({actor: actor}),
+          await game.macros.getName(`SendRollToChat`).execute({
+            roll: surgeRoll,
             flavor: `Extra surge damage`
           });
 

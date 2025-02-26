@@ -95,8 +95,8 @@ try {
   const flavorColor = tier === 1 ? `#800000`
     : tier === 2 ? `#000000`
     : `#008000`;
-  await roll.toMessage({
-    speaker: ChatMessage.implementation.getSpeaker({actor: actor}),
+  await game.macros.getName(`SendRollToChat`).execute({
+    roll,
     flavor: `<span style="color: ${flavorColor}; font-weight: bold;">${isCrit ? `Critical success! ` : ``}Tier ${tier} </span>[${getEdgeBaneLabel(edgeBane)}]`
   });
 
