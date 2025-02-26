@@ -13,6 +13,17 @@ try {
     else {
       const recoveryValue = Math.floor(health.max / 3);
       const newHealth = Math.min(health.value + recoveryValue, health.max);
+
+      if (newHealth < health.value + recoveryValue) {
+        const useRecovery = await Dialog.confirm({
+          title: `Use recovery?`,
+          content: `<p>Warning: If you use a recovery, ${health.value + recoveryValue - newHealth} health will be wasted. Do you still want to use a recovery?</p>`,
+          defaultYes: false
+        });
+        if (!useRecovery)
+          return;
+      }
+
       await game.macros.getName(`UpdateAttribute`).execute({ attributeName: `health`, value: newHealth });
       await game.macros.getName(`UpdateAttribute`).execute({ attributeName: `recoveries`, value: -1, isDelta: true });
     }
