@@ -7,7 +7,7 @@ try {
 
   if (resourceGain > 0) {
     const roll = await new Roll(`${resource.value} + ${resourceGain}`).evaluate();
-    await game.macros.getName(`SendRollToChat`).execute({
+    await game.macros.getName(`ShareRoll`).execute({
       roll,
       flavor: resourceLabel
     });

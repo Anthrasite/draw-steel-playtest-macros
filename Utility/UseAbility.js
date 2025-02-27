@@ -34,7 +34,7 @@ try {
     let allowedEdgeBane = undefined;
     if (getAllowedEdgeBaneFunc)
       allowedEdgeBane = await getAllowedEdgeBaneFunc(actualResourceCost);
-    rollResult = (await game.macros.getName(`Power roll`).execute({ powerRollStat, allowedEdgeBane }));
+    rollResult = (await game.macros.getName(`DoPowerRoll`).execute({ powerRollStat, allowedEdgeBane }));
 
     // Calculate the damage of the ability
     const effect = [ tier1Effect, tier2Effect, tier3Effect ][rollResult.tier - 1];
@@ -78,7 +78,7 @@ try {
         damageRollString += extraDamage;
 
       const damageRoll = await new Roll(damageRollString).evaluate();
-      await game.macros.getName(`SendRollToChat`).execute({
+      await game.macros.getName(`ShareRoll`).execute({
         roll: damageRoll,
         flavor: damageType ? `${damageType.capitalize()} damage` : `Damage`
       });
@@ -109,7 +109,7 @@ try {
           const maxChar = Math.max(...(Object.keys(characteristics).map((key) => characteristics[key].value)));
           const surgeDamage = (surgesUsed * maxChar);
           const surgeRoll = await new Roll(surgeDamage.toString()).evaluate();
-          await game.macros.getName(`SendRollToChat`).execute({
+          await game.macros.getName(`ShareRoll`).execute({
             roll: surgeRoll,
             flavor: `Extra surge damage`
           });
