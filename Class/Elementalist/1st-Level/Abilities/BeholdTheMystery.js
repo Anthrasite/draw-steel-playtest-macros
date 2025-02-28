@@ -1,6 +1,9 @@
+const name = "Behold the Mystery"
+const resourceCost = 3;
+
 await game.macros.getName("ShareAbility").execute({
-  name: "Behold the Mystery",
-  resourceCost: 3,
+  name,
+  resourceCost,
   flavorText: "You open a rift into the void to harry your foes.",
   keywords: "Area, Magic, Ranged, Void",
   type: "Action",
@@ -11,5 +14,9 @@ await game.macros.getName("ShareAbility").execute({
   tier2Effect: "4 psychic damage",
   tier3Effect: "6 psychic damage",
   persistentCost: 1,
-  persistentEffect: "At the start of your turn, you can use a maneuver to use this ability again without spending essence."
+  persistentEffect: "At the start of your turn, you can use a maneuver to use this ability again without spending essence.",
+  getResourceCostFunc: async function() {
+    const persistentCosts = await game.macros.getName(`GetPersistentCost`).execute();
+    return Object.keys(persistentCosts).length && Object.hasOwn(persistentCosts, name) ? 0 : resourceCost;
+  }
 });
