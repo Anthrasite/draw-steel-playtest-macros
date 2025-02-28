@@ -1,55 +1,49 @@
-function getLabel(isGroup) {
-  return isGroup ? `Group` : `Attribute`;
-}
-
 function validateHasOwn(obj, propName, actor, isGroup = false) {
   if (!Object.hasOwn(obj, propName))
-    throw `Error: ${getLabel(isGroup)} "${propName}" is not defined for actor "${actor.name}"`;
+    throw `Error: ${isGroup ? `Group` : `Attribute`} "${propName}" is not defined for actor "${actor.name}"`;
 }
 
-function validateIsNumber(obj, propName, actor, isGroup = false) {
-  if (obj[propName].dtype !== `Number`)
-    throw `Error: ${getLabel(isGroup)} "${propName}" for actor "${actor.name}" does not have "Number" type`;
+function validateIsType(obj, propName, type, actor) {
+  if (obj[propName].dtype.toLowerCase() !== type)
+    throw `Error: Attribute "${propName}" for actor "${actor.name}" does not have "${type}" type`;
 }
 
-function validateHasNumber(obj, propName, actor, isGroup = false) {
-  validateHasOwn(obj, propName, actor, isGroup);
-  validateIsNumber(obj, propName, actor, isGroup);
+function validateHasOwnOfType(obj, propName, type, actor) {
+  validateHasOwn(obj, propName, actor, false);
+  validateIsType(obj, propName, type, actor);
 }
 
 function validateHasNumberWithValue(obj, propName, actor) {
-  validateHasOwn(obj, propName, actor, false);
-  validateIsNumber(obj, propName, actor, false);
+  validateHasOwnOfType(obj, propName, `number`, actor, false);
   if (!obj[propName].value)
     throw `Error: Attribute "${propName}" for actor "${actor.name}" has no value`;
 }
 
-function validateHasNonEmptyLabel(obj, propName, actor, isGroup = false) {
+function validateHasNonEmptyLabel(obj, propName, actor) {
   if (!obj[propName].label)
-    throw `Error: ${getLabel(isGroup)} "${propName}" for actor "${actor.name}" has no label`;
+    throw `Error: Attribute "${propName}" for actor "${actor.name}" has no label`;
 }
 
 if (!actor)
   throw `Error: No token is selected`;
 
-for (const attr of [`resource`, `surges`, `victories`, `persistentCost`])
-  validateHasNumber(actor.system.attributes, attr, actor);
+for (const attr of [`resource`, `surges`, `victories`])
+  validateHasOwnOfType(actor.system.attributes, attr, `number`, actor);
 validateHasNonEmptyLabel(actor.system.attributes, `resource`, actor);
+validateHasOwnOfType(actor.system.attributes, `persistentCost`, `string`, actor);
 
-validateHasNumber(actor.system.groups, `characteristics`, actor, true);
+validateHasOwn(actor.system.groups, `characteristics`, actor, true);
 validateHasOwn(actor.system.attributes, `characteristics`, actor);
 for (const attr of [`might`, `agility`, `intuition`, `reason`, `presence`])
   validateHasNumberWithValue(actor.system.attributes.characteristics, attr, actor);
 
 if (Object.hasOwn(actor.system.groups, `kitMeleeDamage`)) {
-  validateIsNumber(actor.system.groups, `kitMeleeDamage`, actor, true);
   validateHasOwn(actor.system.attributes, `kitMeleeDamage`, actor);
   for (const attr of [`tier1`, `tier2`, `tier3`])
     validateHasNumberWithValue(actor.system.attributes.kitMeleeDamage, attr, actor);
 }
 
 if (Object.hasOwn(actor.system.groups, `kitRangedDamage`)) {
-  validateIsNumber(actor.system.groups, `kitRangedDamage`, actor, true);
   validateHasOwn(actor.system.attributes, `kitRangedDamage`, actor);
   for (const attr of [`tier1`, `tier2`, `tier3`])
     validateHasNumberWithValue(actor.system.attributes.kitRangedDamage, attr, actor);

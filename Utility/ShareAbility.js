@@ -27,6 +27,8 @@ try {
   const onSurgeFunc = await game.macros.getName(`ValidateParameter`).execute({ name: `onSurgeFunc`, value: scope.onSurgeFunc, type: `function`, nullable: true });
 
   // Perform additional validation
+  if (name.includes(`:`) || name.includes(`;`))
+    throw `Error: name cannot include ":" or ";"`;
   if (typeof(resourceCost) !== `undefined` && resourceCost === 0)
     throw `Error: resourceCost cannot be 0`;
   if (typeof(powerRollStat) !== typeof(tier1Effect) || typeof(powerRollStat) !== typeof(tier2Effect) || typeof(powerRollStat) !== typeof(tier3Effect))
@@ -110,6 +112,7 @@ try {
       const button = $(this);
       await game.macros.getName(`UseAbility`).execute({
         button,
+        name,
         keywords,
         isKit,
         resourceCost,

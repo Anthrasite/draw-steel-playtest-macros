@@ -1,6 +1,7 @@
 try {
   const button = await game.macros.getName(`ValidateParameter`).execute({ name: `button`, value: scope.button, type: `object` });
 
+  const name = await game.macros.getName(`ValidateParameter`).execute({ name: `name`, value: scope.name, type: `string` });
   const resourceCost = await game.macros.getName(`ValidateParameter`).execute({ name: `resourceCost`, value: scope.resourceCost, type: `number`, nullable: true });
   const extraResourceCost = await game.macros.getName(`ValidateParameter`).execute({ name: `extraResourceCost`, value: scope.extraResourceCost, type: `string`, nullable: true });
   const persistentCost = await game.macros.getName(`ValidateParameter`).execute({ name: `persistentCost`, value: scope.persistentCost, type: `number`, nullable: true });
@@ -122,7 +123,7 @@ try {
 
   // Set the persistent cost, if the ability has a persistent cost
   if (persistentCost) {
-    await game.macros.getName(`UpdateAttribute`).execute({ attributeName: `persistentCost`, value: persistentCost });
+    await game.macros.getName(`UpdatePersistentCost`).execute({ abilityName: name, cost: persistentCost });
   }
 
   // Subtract the resource cost, if the ability has a resource cost
