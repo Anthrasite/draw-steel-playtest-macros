@@ -40,7 +40,8 @@ try {
     // Calculate the damage of the ability
     const effect = [ tier1Effect, tier2Effect, tier3Effect ][rollResult.tier - 1];
     const matches = effect.match(/^(([0-9]+d[0-9]+)\s+\+\s+)?([0-9]+)(\s+\+\s+[MAIRPor,\s]+)?\s+((acid|cold|corruption|fire|holy|lightning|poison|psychic|sonic)\s+)?damage/);
-    if (matches) {
+    const doesDamage = matches.length > 0;
+    if (doesDamage) {
       const diceDamage = matches[2];
       const constDamage = matches[3];
       const charDamageOptions = matches[4];
@@ -49,7 +50,6 @@ try {
       // Calculate the damage from the highest characteristic
       let charDamage = undefined;
       let maxCharName = undefined;
-      const characteristics = actor.system.attributes.characteristics;
       if (charDamageOptions) {
         for (const [charName, char] of Object.entries(actor.system.attributes.characteristics))
           if (charDamageOptions.indexOf(charName[0].toUpperCase()) >= 0 && (!maxCharName || char.value > charDamage)) {
@@ -83,40 +83,65 @@ try {
         roll: damageRoll,
         flavor: damageType ? `${damageType.capitalize()} damage` : `Damage`
       });
+    }
 
-      // Determine if any surges should be used and send an extra roll for surge damage if so
-      const surgeCount = (await game.macros.getName(`GetAttribute`).execute({ attributeName: `surges` })).value;
-      if (surgeCount > 0) {
-        let surgeButtons = {
-          zero: { label: `0`, callback: () => 0 },
-          one: { label: `1`, callback: () => 1 }
-        }
-        if (surgeCount >= 2)
-          surgeButtons.two = { label: `2`, callback: () => 2 };
-        if (surgeCount >= 3)
-          surgeButtons.three = { label: `3`, callback: () => 3 };
+    // Determine if any surges should be used
+    const hasPotency = /([A-Z]\s+<\s+[A-Z0-9]+)/i.test(effect);
+    const surgeCount = (await game.macros.getName(`GetAttribute`).execute({ attributeName: `surges` })).value;
+    if (doesDamage && surgeCount > 0 || hasPotency && surgeCount >= 2) {
+      let surgeButtons = {
+        z: { label: `0` }
+      }
+      if (doesDamage)
+        surgeButtons.d1 = { label: `1 (damage)` };
+      if (surgeCount >= 2) {
+        if (doesDamage)
+          surgeButtons.d2 = { label: `2 (damage)` };
+        if (hasPotency)
+          surgeButtons.p2 = { label: `2 (potency)` };
+      }
+      if (surgeCount >= 3)
+        surgeButtons.d3 = { label: `3 (damage)` };
 
-        const surgesUsed = Number(await Dialog.wait({
-          title: `Surges to use`,
-          buttons: surgeButtons,
-          close: () => { return 0; }
-        }));
+      const surgeButtonStyles = `
+        <style>
+          .dialog-buttons {
+            white-space: nowrap;
+          }
+          button.d1, button.d2, button.d3 {
+            color: darkred;
+          }
+          button.p2 {
+            color: darkblue;
+          }
+        </style>`;
 
-        // If surges should be used, send an additional roll for surge damage
-        if (surgesUsed > 0) {
-          if (onSurgeFunc)
-            await onSurgeFunc();
+      const surgesUsed = await Dialog.wait({
+        title: `Surges to use`,
+        buttons: surgeButtons,
+        content: surgeButtonStyles,
+        close: () => { return 0; }
+      });
 
+      // If surges should be used, subtract the surges, and send an additional roll for surge damage if used for damage
+      if (surgesUsed !== `z`) {
+        const damageSurges = surgesUsed.startsWith(`d`) ? Number(surgesUsed.substring(1)) : 0;
+        const potencySurges = surgesUsed.startsWith(`p`) ? Number(surgesUsed.substring(1)) : 0;
+        if (onSurgeFunc)
+          await onSurgeFunc(damageSurges, potencySurges);
+
+        if (damageSurges > 0) {
+          const characteristics = actor.system.attributes.characteristics;
           const maxChar = Math.max(...(Object.keys(characteristics).map((key) => characteristics[key].value)));
-          const surgeDamage = (surgesUsed * maxChar);
+          const surgeDamage = (damageSurges * maxChar);
           const surgeRoll = await new Roll(surgeDamage.toString()).evaluate();
           await game.macros.getName(`ShareRoll`).execute({
             roll: surgeRoll,
             flavor: `Extra surge damage`
           });
-
-          await game.macros.getName(`UpdateAttribute`).execute({ attributeName: `surges`, value: -surgesUsed, isDelta: true });
         }
+
+        await game.macros.getName(`UpdateAttribute`).execute({ attributeName: `surges`, value: -(damageSurges + potencySurges), isDelta: true });
       }
     }
   }
