@@ -51,10 +51,10 @@ try {
       let maxCharName = undefined;
       const characteristics = actor.system.attributes.characteristics;
       if (charDamageOptions) {
-        for (const charName in actor.system.attributes.characteristics)
-          if (charDamageOptions.indexOf(charName[0].toUpperCase()) >= 0 && (!maxCharName || characteristics[charName].value > charDamage)) {
+        for (const [charName, char] of Object.entries(actor.system.attributes.characteristics))
+          if (charDamageOptions.indexOf(charName[0].toUpperCase()) >= 0 && (!maxCharName || char.value > charDamage)) {
             maxCharName = charName;
-            charDamage = characteristics[maxCharName].value;
+            charDamage = char.value;
           }
       }
 
