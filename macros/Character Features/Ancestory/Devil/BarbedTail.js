@@ -1,4 +1,4 @@
-await game.macros.getName("ShareTrait").execute({
+await game.macros.getName("ShareFeature").execute({
   name: "Barbed Tail",
   description: "Your pointy tail allows you to punctuate all your actions. Once per round, you can deal extra damage equal to your highest characteristic score on a melee strike.",
   source: "Ancestry",

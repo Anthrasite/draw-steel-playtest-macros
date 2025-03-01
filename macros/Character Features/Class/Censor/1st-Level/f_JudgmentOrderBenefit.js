@@ -1,4 +1,4 @@
-await game.macros.getName("ShareTrait").execute({
+await game.macros.getName("ShareFeature").execute({
   name: "Judgment Order Benefit",
   description: `When you use your Judgment ability to judge another creature, you gain the following benefit based on your order.</p>
     <ul>
