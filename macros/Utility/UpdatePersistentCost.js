@@ -1,3 +1,6 @@
+//@id=D6zoUBTvy8YqVhKc
+//@name=UpdatePersistentCost
+//@img=icons/svg/dice-target.svg
 const abilityName = await game.macros.getName(`ValidateParameter`).execute({ name: `abilityName`, value: scope.abilityName, type: `string`, nullable: true });
 const cost = await game.macros.getName(`ValidateParameter`).execute({ name: `cost`, value: scope.cost, type: `number`, nullable: true });
 

@@ -1,3 +1,6 @@
+//@id=VuzLJPa7S52xeU9X
+//@name=End combat
+//@img=icons/skills/melee/blade-tip-chipped-blood-red.webp
 try {
   await game.macros.getName("ValidateActorAttributes").execute();
 

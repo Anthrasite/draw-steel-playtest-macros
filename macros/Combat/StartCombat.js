@@ -1,3 +1,6 @@
+//@id=zawCdUf340GQMJDK
+//@name=Start combat
+//@img=icons/skills/melee/hand-grip-sword-orange.webp
 try {
   await game.macros.getName("ValidateActorAttributes").execute();
 

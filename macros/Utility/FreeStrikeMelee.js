@@ -1,3 +1,6 @@
+//@id=e6mloKM1BYV2IDr0
+//@name=FreeStrikeMelee
+//@img=icons/svg/dice-target.svg
 const onSurgeFunc = await game.macros.getName(`ValidateParameter`).execute({ name: `onSurgeFunc`, value: scope.onSurgeFunc, type: `function`, nullable: true });
 
 await game.macros.getName("ShareAbility").execute({

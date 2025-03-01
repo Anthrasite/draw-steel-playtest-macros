@@ -1,1 +1,0 @@
-await game.macros.getName(`FreeStrikeRanged`).execute();

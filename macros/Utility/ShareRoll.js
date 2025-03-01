@@ -1,3 +1,6 @@
+//@id=rJPRglQIz1eHFSab
+//@name=ShareRoll
+//@img=icons/svg/dice-target.svg
 const roll = await game.macros.getName(`ValidateParameter`).execute({ name: `roll`, value: scope.roll, type: `object` });
 const flavor = await game.macros.getName(`ValidateParameter`).execute({ name: `flavor`, value: scope.flavor, type: `string` });
 

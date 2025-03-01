@@ -1,3 +1,6 @@
+//@id=jte0ZyibHwRUDQsM
+//@name=Gain victories
+//@img=icons/commodities/treasure/cup-trophy-gold.webp
 try {
   await game.macros.getName("ValidateActorAttributes").execute();
 

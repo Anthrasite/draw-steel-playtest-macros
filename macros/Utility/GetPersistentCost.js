@@ -1,3 +1,6 @@
+//@id=czRakNtrsZFDoWij
+//@name=GetPersistentCost
+//@img=icons/svg/dice-target.svg
 const persistentCostString = (await game.macros.getName(`GetAttribute`).execute({ attributeName: `persistentCost` })).value;
 let persistentCosts = {};
 if (persistentCostString)
