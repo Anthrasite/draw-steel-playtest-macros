@@ -24,7 +24,7 @@ try {
   const actualResourceCost = getResourceCostFunc ? await getResourceCostFunc() : resourceCost;
 
   // Handle Shadow ability cost reduction
-  const className = await game.macros.getName(`GetAttribute`).execute({ attributeName: `class` });
+  const className = (await game.macros.getName(`GetAttribute`).execute({ attributeName: `class` })).value;
   let allowedEdgeBane = undefined;
   if (className.toLowerCase() === "shadow" && powerRollStat) {
     const decreaseCost = await Dialog.confirm({
