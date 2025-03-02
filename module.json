@@ -61,76 +61,76 @@
   ],
   "packs": [
     {
-      "name": "Combat",
-      "label": "Combat",
+      "type": "Macro",
       "path": "macros\\Combat\\Combat_macros.db",
-      "type": "Macro"
+      "label": "Combat",
+      "name": "Combat"
     },
     {
-      "name": "System",
-      "label": "System",
+      "type": "Macro",
       "path": "macros\\System\\System_macros.db",
-      "type": "Macro"
+      "label": "System",
+      "name": "System"
     },
     {
-      "name": "Utility",
-      "label": "Utility",
+      "type": "Macro",
       "path": "macros\\Utility\\Utility_macros.db",
-      "type": "Macro"
+      "label": "Utility",
+      "name": "Utility"
     },
     {
-      "name": "Complications",
+      "type": "Macro",
+      "path": "macros\\CharacterFeatures\\Complications\\Complications_macros.db",
       "label": "Complications",
-      "path": "macros\\Character Features\\Complications\\Complications_macros.db",
-      "type": "Macro"
+      "name": "Complications"
     },
     {
-      "name": "Kits",
+      "type": "Macro",
+      "path": "macros\\CharacterFeatures\\Kits\\Kits_macros.db",
       "label": "Kits",
-      "path": "macros\\Character Features\\Kits\\Kits_macros.db",
-      "type": "Macro"
+      "name": "Kits"
     },
     {
-      "name": "Perks",
+      "type": "Macro",
+      "path": "macros\\CharacterFeatures\\Perks\\Perks_macros.db",
       "label": "Perks",
-      "path": "macros\\Character Features\\Perks\\Perks_macros.db",
-      "type": "Macro"
+      "name": "Perks"
     },
     {
-      "name": "Ancestry_Devil",
+      "type": "Macro",
+      "path": "macros\\CharacterFeatures\\Ancestries\\Ancestry_Devil\\Ancestry_Devil_macros.db",
       "label": "Ancestry - Devil",
-      "path": "macros\\Character Features\\Ancestries\\Ancestry - Devil\\Ancestry_Devil_macros.db",
-      "type": "Macro"
+      "name": "Ancestry_Devil"
     },
     {
-      "name": "Ancestry_Dwarf",
+      "type": "Macro",
+      "path": "macros\\CharacterFeatures\\Ancestries\\Ancestry_Dwarf\\Ancestry_Dwarf_macros.db",
       "label": "Ancestry - Dwarf",
-      "path": "macros\\Character Features\\Ancestries\\Ancestry - Dwarf\\Ancestry_Dwarf_macros.db",
-      "type": "Macro"
+      "name": "Ancestry_Dwarf"
     },
     {
-      "name": "Ancestry_Human",
+      "type": "Macro",
+      "path": "macros\\CharacterFeatures\\Ancestries\\Ancestry_Human\\Ancestry_Human_macros.db",
       "label": "Ancestry - Human",
-      "path": "macros\\Character Features\\Ancestries\\Ancestry - Human\\Ancestry_Human_macros.db",
-      "type": "Macro"
+      "name": "Ancestry_Human"
     },
     {
-      "name": "Class_Censor",
+      "type": "Macro",
+      "path": "macros\\CharacterFeatures\\Classes\\Class_Censor\\Class_Censor_macros.db",
       "label": "Class - Censor",
-      "path": "macros\\Character Features\\Classes\\Class - Censor\\Class_Censor_macros.db",
-      "type": "Macro"
+      "name": "Class_Censor"
     },
     {
-      "name": "Class_Elementalist",
+      "type": "Macro",
+      "path": "macros\\CharacterFeatures\\Classes\\Class_Elementalist\\Class_Elementalist_macros.db",
       "label": "Class - Elementalist",
-      "path": "macros\\Character Features\\Classes\\Class - Elementalist\\Class_Elementalist_macros.db",
-      "type": "Macro"
+      "name": "Class_Elementalist"
     },
     {
-      "name": "Class_Shadow",
+      "type": "Macro",
+      "path": "macros\\CharacterFeatures\\Classes\\Class_Shadow\\Class_Shadow_macros.db",
       "label": "Class - Shadow",
-      "path": "macros\\Character Features\\Classes\\Class - Shadow\\Class_Shadow_macros.db",
-      "type": "Macro"
+      "name": "Class_Shadow"
     }
   ],
   "url": "https://github.com/Anthrasite/draw-steel-playtest-macros",
