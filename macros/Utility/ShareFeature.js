@@ -2,7 +2,7 @@
 //@name=ShareFeature
 //@img=icons/svg/dice-target.svg
 try {
-  await game.dsmacros.executeMacroFromCompendium("ValidateActorAttributes", );
+  await game.dsmacros.executeMacroFromCompendium("ValidateActorAttributes");
 
   const name = await game.dsmacros.executeMacroFromCompendium(`ValidateParameter`, { name: `name`, value: scope.name, type: `string` });
   const description = await game.dsmacros.executeMacroFromCompendium(`ValidateParameter`, { name: `description`, value: scope.description, type: `string` });
