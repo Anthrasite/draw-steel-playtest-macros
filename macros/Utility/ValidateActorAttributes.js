@@ -33,7 +33,8 @@ if (!actor)
 for (const attr of [`resource`, `surges`, `victories`])
   validateHasOwnOfType(actor.system.attributes, attr, `number`, actor);
 validateHasNonEmptyLabel(actor.system.attributes, `resource`, actor);
-validateHasOwnOfType(actor.system.attributes, `persistentCost`, `string`, actor);
+for (const attr of [`persistentCost`, `class`])
+  validateHasOwnOfType(actor.system.attributes, attr, `string`, actor);
 
 validateHasOwn(actor.system.groups, `characteristics`, actor, true);
 validateHasOwn(actor.system.attributes, `characteristics`, actor);

@@ -16,14 +16,31 @@ try {
   const isKit = (await game.dsmacros.executeMacroFromCompendium(`ValidateParameter`, { name: `isKit`, value: scope.isKit, type: `boolean`, nullable: true })) ?? false;
 
   const getResourceCostFunc = await game.dsmacros.executeMacroFromCompendium(`ValidateParameter`, { name: `getResourceCostFunc`, value: scope.getResourceCostFunc, type: `function`, nullable: true });
-  const getAllowedEdgeBaneFunc = await game.dsmacros.executeMacroFromCompendium(`ValidateParameter`, { name: `getAllowedEdgeBaneFunc`, value: scope.getAllowedEdgeBaneFunc, type: `function`, nullable: true });
   const getExtraDamageFunc = await game.dsmacros.executeMacroFromCompendium(`ValidateParameter`, { name: `getExtraDamageFunc`, value: scope.getExtraDamageFunc, type: `function`, nullable: true });
   const onUseFunc = await game.dsmacros.executeMacroFromCompendium(`ValidateParameter`, { name: `onUseFunc`, value: scope.onUseFunc, type: `function`, nullable: true });
-  const onSurgeFunc = await game.dsmacros.executeMacroFromCompendium(`ValidateParameter`, { name: `onSurgeFunc`, value: scope.onSurgeFunc, type: `function`, nullable: true });
 
   // Determine if the ability can actually be used
   const currResource = await game.dsmacros.executeMacroFromCompendium(`GetAttribute`, { attributeName: `resource` });
   const actualResourceCost = getResourceCostFunc ? await getResourceCostFunc() : resourceCost;
+
+  // Handle Shadow ability cost reduction
+  const className = await game.dsmacros.executeMacroFromCompendium(`GetAttribute`, { attributeName: `class` });
+  let allowedEdgeBane = undefined;
+  if (className.toLowerCase() === "shadow" && powerRollStat) {
+    const decreaseCost = await Dialog.confirm({
+      title: `Edge?`,
+      content: `<p>Will you have an edge on the power roll (against at least one target)?</p>`,
+      rejectClose: true
+    });
+
+    if (decreaseCost) {
+      --actualResourceCost;
+      allowedEdgeBane = ['de', 'e'];
+    }
+    else
+      allowedEdgeBane = ['n', 'b', 'db'];
+  }
+
   if (actualResourceCost && currResource.value < actualResourceCost) {
     ui.notifications.info(`Not enough ${currResource.label}!`);
     return;
@@ -35,9 +52,6 @@ try {
   // Perform the power roll, if the ability has a power roll
   let rollResult = undefined;
   if (powerRollStat) {
-    let allowedEdgeBane = undefined;
-    if (getAllowedEdgeBaneFunc)
-      allowedEdgeBane = await getAllowedEdgeBaneFunc(actualResourceCost);
     rollResult = (await game.dsmacros.executeMacroFromCompendium(`DoPowerRoll`, { powerRollStat, allowedEdgeBane }));
 
     // Calculate the damage of the ability
@@ -130,8 +144,17 @@ try {
       if (surgesUsed !== `z`) {
         const damageSurges = surgesUsed.startsWith(`d`) ? Number(surgesUsed.substring(1)) : 0;
         const potencySurges = surgesUsed.startsWith(`p`) ? Number(surgesUsed.substring(1)) : 0;
-        if (onSurgeFunc)
-          await onSurgeFunc(damageSurges, potencySurges);
+
+        // Handle Shadow resource gain when using a surges for damage for the first time in a round
+        if (className.toLowerCase() === "shadow" && damageSurges > 0) {
+          const firstSurge = await Dialog.confirm({
+            title: `First surge?`,
+            content: `<p>Is this the first surge used this round?</p>`,
+            defaultYes: false
+          });
+          if (firstSurge)
+            await game.dsmacros.executeMacroFromCompendium(`UpdateAttribute`, { attributeName: `resource`, value: 1, isDelta: true });
+        }
 
         if (damageSurges > 0) {
           const characteristics = actor.system.attributes.characteristics;

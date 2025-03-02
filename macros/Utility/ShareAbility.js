@@ -25,10 +25,8 @@ try {
   const persistentEffect = await game.dsmacros.executeMacroFromCompendium(`ValidateParameter`, { name: `persistentEffect`, value: scope.persistentEffect, type: `string`, nullable: true });
 
   const getResourceCostFunc = await game.dsmacros.executeMacroFromCompendium(`ValidateParameter`, { name: `getResourceCostFunc`, value: scope.getResourceCostFunc, type: `function`, nullable: true });
-  const getAllowedEdgeBaneFunc = await game.dsmacros.executeMacroFromCompendium(`ValidateParameter`, { name: `getAllowedEdgeBaneFunc`, value: scope.getAllowedEdgeBaneFunc, type: `function`, nullable: true });
   const getExtraDamageFunc = await game.dsmacros.executeMacroFromCompendium(`ValidateParameter`, { name: `getExtraDamageFunc`, value: scope.getExtraDamageFunc, type: `function`, nullable: true });
   const onUseFunc = await game.dsmacros.executeMacroFromCompendium(`ValidateParameter`, { name: `onUseFunc`, value: scope.onUseFunc, type: `function`, nullable: true });
-  const onSurgeFunc = await game.dsmacros.executeMacroFromCompendium(`ValidateParameter`, { name: `onSurgeFunc`, value: scope.onSurgeFunc, type: `function`, nullable: true });
 
   // Perform additional validation
   if (name.includes(`:`) || name.includes(`;`))
@@ -50,10 +48,6 @@ try {
 
   if (typeof(resourceCost) === `undefined` && typeof(getResourceCostFunc) !== `undefined`)
     throw `Error: getResourceCostFunc cannot be specified if resourceCost is not specified`;
-  if (typeof(powerRollStat) === `undefined` && typeof(getAllowedEdgeBaneFunc) !== `undefined`)
-    throw `Error: getAllowedEdgeBaneFunc cannot be specified if powerRollStat is not specified`;
-  if (typeof(powerRollStat) === `undefined` && typeof(onSurgeFunc) !== `undefined`)
-    throw `Error: onSurgeFunc cannot be specified if powerRollStat is not specified`;
 
   // Calculate values for showing the "Use" button
   const buttonId = await game.dsmacros.executeMacroFromCompendium(`GetUUID`);
@@ -140,10 +134,8 @@ try {
         tier2Effect,
         tier3Effect,
         getResourceCostFunc,
-        getAllowedEdgeBaneFunc,
         getExtraDamageFunc,
-        onUseFunc,
-        onSurgeFunc
+        onUseFunc
       });
     });
   }
