@@ -1,4 +1,4 @@
-await game.macros.getName("ShareFeature").execute({
+await game.dsmacros.executeMacroFromCompendium("ShareFeature", {
   name: "",
   description: "" | ``,
   source: "",

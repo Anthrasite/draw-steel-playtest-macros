@@ -1,7 +1,7 @@
 //@id=Vzv9PBx6UfuAj1TS
 //@name=Hands of the Maker
 //@img=icons/magic/holy/barrier-shield-winged-blue.webp
-await game.macros.getName("ShareAbility").execute({
+await game.dsmacros.executeMacroFromCompendium("ShareAbility", {
   name: "Hands of the Maker",
   flavorText: "You can craft objects with the power of your mind!",
   keywords: "Magic",

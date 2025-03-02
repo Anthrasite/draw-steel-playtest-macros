@@ -1,11 +1,11 @@
 //@id=96WYstdKircGE5Th
 //@name=ShowPersistentCostDialog
 //@img=icons/svg/dice-target.svg
-const label = await game.macros.getName(`ValidateParameter`).execute({ name: `label`, value: scope.label, type: `string` });
-const resourceLabel = await game.macros.getName(`ValidateParameter`).execute({ name: `resourceLabel`, value: scope.resourceLabel, type: `string` });
-const selectByDefault = (await game.macros.getName(`ValidateParameter`).execute({ name: `selectByDefault`, value: scope.selectByDefault, type: `boolean`, nullable: true })) ?? false;
+const label = await game.dsmacros.executeMacroFromCompendium(`ValidateParameter`, { name: `label`, value: scope.label, type: `string` });
+const resourceLabel = await game.dsmacros.executeMacroFromCompendium(`ValidateParameter`, { name: `resourceLabel`, value: scope.resourceLabel, type: `string` });
+const selectByDefault = (await game.dsmacros.executeMacroFromCompendium(`ValidateParameter`, { name: `selectByDefault`, value: scope.selectByDefault, type: `boolean`, nullable: true })) ?? false;
 
-const persistentCosts = await game.macros.getName(`GetPersistentCost`).execute();
+const persistentCosts = await game.dsmacros.executeMacroFromCompendium(`GetPersistentCost`);
 if (!Object.keys(persistentCosts).length)
   return undefined;
 

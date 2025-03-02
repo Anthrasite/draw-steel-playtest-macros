@@ -1,7 +1,7 @@
 //@id=20AhgaLxcyZsri7z
 //@name=Shadow_CalculateAbilityCost
 //@img=icons/svg/dice-target.svg
-const resourceCost = await game.macros.getName(`ValidateParameter`).execute({ name: `resourceCost`, value: scope.resourceCost, type: `number` });
+const resourceCost = await game.dsmacros.executeMacroFromCompendium(`ValidateParameter`, { name: `resourceCost`, value: scope.resourceCost, type: `number` });
 
 const decreaseCost = await Dialog.confirm({
   title: `Edge?`,

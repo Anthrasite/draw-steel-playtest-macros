@@ -1,15 +1,15 @@
 //@id=D6zoUBTvy8YqVhKc
 //@name=UpdatePersistentCost
 //@img=icons/svg/dice-target.svg
-const abilityName = await game.macros.getName(`ValidateParameter`).execute({ name: `abilityName`, value: scope.abilityName, type: `string`, nullable: true });
-const cost = await game.macros.getName(`ValidateParameter`).execute({ name: `cost`, value: scope.cost, type: `number`, nullable: true });
+const abilityName = await game.dsmacros.executeMacroFromCompendium(`ValidateParameter`, { name: `abilityName`, value: scope.abilityName, type: `string`, nullable: true });
+const cost = await game.dsmacros.executeMacroFromCompendium(`ValidateParameter`, { name: `cost`, value: scope.cost, type: `number`, nullable: true });
 
 if (cost && !abilityName)
   throw `Error: Cost with no ability name`;
 
 let value = ``;
 if (abilityName) {
-  const persistentCosts = await game.macros.getName(`GetPersistentCost`).execute();
+  const persistentCosts = await game.dsmacros.executeMacroFromCompendium(`GetPersistentCost`);
 
   if (cost)
     persistentCosts[abilityName] = cost;
@@ -24,4 +24,4 @@ const attributePath = `system.attributes.${attributeName}.value`;
 
 await actor.update({ [attributePath]: value });
 
-return await game.macros.getName(`GetAttribute`).execute({ attributeName });
+return await game.dsmacros.executeMacroFromCompendium(`GetAttribute`, { attributeName });

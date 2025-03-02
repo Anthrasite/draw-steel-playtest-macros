@@ -1,7 +1,7 @@
 //@id=O9VjEM8ufRKrP4Ce
 //@name=Translated Through Flame
 //@img=icons/magic/nature/beam-hand-leaves-green.webp
-await game.macros.getName("ShareAbility").execute({
+await game.dsmacros.executeMacroFromCompendium("ShareAbility", {
   name: "Translated Through Flame",
   resourceCost: 5,
   flavorText: "Your ally disappears, then reappears in a burst of fire!",

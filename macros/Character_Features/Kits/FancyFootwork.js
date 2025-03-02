@@ -1,7 +1,7 @@
 //@id=JgjuPdH7Sn8mEszR
 //@name=Fancy Footwork
 //@img=icons/equipment/shield/buckler-boss-iron-wood-brown.webp
-await game.macros.getName("ShareAbility").execute({
+await game.dsmacros.executeMacroFromCompendium("ShareAbility", {
   name: "Fancy Footwork",
   flavorText: "All combat is a dance—and you’ll be the one leading.",
   keywords: "Melee, Strike, Weapon",

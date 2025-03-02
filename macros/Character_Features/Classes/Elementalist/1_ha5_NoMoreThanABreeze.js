@@ -1,7 +1,7 @@
 //@id=Lxrp2CuA7kOYzgE9
 //@name=No More Than a Breeze
 //@img=icons/magic/nature/beam-hand-leaves-green.webp
-await game.macros.getName("ShareAbility").execute({
+await game.dsmacros.executeMacroFromCompendium("ShareAbility", {
   name: "No More Than a Breeze",
   resourceCost: 5,
   flavorText: "The material substance of a creature shreds away at your command.",

@@ -1,7 +1,7 @@
 //@id=jbPkL0mQ1w93lsVd
 //@name=Grasp of Beyond
 //@img=icons/magic/nature/beam-hand-leaves-green.webp
-await game.macros.getName("ShareAbility").execute({
+await game.dsmacros.executeMacroFromCompendium("ShareAbility", {
   name: "Grasp of Beyond",
   flavorText: "You absorb the life energy of another creature and use it to teleport.",
   type: "Action",
