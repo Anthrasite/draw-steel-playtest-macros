@@ -1,7 +1,7 @@
 //@id=0gVIHWSjOdtepar9
 //@name=I Work Better Alone
 //@img=icons/magic/unholy/silhouette-robe-evil-power.webp
-await game.dsmacros.executeMacroFromCompendium("ShareAbility", {
+await game.macros.getName("ShareAbility").execute({
   name: "I Work Better Alone",
   flavorText: "It’s better, just you and me. Isn’t it?",
   keywords: "Melee, Ranged, Strike, Weapon",
@@ -19,6 +19,6 @@ await game.dsmacros.executeMacroFromCompendium("ShareAbility", {
       content: `<p>Does the target have any allies adjacent to them?</p>`,
       defaultYes: false
     });
-    return isAlone ? ` + ${await game.dsmacros.executeMacroFromCompendium(`GetCharacteristic`, { characteristicName: `Agility` })}` : undefined;
+    return isAlone ? ` + ${await game.macros.getName(`GetCharacteristic`).execute({ characteristicName: `Agility` })}` : undefined;
   }
 });

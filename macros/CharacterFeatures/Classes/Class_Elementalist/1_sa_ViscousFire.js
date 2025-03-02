@@ -1,7 +1,7 @@
 //@id=Iy4lnCih1tmQDzMP
 //@name=Viscous Fire
 //@img=icons/magic/nature/beam-hand-leaves-green.webp
-await game.dsmacros.executeMacroFromCompendium("ShareAbility", {
+await game.macros.getName("ShareAbility").execute({
   name: "Viscous Fire",
   flavorText: "A jet of heavy fire erupts with elemental fury where it strikes.",
   type: "Action",

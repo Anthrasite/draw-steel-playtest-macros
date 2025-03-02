@@ -1,7 +1,7 @@
 //@id=0VDzS9IiKp1kGYlw
 //@name=Practical Magic
 //@img=icons/magic/nature/beam-hand-leaves-green.webp
-await game.dsmacros.executeMacroFromCompendium("ShareAbility", {
+await game.macros.getName("ShareAbility").execute({
   name: "Practical Magic",
   flavorText: "Your mastery of elemental power lets you customize your conjurations.",
   keywords: "Magic, Ranged",

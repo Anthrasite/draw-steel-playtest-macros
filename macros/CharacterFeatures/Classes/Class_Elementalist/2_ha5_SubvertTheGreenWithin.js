@@ -1,7 +1,7 @@
 //@id=fBuk67neb1K5hxYG
 //@name=Subvert the Green Within
 //@img=icons/magic/nature/beam-hand-leaves-green.webp
-await game.dsmacros.executeMacroFromCompendium("ShareAbility", {
+await game.macros.getName("ShareAbility").execute({
   name: "Subvert the Green Within",
   resourceCost: 5,
   flavorText: "Burrow into their brains and take control!",

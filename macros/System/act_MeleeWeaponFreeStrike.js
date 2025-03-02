@@ -1,7 +1,7 @@
 //@id=reinsTU07KmpQlcA
 //@name=Melee Weapon Free Strike
 //@img=icons/weapons/swords/shortsword-guard-worn.webp
-await game.dsmacros.executeMacroFromCompendium("ShareAbility", {
+await game.macros.getName("ShareAbility").execute({
   name: "Melee Weapon Free Strike",
   keywords: "Charge, Melee, Strike, Weapon",
   type: "Action",

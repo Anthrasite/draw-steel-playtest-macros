@@ -1,7 +1,7 @@
 //@id=MNuBY1p2trCaFlRv
 //@name=Ray of Agonizing Self Reflection
 //@img=icons/magic/nature/beam-hand-leaves-green.webp
-await game.dsmacros.executeMacroFromCompendium("ShareAbility", {
+await game.macros.getName("ShareAbility").execute({
   name: "Ray of Agonizing Self Reflection",
   flavorText: "You inflict pain and doubt in equal measure.",
   type: "Action",

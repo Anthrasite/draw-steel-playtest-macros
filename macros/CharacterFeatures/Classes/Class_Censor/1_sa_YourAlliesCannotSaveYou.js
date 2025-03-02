@@ -1,7 +1,7 @@
 //@id=heTa4RUDCsFP3Kwu
 //@name=Your Allies Cannot Save You!
 //@img=icons/magic/holy/barrier-shield-winged-blue.webp
-await game.dsmacros.executeMacroFromCompendium("ShareAbility", {
+await game.macros.getName("ShareAbility").execute({
   name: "Your Allies Cannot Save You!",
   flavorText: "\"See how they abandon you!\"",
   keywords: "Melee, Strike, Weapon",

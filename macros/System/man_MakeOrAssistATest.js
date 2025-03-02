@@ -1,7 +1,7 @@
 //@id=qtENAy5eHWOc0vxK
 //@name=Make or Assist a Test
 //@img=icons/magic/air/air-smoke-casting.webp
-await game.dsmacros.executeMacroFromCompendium("ShareAbility", {
+await game.macros.getName("ShareAbility").execute({
   name: "Make or Assist a Test",
   type: "Maneuver",
   description: `Many tests are maneuvers if made in combat. Searching a chest with a Reason test, picking a door’s lock with an Agility test, or lifting a portcullis with a Might test would all be maneuvers. Assisting a test is also a maneuver in combat.</p>

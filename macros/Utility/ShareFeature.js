@@ -2,16 +2,16 @@
 //@name=ShareFeature
 //@img=icons/svg/dice-target.svg
 try {
-  await game.dsmacros.executeMacroFromCompendium("ValidateActorAttributes");
+  await game.macros.getName("ValidateActorAttributes").execute();
 
-  const name = await game.dsmacros.executeMacroFromCompendium(`ValidateParameter`, { name: `name`, value: scope.name, type: `string` });
-  const description = await game.dsmacros.executeMacroFromCompendium(`ValidateParameter`, { name: `description`, value: scope.description, type: `string` });
-  const source = await game.dsmacros.executeMacroFromCompendium(`ValidateParameter`, { name: `source`, value: scope.source, type: `string` });
+  const name = await game.macros.getName(`ValidateParameter`).execute({ name: `name`, value: scope.name, type: `string` });
+  const description = await game.macros.getName(`ValidateParameter`).execute({ name: `description`, value: scope.description, type: `string` });
+  const source = await game.macros.getName(`ValidateParameter`).execute({ name: `source`, value: scope.source, type: `string` });
 
-  const onUseFunc = await game.dsmacros.executeMacroFromCompendium(`ValidateParameter`, { name: `onUseFunc`, value: scope.onUseFunc, type: `function`, nullable: true });
+  const onUseFunc = await game.macros.getName(`ValidateParameter`).execute({ name: `onUseFunc`, value: scope.onUseFunc, type: `function`, nullable: true });
 
   // Calculate values for showing the "Use" button
-  const buttonId = await game.dsmacros.executeMacroFromCompendium(`GetUUID`);
+  const buttonId = await game.macros.getName(`GetUUID`).execute();
 
   // Show the ability in the chat
   await ChatMessage.create({

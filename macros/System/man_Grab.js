@@ -1,7 +1,7 @@
 //@id=Ongxstlr9zedfEMv
 //@name=Grab
 //@img=icons/magic/air/air-smoke-casting.webp
-await game.dsmacros.executeMacroFromCompendium("ShareAbility", {
+await game.macros.getName("ShareAbility").execute({
   name: "Grab",
   keywords: "Melee",
   type: "Maneuver",
