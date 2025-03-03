@@ -21,7 +21,7 @@ try {
 
   // Determine if the ability can actually be used
   const currResource = await game.macros.getName(`GetAttribute`).execute({ attributeName: `resource` });
-  const actualResourceCost = getResourceCostFunc ? await getResourceCostFunc() : resourceCost;
+  let actualResourceCost = getResourceCostFunc ? await getResourceCostFunc() : resourceCost;
 
   // Handle Shadow ability cost reduction
   const className = (await game.macros.getName(`GetAttribute`).execute({ attributeName: `class` })).value;
