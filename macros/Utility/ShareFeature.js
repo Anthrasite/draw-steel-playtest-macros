@@ -28,6 +28,10 @@ try {
   if (onUseFunc) {
     $(document).on(`click`, `#${buttonId}`, async function() {
       await onUseFunc();
+      
+      // Disable this event and delete the button
+      $(this).off(`click`);
+      $(this).remove();
     });
   }
 }
