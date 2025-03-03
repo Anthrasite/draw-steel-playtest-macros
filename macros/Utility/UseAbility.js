@@ -26,7 +26,7 @@ try {
   // Handle Shadow ability cost reduction
   const className = (await game.macros.getName(`GetAttribute`).execute({ attributeName: `class` })).value;
   let allowedEdgeBane = undefined;
-  if (className.toLowerCase() === "shadow" && powerRollStat) {
+  if (className.toLowerCase() === "shadow" && actualResourceCost && powerRollStat) {
     const decreaseCost = await Dialog.confirm({
       title: `Edge?`,
       content: `<p>Will you have an edge on the power roll (against at least one target)?</p>`,
