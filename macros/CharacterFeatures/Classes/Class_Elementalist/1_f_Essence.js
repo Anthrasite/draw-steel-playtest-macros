@@ -9,7 +9,7 @@ await game.macros.getName("ShareFeature").execute({
   <p>You lose any remaining essence at the end of the encounter.</p>
   <h3>Essence Outside of Combat</h3>
   <p>Though you can’t gain essence outside of combat, you can use your heroic abilities and effects that cost essence without spending it. Whenever you use an ability or effect outside of combat that costs essence, you can’t use that same ability or effect outside of combat again until you gain at least 1 Victory or finish a respite.</p>
-  <p>If you use a persistent ability outside of combat (see Persistent Magic), you can maintain it for a number of rounds equal to your Victories.</p>
+  <p>If you use a persistent ability outside of combat, you can maintain it for a number of rounds equal to your Victories.</p>
   <p>If you use an ability outside of combat that lets you spend unlimited essence on its effect, you can use it as if you had spent an amount of essence on it equal to your Victories. (Such abilities aren’t part of the core rules for the elementalist but might appear in future products.)</p>`,
   source: "Class"
 });
