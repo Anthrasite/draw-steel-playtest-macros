@@ -163,7 +163,7 @@ try {
           const surgeRoll = await new Roll(surgeDamage.toString()).evaluate();
           await game.macros.getName(`ShareRoll`).execute({
             roll: surgeRoll,
-            flavor: `Extra surge damage`
+            flavor: `Extra damage`
           });
         }
 
