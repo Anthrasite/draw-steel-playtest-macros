@@ -14,9 +14,6 @@ try {
 
     await game.macros.getName(`UpdateAttribute`).execute({ attributeName: `resource`, value: resourceGain, isDelta: true });
   }
-
-  if (actor.sheet.rendered)
-    actor.sheet.render(true);
 }
 catch (error) {
   if (error.message !== "The Dialog was closed without a choice being made.")

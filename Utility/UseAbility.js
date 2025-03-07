@@ -168,10 +168,6 @@ try {
       await game.macros.getName(`UpdateAttribute`).execute({ attributeName: `resource`, value: -totalResourceCost, isDelta: true });
     }
   }
-
-  // Re-render the character sheet if it's open to prevent it from overwriting the new values
-  if (actor.sheet.rendered)
-    actor.sheet.render(true);
       
   // Disable this event and delete the button
   button.off(`click`);

@@ -8,9 +8,6 @@ try {
   await game.macros.getName("UpdateAttribute").execute({ attributeName: "surges", value: 0 });
   await game.macros.getName("UpdateAttribute").execute({ attributeName: "resource", value: 0 });
   await game.macros.getName("UpdateAttribute").execute({ attributeName: "persistentCost", value: 0 });
-
-  if (actor.sheet.rendered)
-    actor.sheet.render(true);
 }
 catch (error) {
   if (error.message !== "The Dialog was closed without a choice being made.")
