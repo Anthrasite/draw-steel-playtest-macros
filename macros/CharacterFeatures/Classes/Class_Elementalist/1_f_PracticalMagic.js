@@ -10,8 +10,8 @@ await game.macros.getName("ShareAbility").execute({
   target: "Self",
   effect: `Choose one of the following effects:</p>
     <ul>
-      <li>You use the Knockback maneuver, but its distance becomes the range of your Hurl Element ability, and you use Reason instead of Might for the power roll.</li>
-      <li>You choose a creature within the distance of your Hurl Element ability and deal damage equal to your Reason score to them. The damage type can be acid, cold, corruption, fire, lightning, poison, or sonic.</li>
+      <li>You use the <i>Knockback</i> maneuver, but its distance becomes the range of your <i>Hurl Element</i> ability, and you use Reason instead of Might for the power roll.</li>
+      <li>You choose a creature within the distance of your <i>Hurl Element</i> ability and deal damage equal to your Reason score to them. The damage type can be acid, cold, corruption, fire, lightning, poison, or sonic.</li>
       <li>You teleport up to a number of squares equal to your Reason score.</li>
     </ul>`
 });
