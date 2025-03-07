@@ -1,7 +1,7 @@
 //@id=Z7tCnrgKNXPW5BhR
 //@name=Shield Bash
 //@img=icons/equipment/shield/buckler-boss-iron-wood-brown.webp
-await game.dsmacros.executeMacroFromCompendium("ShareAbility", {
+await game.macros.getName("ShareAbility").execute({
   name: "Shield Bash",
   flavorText: "In your hands, a shield isn’t just for protection.",
   keywords: "Melee, Strike, Weapon",

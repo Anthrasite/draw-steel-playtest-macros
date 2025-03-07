@@ -1,7 +1,7 @@
 //@id=fVF5ICsRveDji8LX
 //@name=Shattered Legacy
 //@img=icons/magic/control/debuff-chains-shackles-movement-blue.webp
-await game.dsmacros.executeMacroFromCompendium("ShareFeature", {
+await game.macros.getName("ShareFeature").execute({
   name: "Shattered Legacy",
   description: `You’re the heir to a powerful magical treasure that has been in your family for generations. The only problem: it’s broken. Some ancestor of yours broke it while saving the world, or maybe they tripped and smashed it on a rock. It’s your job to fix it.</p>
     <p><b>Benefit:</b> You learn a language of your choice. You gain a leveled item of your choice.</p>

@@ -1,7 +1,7 @@
 //@id=3JSUMOHwK9GDc1CE
 //@name=Hurl Element
 //@img=icons/magic/nature/beam-hand-leaves-green.webp
-await game.dsmacros.executeMacroFromCompendium("ShareAbility", {
+await game.macros.getName("ShareAbility").execute({
   name: "Hurl Element",
   flavorText: "You cast a ball of elemental energy at an unsuspecting foe.",
   keywords: "Magic, Ranged, Strike",

@@ -1,7 +1,7 @@
 //@id=P4LJSwdMhKRHrbe3
 //@name=Ranged Weapon Free Strike
 //@img=icons/weapons/bows/shortbow-recurve.webp
-await game.dsmacros.executeMacroFromCompendium("ShareAbility", {
+await game.macros.getName("ShareAbility").execute({
   name: "Ranged Weapon Free Strike",
   keywords: "Ranged, Strike, Weapon",
   type: "Action",

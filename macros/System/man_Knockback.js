@@ -1,7 +1,7 @@
 //@id=Oqx5g14i6Pla38pz
 //@name=Knockback
 //@img=icons/magic/air/air-smoke-casting.webp
-await game.dsmacros.executeMacroFromCompendium("ShareAbility", {
+await game.macros.getName("ShareAbility").execute({
   name: "Knockback",
   keywords: "Melee, Weapon",
   type: "Maneuver",

@@ -2,29 +2,29 @@
 //@name=UseAbility
 //@img=icons/svg/dice-target.svg
 try {
-  const button = await game.dsmacros.executeMacroFromCompendium(`ValidateParameter`, { name: `button`, value: scope.button, type: `object` });
+  const button = await game.macros.getName(`ValidateParameter`).execute({ name: `button`, value: scope.button, type: `object` });
 
-  const name = await game.dsmacros.executeMacroFromCompendium(`ValidateParameter`, { name: `name`, value: scope.name, type: `string` });
-  const resourceCost = await game.dsmacros.executeMacroFromCompendium(`ValidateParameter`, { name: `resourceCost`, value: scope.resourceCost, type: `number`, nullable: true });
-  const extraResourceCost = await game.dsmacros.executeMacroFromCompendium(`ValidateParameter`, { name: `extraResourceCost`, value: scope.extraResourceCost, type: `string`, nullable: true });
-  const persistentCost = await game.dsmacros.executeMacroFromCompendium(`ValidateParameter`, { name: `persistentCost`, value: scope.persistentCost, type: `number`, nullable: true });
-  const powerRollStat = await game.dsmacros.executeMacroFromCompendium(`ValidateParameter`, { name: `powerRollStat`, value: scope.powerRollStat, type: `string`, nullable: true });
-  const tier1Effect = await game.dsmacros.executeMacroFromCompendium(`ValidateParameter`, { name: `tier1Effect`, value: scope.tier1Effect, type: `string`, nullable: true });
-  const tier2Effect = await game.dsmacros.executeMacroFromCompendium(`ValidateParameter`, { name: `tier2Effect`, value: scope.tier2Effect, type: `string`, nullable: true });
-  const tier3Effect = await game.dsmacros.executeMacroFromCompendium(`ValidateParameter`, { name: `tier3Effect`, value: scope.tier3Effect, type: `string`, nullable: true });
-  const keywords = (await game.dsmacros.executeMacroFromCompendium(`ValidateParameter`, { name: `keywords`, value: scope.keywords, type: `string`, nullable: true })) ?? ``;
-  const isKit = (await game.dsmacros.executeMacroFromCompendium(`ValidateParameter`, { name: `isKit`, value: scope.isKit, type: `boolean`, nullable: true })) ?? false;
+  const name = await game.macros.getName(`ValidateParameter`).execute({ name: `name`, value: scope.name, type: `string` });
+  const resourceCost = await game.macros.getName(`ValidateParameter`).execute({ name: `resourceCost`, value: scope.resourceCost, type: `number`, nullable: true });
+  const extraResourceCost = await game.macros.getName(`ValidateParameter`).execute({ name: `extraResourceCost`, value: scope.extraResourceCost, type: `string`, nullable: true });
+  const persistentCost = await game.macros.getName(`ValidateParameter`).execute({ name: `persistentCost`, value: scope.persistentCost, type: `number`, nullable: true });
+  const powerRollStat = await game.macros.getName(`ValidateParameter`).execute({ name: `powerRollStat`, value: scope.powerRollStat, type: `string`, nullable: true });
+  const tier1Effect = await game.macros.getName(`ValidateParameter`).execute({ name: `tier1Effect`, value: scope.tier1Effect, type: `string`, nullable: true });
+  const tier2Effect = await game.macros.getName(`ValidateParameter`).execute({ name: `tier2Effect`, value: scope.tier2Effect, type: `string`, nullable: true });
+  const tier3Effect = await game.macros.getName(`ValidateParameter`).execute({ name: `tier3Effect`, value: scope.tier3Effect, type: `string`, nullable: true });
+  const keywords = (await game.macros.getName(`ValidateParameter`).execute({ name: `keywords`, value: scope.keywords, type: `string`, nullable: true })) ?? ``;
+  const isKit = (await game.macros.getName(`ValidateParameter`).execute({ name: `isKit`, value: scope.isKit, type: `boolean`, nullable: true })) ?? false;
 
-  const getResourceCostFunc = await game.dsmacros.executeMacroFromCompendium(`ValidateParameter`, { name: `getResourceCostFunc`, value: scope.getResourceCostFunc, type: `function`, nullable: true });
-  const getExtraDamageFunc = await game.dsmacros.executeMacroFromCompendium(`ValidateParameter`, { name: `getExtraDamageFunc`, value: scope.getExtraDamageFunc, type: `function`, nullable: true });
-  const onUseFunc = await game.dsmacros.executeMacroFromCompendium(`ValidateParameter`, { name: `onUseFunc`, value: scope.onUseFunc, type: `function`, nullable: true });
+  const getResourceCostFunc = await game.macros.getName(`ValidateParameter`).execute({ name: `getResourceCostFunc`, value: scope.getResourceCostFunc, type: `function`, nullable: true });
+  const getExtraDamageFunc = await game.macros.getName(`ValidateParameter`).execute({ name: `getExtraDamageFunc`, value: scope.getExtraDamageFunc, type: `function`, nullable: true });
+  const onUseFunc = await game.macros.getName(`ValidateParameter`).execute({ name: `onUseFunc`, value: scope.onUseFunc, type: `function`, nullable: true });
 
   // Determine if the ability can actually be used
-  const currResource = await game.dsmacros.executeMacroFromCompendium(`GetAttribute`, { attributeName: `resource` });
+  const currResource = await game.macros.getName(`GetAttribute`).execute({ attributeName: `resource` });
   const actualResourceCost = getResourceCostFunc ? await getResourceCostFunc() : resourceCost;
 
   // Handle Shadow ability cost reduction
-  const className = await game.dsmacros.executeMacroFromCompendium(`GetAttribute`, { attributeName: `class` });
+  const className = await game.macros.getName(`GetAttribute`).execute({ attributeName: `class` });
   let allowedEdgeBane = undefined;
   if (className.toLowerCase() === "shadow" && powerRollStat) {
     const decreaseCost = await Dialog.confirm({
@@ -52,7 +52,7 @@ try {
   // Perform the power roll, if the ability has a power roll
   let rollResult = undefined;
   if (powerRollStat) {
-    rollResult = (await game.dsmacros.executeMacroFromCompendium(`DoPowerRoll`, { powerRollStat, allowedEdgeBane }));
+    rollResult = (await game.macros.getName(`DoPowerRoll`).execute({ powerRollStat, allowedEdgeBane }));
 
     // Calculate the damage of the ability
     const effect = [ tier1Effect, tier2Effect, tier3Effect ][rollResult.tier - 1];
@@ -78,7 +78,7 @@ try {
       // Calculate the damage from the kit (if this isn't a kit ability)
       const isMelee = keywords.toLowerCase().includes("melee");
       const isRanged = keywords.toLowerCase().includes("ranged");
-      const kitDamage = (!isMelee && !isRanged) || isKit ? 0 : await game.dsmacros.executeMacroFromCompendium(`GetKitDamage`, { isMelee, tier: rollResult.tier });
+      const kitDamage = (!isMelee && !isRanged) || isKit ? 0 : await game.macros.getName(`GetKitDamage`).execute({ isMelee, tier: rollResult.tier });
 
       let extraDamage = undefined;
       if (getExtraDamageFunc)
@@ -96,7 +96,7 @@ try {
         damageRollString += extraDamage;
 
       const damageRoll = await new Roll(damageRollString).evaluate();
-      await game.dsmacros.executeMacroFromCompendium(`ShareRoll`, {
+      await game.macros.getName(`ShareRoll`).execute({
         roll: damageRoll,
         flavor: damageType ? `${damageType.capitalize()} damage` : `Damage`
       });
@@ -104,7 +104,7 @@ try {
 
     // Determine if any surges should be used
     const hasPotency = /([A-Z]\s+<\s+[A-Z0-9]+)/i.test(effect);
-    const surgeCount = (await game.dsmacros.executeMacroFromCompendium(`GetAttribute`, { attributeName: `surges` })).value;
+    const surgeCount = (await game.macros.getName(`GetAttribute`).execute({ attributeName: `surges` })).value;
     if (doesDamage && surgeCount > 0 || hasPotency && surgeCount >= 2) {
       let surgeButtons = {
         z: { label: `0` }
@@ -153,7 +153,7 @@ try {
             defaultYes: false
           });
           if (firstSurge)
-            await game.dsmacros.executeMacroFromCompendium(`UpdateAttribute`, { attributeName: `resource`, value: 1, isDelta: true });
+            await game.macros.getName(`UpdateAttribute`).execute({ attributeName: `resource`, value: 1, isDelta: true });
         }
 
         if (damageSurges > 0) {
@@ -161,20 +161,20 @@ try {
           const maxChar = Math.max(...(Object.keys(characteristics).map((key) => characteristics[key].value)));
           const surgeDamage = (damageSurges * maxChar);
           const surgeRoll = await new Roll(surgeDamage.toString()).evaluate();
-          await game.dsmacros.executeMacroFromCompendium(`ShareRoll`, {
+          await game.macros.getName(`ShareRoll`).execute({
             roll: surgeRoll,
             flavor: `Extra surge damage`
           });
         }
 
-        await game.dsmacros.executeMacroFromCompendium(`UpdateAttribute`, { attributeName: `surges`, value: -(damageSurges + potencySurges), isDelta: true });
+        await game.macros.getName(`UpdateAttribute`).execute({ attributeName: `surges`, value: -(damageSurges + potencySurges), isDelta: true });
       }
     }
   }
 
   // Set the persistent cost, if the ability has a persistent cost
   if (persistentCost) {
-    await game.dsmacros.executeMacroFromCompendium(`UpdatePersistentCost`, { abilityName: name, cost: persistentCost });
+    await game.macros.getName(`UpdatePersistentCost`).execute({ abilityName: name, cost: persistentCost });
   }
 
   // Subtract the resource cost, if the ability has a resource cost
@@ -191,7 +191,7 @@ try {
       // If the extra resource ends with a "+", then a variable amount can be used
       if (isExtraResourceCostVariable) {
         if (currResource.value >= totalResourceCost + minExtraResourceCost) {
-          extraResourceUsed = Number((await game.dsmacros.executeMacroFromCompendium(`ShowSimpleInputDialog`, { title: `Extra ${currResource.label}`, label: `Extra ${currResource.label} to use`, defaultValue: minExtraResourceCost, allowNegative: false, rejectClose: false })) ?? 0);
+          extraResourceUsed = Number((await game.macros.getName(`ShowSimpleInputDialog`).execute({ title: `Extra ${currResource.label}`, label: `Extra ${currResource.label} to use`, defaultValue: minExtraResourceCost, allowNegative: false, rejectClose: false })) ?? 0);
 
           // Ensure the minimum resource was used
           if (extraResourceUsed > 0 && extraResourceUsed < minExtraResourceCost) {
@@ -217,7 +217,7 @@ try {
     }
 
     if (totalResourceCost > 0) {
-      await game.dsmacros.executeMacroFromCompendium(`UpdateAttribute`, { attributeName: `resource`, value: -totalResourceCost, isDelta: true });
+      await game.macros.getName(`UpdateAttribute`).execute({ attributeName: `resource`, value: -totalResourceCost, isDelta: true });
     }
   }
       

@@ -1,7 +1,7 @@
 //@id=pFHqOTI3acYgxE9b
 //@name=Volcano's Embrace
 //@img=icons/magic/nature/beam-hand-leaves-green.webp
-await game.dsmacros.executeMacroFromCompendium("ShareAbility", {
+await game.macros.getName("ShareAbility").execute({
   name: "Volcano's Embrace",
   resourceCost: 5,
   flavorText: "Wrap them up in fire and melting stone.",

@@ -1,11 +1,11 @@
 //@id=70zYVUoWLrq6abeH
 //@name=Ward of Delightful Consequences
 //@img=icons/magic/nature/beam-hand-leaves-green.webp
-await game.dsmacros.executeMacroFromCompendium("ShareFeature", {
+await game.macros.getName("ShareFeature").execute({
   name: "Ward of Delightful Consequences",
   description: "A protective field of void magic absorbs violence aimed at you, then lets you hurl it back at your enemies. The first time each round that you take damage, you gain a surge.",
   source: "Class",
   onUseFunc: async function() {
-    await game.dsmacros.executeMacroFromCompendium("UpdateAttribute", { attributeName: "surges", value: 1, isDelta: true });
+    await game.macros.getName("UpdateAttribute").execute({ attributeName: "surges", value: 1, isDelta: true });
   }
 });

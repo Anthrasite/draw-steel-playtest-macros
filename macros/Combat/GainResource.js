@@ -2,20 +2,20 @@
 //@name=Gain resource
 //@img=icons/magic/symbols/ring-circle-smoke-blue.webp
 try {
-  await game.dsmacros.executeMacroFromCompendium("ValidateActorAttributes");
+  await game.macros.getName("ValidateActorAttributes").execute();
 
-  const resource = await game.dsmacros.executeMacroFromCompendium(`GetAttribute`, { attributeName: `resource` });
+  const resource = await game.macros.getName(`GetAttribute`).execute({ attributeName: `resource` });
   const resourceLabel = resource.label.capitalize();
-  const resourceGain = Number(await game.dsmacros.executeMacroFromCompendium(`ShowSimpleInputDialog`, { title: resourceLabel, label: `${resourceLabel} gained`, defaultValue: 1, allowNegative: false }));
+  const resourceGain = Number(await game.macros.getName(`ShowSimpleInputDialog`).execute({ title: resourceLabel, label: `${resourceLabel} gained`, defaultValue: 1, allowNegative: false }));
 
   if (resourceGain > 0) {
     const roll = await new Roll(`${resource.value} + ${resourceGain}`).evaluate();
-    await game.dsmacros.executeMacroFromCompendium(`ShareRoll`, {
+    await game.macros.getName(`ShareRoll`).execute({
       roll,
       flavor: resourceLabel
     });
 
-    await game.dsmacros.executeMacroFromCompendium(`UpdateAttribute`, { attributeName: `resource`, value: resourceGain, isDelta: true });
+    await game.macros.getName(`UpdateAttribute`).execute({ attributeName: `resource`, value: resourceGain, isDelta: true });
   }
 }
 catch (error) {

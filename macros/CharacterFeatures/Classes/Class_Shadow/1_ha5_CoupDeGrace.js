@@ -1,7 +1,7 @@
 //@id=baRkGuOAm0IqWy72
 //@name=Coup de Grace
 //@img=icons/magic/unholy/silhouette-robe-evil-power.webp
-await game.dsmacros.executeMacroFromCompendium("ShareAbility", {
+await game.macros.getName("ShareAbility").execute({
   name: "Coup de Grace",
   flavorText: "Your blade might be the last thing they see.",
   resourceCost: 5,

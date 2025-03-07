@@ -1,7 +1,7 @@
 //@id=YwpDuNX84dehER5K
 //@name=A Meteoric Introduction
 //@img=icons/magic/nature/beam-hand-leaves-green.webp
-await game.dsmacros.executeMacroFromCompendium("ShareAbility", {
+await game.macros.getName("ShareAbility").execute({
   name: "A Meteoric Introduction",
   flavorText: "You give your enemy a gentle tap like an asteroid impact.",
   type: "Action",

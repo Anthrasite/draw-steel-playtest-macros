@@ -1,7 +1,7 @@
 //@id=IsEqrB3nFQYiKyzf
 //@name=Hesitation is Weakness
 //@img=icons/magic/unholy/silhouette-robe-evil-power.webp
-await game.dsmacros.executeMacroFromCompendium("ShareAbility", {
+await game.macros.getName("ShareAbility").execute({
   name: "Hesitation is Weakness",
   flavorText: "Keep up the attack. Never give them a moment's grace.",
   resourceCost: 1,

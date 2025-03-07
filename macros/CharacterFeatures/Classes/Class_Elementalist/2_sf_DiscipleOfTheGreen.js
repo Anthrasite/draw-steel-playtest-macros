@@ -1,7 +1,7 @@
 //@id=TxhsuZWYVz6jRFe3
 //@name=Disciple of the Green
 //@img=icons/magic/nature/beam-hand-leaves-green.webp
-await game.dsmacros.executeMacroFromCompendium("ShareFeature", {
+await game.macros.getName("ShareFeature").execute({
   name: "Disciple of the Green",
   description: `You can use a maneuver to shapeshift into a type of creature on the Green Animal Forms table. While in animal form, you can speak, and you use your Reason score to make melee free strikes. Your statistics stay the same except as noted on the table.</p>
     <p>Each form has a prerequisite level that you must attain in this class before you can adopt it. Some animal forms grant you temporary Stamina. You lose this temporary Stamina when you revert back to your true form.</p>
