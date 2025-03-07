@@ -1,3 +1,6 @@
+//@id=1JFEp3M9VhftSyuZ
+//@name=ValidateActorAttributes
+//@img=icons/svg/dice-target.svg
 function validateHasOwn(obj, propName, actor, isGroup = false) {
   if (!Object.hasOwn(obj, propName))
     throw `Error: ${isGroup ? `Group` : `Attribute`} "${propName}" is not defined for actor "${actor.name}"`;

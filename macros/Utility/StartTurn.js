@@ -1,3 +1,6 @@
+//@id=SQXPenBmpa0GCwc3
+//@name=StartTurn
+//@img=icons/svg/dice-target.svg
 try {
   await game.macros.getName("ValidateActorAttributes").execute();
 

@@ -1,3 +1,6 @@
+//@id=aUX7yxzO8WBIhCKP
+//@name=ShareFeature
+//@img=icons/svg/dice-target.svg
 try {
   await game.macros.getName("ValidateActorAttributes").execute();
 

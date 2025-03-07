@@ -1,3 +1,6 @@
+//@id=UvSBFc1YuHe5kiDW
+//@name=UseAbility
+//@img=icons/svg/dice-target.svg
 try {
   const button = await game.macros.getName(`ValidateParameter`).execute({ name: `button`, value: scope.button, type: `object` });
 

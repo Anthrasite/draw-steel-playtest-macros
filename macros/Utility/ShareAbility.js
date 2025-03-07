@@ -1,3 +1,6 @@
+//@id=wxzRAVPDMEyIoFSg
+//@name=ShareAbility
+//@img=icons/svg/dice-target.svg
 try {
   await game.macros.getName("ValidateActorAttributes").execute();
 

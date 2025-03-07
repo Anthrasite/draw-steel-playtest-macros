@@ -1,3 +1,6 @@
+//@id=96WYstdKircGE5Th
+//@name=ShowPersistentCostDialog
+//@img=icons/svg/dice-target.svg
 const label = await game.macros.getName(`ValidateParameter`).execute({ name: `label`, value: scope.label, type: `string` });
 const resourceLabel = await game.macros.getName(`ValidateParameter`).execute({ name: `resourceLabel`, value: scope.resourceLabel, type: `string` });
 const selectByDefault = (await game.macros.getName(`ValidateParameter`).execute({ name: `selectByDefault`, value: scope.selectByDefault, type: `boolean`, nullable: true })) ?? false;

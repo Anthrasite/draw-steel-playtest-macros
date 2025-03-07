@@ -1,3 +1,6 @@
+//@id=lBfmIKZDFeOow27S
+//@name=DoPowerRoll
+//@img=icons/svg/dice-target.svg
 try {
   const powerRollStat = await game.macros.getName(`ValidateParameter`).execute({ name: `powerRollStat`, value: scope.powerRollStat, type: `string`, nullable: true });
   const allowedEdgeBane = await game.macros.getName(`ValidateParameter`).execute({ name: `allowedEdgeBane`, value: scope.allowedEdgeBane, type: `object`, nullable: true });

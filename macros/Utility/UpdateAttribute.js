@@ -1,3 +1,6 @@
+//@id=inREdrJwhy1tXNak
+//@name=UpdateAttribute
+//@img=icons/svg/dice-target.svg
 const attributeName = await game.macros.getName(`ValidateParameter`).execute({ name: `attributeName`, value: scope.attributeName, type: `string` });
 const value = await game.macros.getName(`ValidateParameter`).execute({ name: `value`, value: scope.value, type: `number` });
 const isDelta = (await game.macros.getName(`ValidateParameter`).execute({ name: `isDelta`, value: scope.isDelta, type: `boolean`, nullable: true })) ?? false;

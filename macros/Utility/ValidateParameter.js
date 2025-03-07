@@ -1,3 +1,6 @@
+//@id=dlDYABs6ha9yUIOr
+//@name=ValidateParameter
+//@img=icons/svg/dice-target.svg
 const name = scope.name;
 const value = scope.value;
 const type = scope.type;

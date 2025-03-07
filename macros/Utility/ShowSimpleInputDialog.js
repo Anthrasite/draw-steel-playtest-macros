@@ -1,3 +1,6 @@
+//@id=AQTxaEf8itGUMpOR
+//@name=ShowSimpleInputDialog
+//@img=icons/svg/dice-target.svg
 const label = await game.macros.getName(`ValidateParameter`).execute({ name: `label`, value: scope.label, type: `string` });
 const title = (await game.macros.getName(`ValidateParameter`).execute({ name: `label`, value: scope.label, type: `string`, nullable: true })) ?? label;
 const allowNegative = (await game.macros.getName(`ValidateParameter`).execute({ name: `allowNegative`, value: scope.allowNegative, type: `boolean`, nullable: true })) ?? true;
