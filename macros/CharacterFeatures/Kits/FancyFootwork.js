@@ -2,6 +2,7 @@
 //@name=Fancy Footwork
 //@img=icons/equipment/shield/buckler-boss-iron-wood-brown.webp
 await game.macros.getName("ShareAbility").execute({
+  activeActor: actor,
   name: "Fancy Footwork",
   flavorText: "All combat is a dance—and you’ll be the one leading.",
   keywords: "Melee, Strike, Weapon",

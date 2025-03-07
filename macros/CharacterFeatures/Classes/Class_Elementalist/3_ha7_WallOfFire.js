@@ -2,6 +2,7 @@
 //@name=Wall of Fire
 //@img=icons/magic/nature/beam-hand-leaves-green.webp
 await game.macros.getName("ShareAbility").execute({
+  activeActor: actor,
   name: "Wall of Fire",
   resourceCost: 7,
   flavorText: "A blazing, beautifully organized inferno erupts at your command.",

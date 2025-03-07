@@ -2,6 +2,7 @@
 //@name=UseAbility
 //@img=icons/svg/dice-target.svg
 try {
+  const activeActor = await game.macros.getName(`ValidateParameter`).execute({ name: `activeActor`, value: scope.activeActor, type: `object` });
   const button = await game.macros.getName(`ValidateParameter`).execute({ name: `button`, value: scope.button, type: `object` });
 
   const name = await game.macros.getName(`ValidateParameter`).execute({ name: `name`, value: scope.name, type: `string` });
@@ -19,11 +20,11 @@ try {
   const onUseFunc = await game.macros.getName(`ValidateParameter`).execute({ name: `onUseFunc`, value: scope.onUseFunc, type: `function`, nullable: true });
 
   // Determine if the ability can actually be used
-  const currResource = await game.macros.getName(`GetAttribute`).execute({ attributeName: `resource` });
+  const currResource = await game.macros.getName(`GetAttribute`).execute({ activeActor, attributeName: `resource` });
   let actualResourceCost = resourceCost;
 
   // Handle free persistent effect
-  const persistentCosts = await game.macros.getName(`GetPersistentCost`).execute();
+  const persistentCosts = await game.macros.getName(`GetPersistentCost`).execute({ activeActor });
   if (Object.keys(persistentCosts).length && Object.hasOwn(persistentCosts, name)) {
     const isPersistent = await Dialog.confirm({
       title: `Persistent effect?`,
@@ -34,7 +35,7 @@ try {
   }
 
   // Handle Shadow ability cost reduction
-  const className = (await game.macros.getName(`GetAttribute`).execute({ attributeName: `class` })).value;
+  const className = (await game.macros.getName(`GetAttribute`).execute({ activeActor, attributeName: `class` })).value;
   let allowedEdgeBane = undefined;
   if (className.toLowerCase() === "shadow" && actualResourceCost && powerRollStat) {
     const decreaseCost = await Dialog.confirm({
@@ -62,7 +63,7 @@ try {
   // Perform the power roll, if the ability has a power roll
   let rollResult = undefined;
   if (powerRollStat) {
-    rollResult = (await game.macros.getName(`DoPowerRoll`).execute({ powerRollStat, allowedEdgeBane }));
+    rollResult = (await game.macros.getName(`DoPowerRoll`).execute({ activeActor, powerRollStat, allowedEdgeBane }));
 
     // Calculate the damage of the ability
     const effect = [ tier1Effect, tier2Effect, tier3Effect ][rollResult.tier - 1];
@@ -78,7 +79,7 @@ try {
       let charDamage = undefined;
       let maxCharName = undefined;
       if (charDamageOptions) {
-        for (const [charName, char] of Object.entries(actor.system.attributes.characteristics))
+        for (const [charName, char] of Object.entries(activeActor.system.attributes.characteristics))
           if (charDamageOptions.indexOf(charName[0].toUpperCase()) >= 0 && (!maxCharName || char.value > charDamage)) {
             maxCharName = charName;
             charDamage = char.value;
@@ -88,7 +89,7 @@ try {
       // Calculate the damage from the kit (if this isn't a kit ability)
       const isMelee = keywords.toLowerCase().includes("melee");
       const isRanged = keywords.toLowerCase().includes("ranged");
-      const kitDamage = (!isMelee && !isRanged) || isKit ? 0 : await game.macros.getName(`GetKitDamage`).execute({ isMelee, tier: rollResult.tier });
+      const kitDamage = (!isMelee && !isRanged) || isKit ? 0 : await game.macros.getName(`GetKitDamage`).execute({ activeActor, isMelee, tier: rollResult.tier });
 
       let extraDamage = undefined;
       if (getExtraDamageFunc)
@@ -107,6 +108,7 @@ try {
 
       const damageRoll = await new Roll(damageRollString).evaluate();
       await game.macros.getName(`ShareRoll`).execute({
+        activeActor,
         roll: damageRoll,
         flavor: damageType ? `${damageType.capitalize()} damage` : `Damage`
       });
@@ -114,7 +116,7 @@ try {
 
     // Determine if any surges should be used
     const hasPotency = /([A-Z]\s+<\s+[A-Z0-9]+)/i.test(effect);
-    const surgeCount = (await game.macros.getName(`GetAttribute`).execute({ attributeName: `surges` })).value;
+    const surgeCount = (await game.macros.getName(`GetAttribute`).execute({ activeActor, attributeName: `surges` })).value;
     if (doesDamage && surgeCount > 0 || hasPotency && surgeCount >= 2) {
       let surgeButtons = {
         z: { label: `0` }
@@ -163,28 +165,29 @@ try {
             defaultYes: false
           });
           if (firstSurge)
-            await game.macros.getName(`UpdateAttribute`).execute({ attributeName: `resource`, value: 1, isDelta: true });
+            await game.macros.getName(`UpdateAttribute`).execute({ activeActor, attributeName: `resource`, value: 1, isDelta: true });
         }
 
         if (damageSurges > 0) {
-          const characteristics = actor.system.attributes.characteristics;
+          const characteristics = activeActor.system.attributes.characteristics;
           const maxChar = Math.max(...(Object.keys(characteristics).map((key) => characteristics[key].value)));
           const surgeDamage = (damageSurges * maxChar);
           const surgeRoll = await new Roll(surgeDamage.toString()).evaluate();
           await game.macros.getName(`ShareRoll`).execute({
+            activeActor,
             roll: surgeRoll,
             flavor: `Extra damage`
           });
         }
 
-        await game.macros.getName(`UpdateAttribute`).execute({ attributeName: `surges`, value: -(damageSurges + potencySurges), isDelta: true });
+        await game.macros.getName(`UpdateAttribute`).execute({ activeActor, attributeName: `surges`, value: -(damageSurges + potencySurges), isDelta: true });
       }
     }
   }
 
   // Set the persistent cost, if the ability has a persistent cost
   if (persistentCost) {
-    await game.macros.getName(`UpdatePersistentCost`).execute({ abilityName: name, cost: persistentCost });
+    await game.macros.getName(`UpdatePersistentCost`).execute({ activeActor, abilityName: name, cost: persistentCost });
   }
 
   // Subtract the resource cost, if the ability has a resource cost
@@ -227,7 +230,7 @@ try {
     }
 
     if (totalResourceCost > 0) {
-      await game.macros.getName(`UpdateAttribute`).execute({ attributeName: `resource`, value: -totalResourceCost, isDelta: true });
+      await game.macros.getName(`UpdateAttribute`).execute({ activeActor, attributeName: `resource`, value: -totalResourceCost, isDelta: true });
     }
   }
 

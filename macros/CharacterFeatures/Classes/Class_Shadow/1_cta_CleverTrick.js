@@ -2,6 +2,7 @@
 //@name=Clever Trick
 //@img=icons/magic/unholy/silhouette-robe-evil-power.webp
 await game.macros.getName("ShareAbility").execute({
+  activeActor: actor,
   name: "Clever Trick",
   flavorText: "You sow a moment of confusion in combat, to your enemy’s peril.",
   resourceCost: 1,

@@ -2,6 +2,7 @@
 //@name=Conflagration
 //@img=icons/magic/nature/beam-hand-leaves-green.webp
 await game.macros.getName("ShareAbility").execute({
+  activeActor: actor,
   name: "Conflagration",
   resourceCost: 5,
   flavorText: "A storm of fire descends upon your enemies.",

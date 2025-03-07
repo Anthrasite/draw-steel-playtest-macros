@@ -2,6 +2,7 @@
 //@name=Get In Get Out
 //@img=icons/magic/unholy/silhouette-robe-evil-power.webp
 await game.macros.getName("ShareAbility").execute({
+  activeActor: actor,
   name: "Get In Get Out",
   flavorText: "Move unexpectedly, strike fast, and be gone!",
   resourceCost: 3,

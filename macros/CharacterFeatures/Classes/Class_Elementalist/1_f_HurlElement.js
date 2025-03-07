@@ -2,6 +2,7 @@
 //@name=Hurl Element
 //@img=icons/magic/nature/beam-hand-leaves-green.webp
 await game.macros.getName("ShareAbility").execute({
+  activeActor: actor,
   name: "Hurl Element",
   flavorText: "You cast a ball of elemental energy at an unsuspecting foe.",
   keywords: "Magic, Ranged, Strike",

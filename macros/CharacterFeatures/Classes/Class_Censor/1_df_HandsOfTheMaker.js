@@ -2,6 +2,7 @@
 //@name=Hands of the Maker
 //@img=icons/magic/holy/barrier-shield-winged-blue.webp
 await game.macros.getName("ShareAbility").execute({
+  activeActor: actor,
   name: "Hands of the Maker",
   flavorText: "You can craft objects with the power of your mind!",
   keywords: "Magic",

@@ -2,6 +2,7 @@
 //@name=Ripples in the Earth
 //@img=icons/magic/nature/beam-hand-leaves-green.webp
 await game.macros.getName("ShareAbility").execute({
+  activeActor: actor,
   name: "Ripples in the Earth",
   resourceCost: 3,
   flavorText: "Like a stone dropped into a pond, waves in the earth radiate from you.",

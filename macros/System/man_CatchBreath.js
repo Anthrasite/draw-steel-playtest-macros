@@ -2,6 +2,7 @@
 //@name=Catch Breath
 //@img=icons/magic/air/air-smoke-casting.webp
 await game.macros.getName("ShareAbility").execute({
+  activeActor: actor,
   name: "Catch Breath",
   type: "Maneuver",
   description: `By using the Catch Breath maneuver, you spend a Recovery and regain Stamina in an amount equal to your recovery value.</p>

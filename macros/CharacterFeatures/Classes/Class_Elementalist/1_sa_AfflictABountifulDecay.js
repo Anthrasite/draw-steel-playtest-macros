@@ -2,6 +2,7 @@
 //@name=Afflict a Bountiful Decay
 //@img=icons/magic/nature/beam-hand-leaves-green.webp
 await game.macros.getName("ShareAbility").execute({
+  activeActor: actor,
   name: "Afflict a Bountiful Decay",
   flavorText: "Your curse causes a foe’s flesh to rot off as spores that aid your allies.",
   keywords: "Green, Rot, Magic, Ranged, Strike",

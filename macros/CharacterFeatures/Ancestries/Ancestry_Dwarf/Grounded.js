@@ -2,6 +2,7 @@
 //@name=Grounded
 //@img=icons/magic/earth/strike-fist-stone.webp
 await game.macros.getName("ShareFeature").execute({
+  activeActor: actor,
   name: "Grounded",
   description: "Your heavy stone body and connection to the earth makes it difficult for others to move you. Your stability increases by 1.",
   source: "Ancestry"

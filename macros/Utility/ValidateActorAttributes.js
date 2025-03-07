@@ -1,54 +1,56 @@
 //@id=1JFEp3M9VhftSyuZ
 //@name=ValidateActorAttributes
 //@img=icons/svg/dice-target.svg
-function validateHasOwn(obj, propName, actor, isGroup = false) {
+const activeActor = await game.macros.getName(`ValidateParameter`).execute({ name: `activeActor`, value: scope.activeActor, type: `object` });
+
+function validateHasOwn(obj, propName, activeActor, isGroup = false) {
   if (!Object.hasOwn(obj, propName))
-    throw `Error: ${isGroup ? `Group` : `Attribute`} "${propName}" is not defined for actor "${actor.name}"`;
+    throw `Error: ${isGroup ? `Group` : `Attribute`} "${propName}" is not defined for actor "${activeActor.name}"`;
 }
 
-function validateIsType(obj, propName, type, actor) {
+function validateIsType(obj, propName, type, activeActor) {
   if (obj[propName].dtype.toLowerCase() !== type)
-    throw `Error: Attribute "${propName}" for actor "${actor.name}" does not have "${type}" type`;
+    throw `Error: Attribute "${propName}" for actor "${activeActor.name}" does not have "${type}" type`;
 }
 
-function validateHasOwnOfType(obj, propName, type, actor) {
-  validateHasOwn(obj, propName, actor, false);
-  validateIsType(obj, propName, type, actor);
+function validateHasOwnOfType(obj, propName, type, activeActor) {
+  validateHasOwn(obj, propName, activeActor, false);
+  validateIsType(obj, propName, type, activeActor);
 }
 
-function validateHasNumberWithValue(obj, propName, actor) {
-  validateHasOwnOfType(obj, propName, `number`, actor, false);
+function validateHasNumberWithValue(obj, propName, activeActor) {
+  validateHasOwnOfType(obj, propName, `number`, activeActor, false);
   if (!obj[propName].value)
-    throw `Error: Attribute "${propName}" for actor "${actor.name}" has no value`;
+    throw `Error: Attribute "${propName}" for actor "${activeActor.name}" has no value`;
 }
 
-function validateHasNonEmptyLabel(obj, propName, actor) {
+function validateHasNonEmptyLabel(obj, propName, activeActor) {
   if (!obj[propName].label)
-    throw `Error: Attribute "${propName}" for actor "${actor.name}" has no label`;
+    throw `Error: Attribute "${propName}" for actor "${activeActor.name}" has no label`;
 }
 
-if (!actor)
+if (!activeActor)
   throw `Error: No token is selected`;
 
 for (const attr of [`resource`, `surges`, `victories`, `level`])
-  validateHasOwnOfType(actor.system.attributes, attr, `number`, actor);
-validateHasNonEmptyLabel(actor.system.attributes, `resource`, actor);
+  validateHasOwnOfType(activeActor.system.attributes, attr, `number`, activeActor);
+validateHasNonEmptyLabel(activeActor.system.attributes, `resource`, activeActor);
 for (const attr of [`persistentCost`, `class`])
-  validateHasOwnOfType(actor.system.attributes, attr, `string`, actor);
+  validateHasOwnOfType(activeActor.system.attributes, attr, `string`, activeActor);
 
-validateHasOwn(actor.system.groups, `characteristics`, actor, true);
-validateHasOwn(actor.system.attributes, `characteristics`, actor);
+validateHasOwn(activeActor.system.groups, `characteristics`, activeActor, true);
+validateHasOwn(activeActor.system.attributes, `characteristics`, activeActor);
 for (const attr of [`might`, `agility`, `intuition`, `reason`, `presence`])
-  validateHasNumberWithValue(actor.system.attributes.characteristics, attr, actor);
+  validateHasNumberWithValue(activeActor.system.attributes.characteristics, attr, activeActor);
 
-if (Object.hasOwn(actor.system.groups, `kitMeleeDamage`)) {
-  validateHasOwn(actor.system.attributes, `kitMeleeDamage`, actor);
+if (Object.hasOwn(activeActor.system.groups, `kitMeleeDamage`)) {
+  validateHasOwn(activeActor.system.attributes, `kitMeleeDamage`, activeActor);
   for (const attr of [`tier1`, `tier2`, `tier3`])
-    validateHasNumberWithValue(actor.system.attributes.kitMeleeDamage, attr, actor);
+    validateHasNumberWithValue(activeActor.system.attributes.kitMeleeDamage, attr, activeActor);
 }
 
-if (Object.hasOwn(actor.system.groups, `kitRangedDamage`)) {
-  validateHasOwn(actor.system.attributes, `kitRangedDamage`, actor);
+if (Object.hasOwn(activeActor.system.groups, `kitRangedDamage`)) {
+  validateHasOwn(activeActor.system.attributes, `kitRangedDamage`, activeActor);
   for (const attr of [`tier1`, `tier2`, `tier3`])
-    validateHasNumberWithValue(actor.system.attributes.kitRangedDamage, attr, actor);
+    validateHasNumberWithValue(activeActor.system.attributes.kitRangedDamage, attr, activeActor);
 }

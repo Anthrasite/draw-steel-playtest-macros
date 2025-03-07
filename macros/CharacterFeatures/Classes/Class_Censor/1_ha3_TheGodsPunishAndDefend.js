@@ -2,6 +2,7 @@
 //@name=The Gods Punish and Defend
 //@img=icons/magic/holy/barrier-shield-winged-blue.webp
 await game.macros.getName("ShareAbility").execute({
+  activeActor: actor,
   name: "The Gods Punish and Defend",
   resourceCost: 3,
   flavorText: "You channel holy energy to smite a foe and heal an ally.",

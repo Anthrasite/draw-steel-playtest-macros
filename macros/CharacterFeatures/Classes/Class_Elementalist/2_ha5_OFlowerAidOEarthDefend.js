@@ -2,6 +2,7 @@
 //@name=O Flower Aid, O Earth Defend
 //@img=icons/magic/nature/beam-hand-leaves-green.webp
 await game.macros.getName("ShareAbility").execute({
+  activeActor: actor,
   name: "O Flower Aid, O Earth Defend",
   resourceCost: 5,
   flavorText: "Revitalizing plants and jagged stones grow, helping allies and hindering foes.",

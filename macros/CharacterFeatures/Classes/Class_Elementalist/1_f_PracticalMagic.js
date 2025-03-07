@@ -2,6 +2,7 @@
 //@name=Practical Magic
 //@img=icons/magic/nature/beam-hand-leaves-green.webp
 await game.macros.getName("ShareAbility").execute({
+  activeActor: actor,
   name: "Practical Magic",
   flavorText: "Your mastery of elemental power lets you customize your conjurations.",
   keywords: "Magic, Ranged",

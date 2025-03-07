@@ -2,13 +2,16 @@
 //@name=DoPowerRoll
 //@img=icons/svg/dice-target.svg
 try {
+  const activeActor = await game.macros.getName(`ValidateParameter`).execute({ name: `activeActor`, value: scope.activeActor, type: `object` });
   const powerRollStat = await game.macros.getName(`ValidateParameter`).execute({ name: `powerRollStat`, value: scope.powerRollStat, type: `string`, nullable: true });
   const allowedEdgeBane = await game.macros.getName(`ValidateParameter`).execute({ name: `allowedEdgeBane`, value: scope.allowedEdgeBane, type: `object`, nullable: true });
 
   // Calculate the default modifier based on the highest allowed characteristic of the power roll
   let defaultValue = -1;
   if (powerRollStat) {
-    const characteristics = actor.system.attributes.characteristics;
+    await game.macros.getName("ValidateActorAttributes").execute({ activeActor });
+
+    const characteristics = activeActor.system.attributes.characteristics;
     for (const [charName, char] of Object.entries(characteristics))
       if (powerRollStat.toLowerCase().includes(charName) && char.value > defaultValue)
         defaultValue = char.value;
@@ -99,6 +102,7 @@ try {
     : tier === 2 ? `#000000`
     : `#008000`;
   await game.macros.getName(`ShareRoll`).execute({
+    activeActor,
     roll,
     flavor: `<span style="color: ${flavorColor}; font-weight: bold;">${isCrit ? `Critical success! ` : ``}Tier ${tier} </span>[${getEdgeBaneLabel(edgeBane)}]`
   });

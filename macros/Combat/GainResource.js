@@ -2,20 +2,22 @@
 //@name=Gain resource
 //@img=icons/magic/symbols/ring-circle-smoke-blue.webp
 try {
-  await game.macros.getName("ValidateActorAttributes").execute();
+  const activeActor = actor;
+  await game.macros.getName("ValidateActorAttributes").execute({ activeActor });
 
-  const resource = await game.macros.getName(`GetAttribute`).execute({ attributeName: `resource` });
+  const resource = await game.macros.getName(`GetAttribute`).execute({ activeActor, attributeName: `resource` });
   const resourceLabel = resource.label.capitalize();
   const resourceGain = Number(await game.macros.getName(`ShowSimpleInputDialog`).execute({ title: resourceLabel, label: `${resourceLabel} gained`, defaultValue: 1, allowNegative: false }));
 
   if (resourceGain > 0) {
     const roll = await new Roll(`${resource.value} + ${resourceGain}`).evaluate();
     await game.macros.getName(`ShareRoll`).execute({
+      activeActor,
       roll,
       flavor: resourceLabel
     });
 
-    await game.macros.getName(`UpdateAttribute`).execute({ attributeName: `resource`, value: resourceGain, isDelta: true });
+    await game.macros.getName(`UpdateAttribute`).execute({ activeActor, attributeName: `resource`, value: resourceGain, isDelta: true });
   }
 }
 catch (error) {

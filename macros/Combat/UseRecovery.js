@@ -2,14 +2,15 @@
 //@name=Use recovery
 //@img=icons/magic/life/cross-worn-green.webp
 try {
-  await game.macros.getName("ValidateActorAttributes").execute();
+  const activeActor = actor;
+  await game.macros.getName("ValidateActorAttributes").execute({ activeActor });
 
-  const health = (await game.macros.getName(`GetAttribute`).execute({ attributeName: `health` }));
+  const health = (await game.macros.getName(`GetAttribute`).execute({ activeActor, attributeName: `health` }));
 
   if (health.value >= health.max)
     ui.notifications.info(`Health is already full!`);
   else {
-    const recoveries = (await game.macros.getName(`GetAttribute`).execute({ attributeName: `recoveries` }));
+    const recoveries = (await game.macros.getName(`GetAttribute`).execute({ activeActor, attributeName: `recoveries` }));
 
     if (recoveries.value <= 0)
       ui.notifications.info(`No recoveries left!`);
@@ -27,8 +28,8 @@ try {
           return;
       }
 
-      await game.macros.getName(`UpdateAttribute`).execute({ attributeName: `health`, value: newHealth });
-      await game.macros.getName(`UpdateAttribute`).execute({ attributeName: `recoveries`, value: -1, isDelta: true });
+      await game.macros.getName(`UpdateAttribute`).execute({ activeActor, attributeName: `health`, value: newHealth });
+      await game.macros.getName(`UpdateAttribute`).execute({ activeActor, attributeName: `recoveries`, value: -1, isDelta: true });
     }
   }
 }

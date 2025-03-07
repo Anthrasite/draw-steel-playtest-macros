@@ -2,6 +2,7 @@
 //@name=Swarm of Spirits
 //@img=icons/magic/nature/beam-hand-leaves-green.webp
 await game.macros.getName("ShareAbility").execute({
+  activeActor: actor,
   name: "Swarm of Spirits",
   resourceCost: 7,
   flavorText: "Guardian animal spirits surround you to harry your foes and bolster your allies.",

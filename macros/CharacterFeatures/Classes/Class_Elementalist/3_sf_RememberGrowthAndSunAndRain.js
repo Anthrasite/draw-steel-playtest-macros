@@ -2,6 +2,7 @@
 //@name=Remember Growth and Sun and Rain
 //@img=icons/magic/nature/beam-hand-leaves-green.webp
 await game.macros.getName("ShareAbility").execute({
+  activeActor: actor,
   name: "Remember Growth and Sun and Rain",
   flavorText: "You stir any wood’s memory and learn what it has seen.",
   type: "Action",

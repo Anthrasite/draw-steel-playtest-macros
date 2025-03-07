@@ -2,6 +2,7 @@
 //@name=Judgment
 //@img=icons/magic/holy/barrier-shield-winged-blue.webp
 await game.macros.getName("ShareAbility").execute({
+  activeActor: actor,
   name: "Judgment",
   flavorText: "You utter a pray that outlines your foe in holy energy.",
   keywords: "Magic, Ranged",

@@ -2,6 +2,7 @@
 //@name=No More Than a Breeze
 //@img=icons/magic/nature/beam-hand-leaves-green.webp
 await game.macros.getName("ShareAbility").execute({
+  activeActor: actor,
   name: "No More Than a Breeze",
   resourceCost: 5,
   flavorText: "The material substance of a creature shreds away at your command.",

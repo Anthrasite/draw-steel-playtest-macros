@@ -2,6 +2,7 @@
 //@name=Translated Through Flame
 //@img=icons/magic/nature/beam-hand-leaves-green.webp
 await game.macros.getName("ShareAbility").execute({
+  activeActor: actor,
   name: "Translated Through Flame",
   resourceCost: 5,
   flavorText: "Your ally disappears, then reappears in a burst of fire!",

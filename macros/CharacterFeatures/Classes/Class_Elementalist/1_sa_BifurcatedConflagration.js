@@ -2,6 +2,7 @@
 //@name=Bifurcated Conflagration
 //@img=icons/magic/nature/beam-hand-leaves-green.webp
 await game.macros.getName("ShareAbility").execute({
+  activeActor: actor,
   name: "Bifurcated Conflagration",
   flavorText: "Two jets of flame lance out at your command.",
   type: "Action",

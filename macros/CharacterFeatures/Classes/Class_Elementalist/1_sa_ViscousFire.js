@@ -2,6 +2,7 @@
 //@name=Viscous Fire
 //@img=icons/magic/nature/beam-hand-leaves-green.webp
 await game.macros.getName("ShareAbility").execute({
+  activeActor: actor,
   name: "Viscous Fire",
   flavorText: "A jet of heavy fire erupts with elemental fury where it strikes.",
   type: "Action",

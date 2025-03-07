@@ -2,6 +2,7 @@
 //@name=Ray of Agonizing Self Reflection
 //@img=icons/magic/nature/beam-hand-leaves-green.webp
 await game.macros.getName("ShareAbility").execute({
+  activeActor: actor,
   name: "Ray of Agonizing Self Reflection",
   flavorText: "You inflict pain and doubt in equal measure.",
   type: "Action",

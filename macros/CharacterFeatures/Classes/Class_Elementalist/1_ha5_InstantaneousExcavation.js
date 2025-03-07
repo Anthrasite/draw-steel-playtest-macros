@@ -2,6 +2,7 @@
 //@name=Instantaneous Excavation
 //@img=icons/magic/nature/beam-hand-leaves-green.webp
 await game.macros.getName("ShareAbility").execute({
+  activeActor: actor,
   name: "Instantaneous Excavation",
   resourceCost: 5,
   flavorText: "The surface of the world around you opens up at your command.",

@@ -2,6 +2,7 @@
 //@name=Invigorating Growth
 //@img=icons/magic/nature/beam-hand-leaves-green.webp
 await game.macros.getName("ShareAbility").execute({
+  activeActor: actor,
   name: "Invigorating Growth",
   resourceCost: 3,
   flavorText: "Mushrooms erupt from a foe, sapping their vitality to spread strengthening spores.",

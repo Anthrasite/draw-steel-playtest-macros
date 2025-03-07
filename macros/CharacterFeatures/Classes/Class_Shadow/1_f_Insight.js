@@ -2,6 +2,7 @@
 //@name=Insight
 //@img=icons/magic/unholy/silhouette-robe-evil-power.webp
 await game.macros.getName("ShareFeature").execute({
+  activeActor: actor,
   name: "Insight",
   description: `By observing your enemy, you learn how to use their weaknesses against them, building up a Heroic Resource called insight.</p>
   <h3>Insight in Combat</h3>

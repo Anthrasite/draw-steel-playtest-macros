@@ -2,6 +2,7 @@
 //@name=My Life For Yours
 //@img=icons/magic/holy/barrier-shield-winged-blue.webp
 await game.macros.getName("ShareAbility").execute({
+  activeActor: actor,
   name: "My Life For Yours",
   flavorText: "The first principle of the oath: defend the righteous.",
   keywords: "Magic, Ranged",

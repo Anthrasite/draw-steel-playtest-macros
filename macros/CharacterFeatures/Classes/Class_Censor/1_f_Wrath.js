@@ -2,6 +2,7 @@
 //@name=Wrath
 //@img=icons/magic/holy/barrier-shield-winged-blue.webp
 await game.macros.getName("ShareFeature").execute({
+  activeActor: actor,
   name: "Wrath",
   description: `The power you serve grants you a Heroic Resource called wrath, fueling your abilities as you censor those your church deems to be heretics.</p>
   <h3>Wrath in Combat</h3>

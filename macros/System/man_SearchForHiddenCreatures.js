@@ -2,6 +2,7 @@
 //@name=Search for Hidden Creatures
 //@img=icons/magic/air/air-smoke-casting.webp
 await game.macros.getName("ShareAbility").execute({
+  activeActor: actor,
   name: "Search for Hidden Creatures",
   type: "Maneuver",
   description: `You can search for creatures who are hidden from you as long as those creatures are within 10 squares of you and you have line of effect to them. To do so, you make an Intuition test as a maneuver and assess the result.</p>

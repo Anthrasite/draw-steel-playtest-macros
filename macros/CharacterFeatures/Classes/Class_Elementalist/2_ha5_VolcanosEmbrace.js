@@ -2,6 +2,7 @@
 //@name=Volcano's Embrace
 //@img=icons/magic/nature/beam-hand-leaves-green.webp
 await game.macros.getName("ShareAbility").execute({
+  activeActor: actor,
   name: "Volcano's Embrace",
   resourceCost: 5,
   flavorText: "Wrap them up in fire and melting stone.",

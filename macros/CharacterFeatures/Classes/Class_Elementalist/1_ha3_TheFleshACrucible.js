@@ -2,6 +2,7 @@
 //@name=The Flesh, a Crucible
 //@img=icons/magic/nature/beam-hand-leaves-green.webp
 await game.macros.getName("ShareAbility").execute({
+  activeActor: actor,
   name: "The Flesh, a Crucible",
   resourceCost: 3,
   flavorText: "Fire engulfs a target of your choice and burns at your command.",

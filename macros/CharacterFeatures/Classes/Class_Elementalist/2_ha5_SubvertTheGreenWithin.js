@@ -2,6 +2,7 @@
 //@name=Subvert the Green Within
 //@img=icons/magic/nature/beam-hand-leaves-green.webp
 await game.macros.getName("ShareAbility").execute({
+  activeActor: actor,
   name: "Subvert the Green Within",
   resourceCost: 5,
   flavorText: "Burrow into their brains and take control!",

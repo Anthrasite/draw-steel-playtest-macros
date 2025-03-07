@@ -2,6 +2,7 @@
 //@name=Maw of Earth
 //@img=icons/magic/nature/beam-hand-leaves-green.webp
 await game.macros.getName("ShareAbility").execute({
+  activeActor: actor,
   name: "Maw of Earth",
   resourceCost: 7,
   flavorText: "You open up the ground, unleashing a shower of stone and debris.",

@@ -2,6 +2,7 @@
 //@name=Runic Carving
 //@img=icons/magic/earth/strike-fist-stone.webp
 await game.macros.getName("ShareFeature").execute({
+  activeActor: actor,
   name: "Runic Carving",
   description: `You can carve a rune onto your skin and the magic within your body activates it. The rune you carve determines the benefit you receive. You can change or remove this rune with 10 minutes of work while not engaged in combat.</p>
     <ul>

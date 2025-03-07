@@ -1,11 +1,12 @@
 //@id=96WYstdKircGE5Th
 //@name=ShowPersistentCostDialog
 //@img=icons/svg/dice-target.svg
+const activeActor = await game.macros.getName(`ValidateParameter`).execute({ name: `activeActor`, value: scope.activeActor, type: `object` });
 const label = await game.macros.getName(`ValidateParameter`).execute({ name: `label`, value: scope.label, type: `string` });
 const resourceLabel = await game.macros.getName(`ValidateParameter`).execute({ name: `resourceLabel`, value: scope.resourceLabel, type: `string` });
 const selectByDefault = (await game.macros.getName(`ValidateParameter`).execute({ name: `selectByDefault`, value: scope.selectByDefault, type: `boolean`, nullable: true })) ?? false;
 
-const persistentCosts = await game.macros.getName(`GetPersistentCost`).execute();
+const persistentCosts = await game.macros.getName(`GetPersistentCost`).execute({ activeActor });
 if (!Object.keys(persistentCosts).length)
   return undefined;
 

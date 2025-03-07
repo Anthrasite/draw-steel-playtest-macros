@@ -2,6 +2,7 @@
 //@name=Test of Rain
 //@img=icons/magic/nature/beam-hand-leaves-green.webp
 await game.macros.getName("ShareAbility").execute({
+  activeActor: actor,
   name: "Test of Rain",
   resourceCost: 5,
   flavorText: "You call down a rain that burns your enemies and restores your allies.",

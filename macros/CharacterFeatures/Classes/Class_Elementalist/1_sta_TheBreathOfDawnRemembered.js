@@ -2,6 +2,7 @@
 //@name=The Breath of Dawn Remembered
 //@img=icons/magic/nature/beam-hand-leaves-green.webp
 await game.macros.getName("ShareAbility").execute({
+  activeActor: actor,
   name: "The Breath of Dawn Remembered",
   flavorText: "The power you channel grants the ability to get back in the fight.",
   keywords: "Green, Magic, Ranged",

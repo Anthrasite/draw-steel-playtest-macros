@@ -2,7 +2,8 @@
 //@name=ShareAbility
 //@img=icons/svg/dice-target.svg
 try {
-  await game.macros.getName("ValidateActorAttributes").execute();
+  const activeActor = await game.macros.getName(`ValidateParameter`).execute({ name: `activeActor`, value: scope.activeActor, type: `object` });
+  await game.macros.getName("ValidateActorAttributes").execute({ activeActor });
 
   const name = await game.macros.getName(`ValidateParameter`).execute({ name: `name`, value: scope.name, type: `string` });
   const resourceCost = await game.macros.getName(`ValidateParameter`).execute({ name: `resourceCost`, value: scope.resourceCost, type: `number`, nullable: true });
@@ -48,7 +49,7 @@ try {
   // Calculate values for showing the "Use" button
   const buttonId = await game.macros.getName(`GetUUID`).execute();
 
-  const resource = await game.macros.getName(`GetAttribute`).execute({ attributeName: `resource` });
+  const resource = await game.macros.getName(`GetAttribute`).execute({ activeActor, attributeName: `resource` });
 
   const showUseButton = resourceCost || extraResourceCost || powerRollStat || onUseFunc;
   const canUse = showUseButton && (typeof(resourceCost) === `undefined` || resource.value >= resourceCost);
@@ -118,6 +119,7 @@ try {
     $(document).on(`click`, `#${buttonId}`, async function() {
       const button = $(this);
       await game.macros.getName(`UseAbility`).execute({
+        activeActor,
         button,
         name,
         keywords,

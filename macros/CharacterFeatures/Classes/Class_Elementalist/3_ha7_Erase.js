@@ -2,6 +2,7 @@
 //@name=Erase
 //@img=icons/magic/nature/beam-hand-leaves-green.webp
 await game.macros.getName("ShareAbility").execute({
+  activeActor: actor,
   name: "Erase",
   resourceCost: 7,
   flavorText: "With a flick of the wrist, you phase creatures out of existence.",

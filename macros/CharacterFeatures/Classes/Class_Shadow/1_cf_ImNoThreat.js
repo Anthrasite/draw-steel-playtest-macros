@@ -2,6 +2,7 @@
 //@name=I'm No Threat
 //@img=icons/magic/unholy/silhouette-robe-evil-power.webp
 await game.macros.getName("ShareAbility").execute({
+  activeActor: actor,
   name: "I'm No Threat",
   flavorText: "Taking on the illusory countenance of another creature gives you an advantage on subterfuge.",
   keywords: "Magic",
@@ -13,6 +14,6 @@ await game.macros.getName("ShareAbility").execute({
   extraResourceCost: "1",
   extraResourceEffect: "Choose a creature whose size is no more than 1 greater than yours, and who is within 10 squares of you. This ability’s illusion makes you appear to be that creature. This illusion covers your entire body, including clothing and armor, and changes your voice to sound like the creature. You gain an edge on tests made to convince the creature’s allies that you are the creature.",
   onUseFunc: async function() {
-    await game.macros.getName("UpdateAttribute").execute({ attributeName: "surges", value: 1, isDelta: true });
+    await game.macros.getName("UpdateAttribute").execute({ activeActor: actor, attributeName: "surges", value: 1, isDelta: true });
   }
 });

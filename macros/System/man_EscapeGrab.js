@@ -2,6 +2,7 @@
 //@name=Escape Grab
 //@img=icons/magic/air/air-smoke-casting.webp
 await game.macros.getName("ShareAbility").execute({
+  activeActor: actor,
   name: "Escape Grab",
   type: "Maneuver",
   description: `While you are grabbed by another creature, you can attempt to escape by making the following test (which can’t have a skill applied). You take a bane on the roll if the creature’s size is larger than yours.`,

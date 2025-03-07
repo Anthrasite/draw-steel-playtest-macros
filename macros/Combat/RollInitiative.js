@@ -6,6 +6,7 @@ AudioHelper.play({src: "modules/draw-steel-playtest-macros/audio/sword-drawing.m
 const roll = await new Roll(`1d10`).evaluate();
 const heroesActFirst = roll.total >= 6;
 await game.macros.getName(`ShareRoll`).execute({
+  activeActor: actor,
   roll,
   flavor: `<span style="color: ${heroesActFirst ? `#008000` : `#800000`};">${heroesActFirst ? `Heroes` : `Foes`} strike first!</span>`
 });

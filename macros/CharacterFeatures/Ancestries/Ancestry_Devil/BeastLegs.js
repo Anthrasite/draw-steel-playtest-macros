@@ -2,6 +2,7 @@
 //@name=Beast Legs
 //@img=icons/creatures/unholy/demon-female-succubus-orange.webp
 await game.macros.getName("ShareFeature").execute({
+  activeActor: actor,
   name: "Beast Legs",
   description: "Your powerful legs improve your speed. Your speed becomes 6.",
   source: "Ancestry"
