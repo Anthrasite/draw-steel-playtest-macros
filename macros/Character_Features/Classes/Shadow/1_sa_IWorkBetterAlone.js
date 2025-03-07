@@ -1,7 +1,7 @@
 //@id=0gVIHWSjOdtepar9
 //@name=I Work Better Alone
 //@img=icons/magic/unholy/silhouette-robe-evil-power.webp
-await game.macros.getName("ShareAbility").execute({
+await game.dsmacros.executeMacroFromCompendium("ShareAbility", {
   name: "I Work Better Alone",
   flavorText: "It’s better, just you and me. Isn’t it?",
   keywords: "Melee, Ranged, Strike, Weapon",
@@ -15,7 +15,7 @@ await game.macros.getName("ShareAbility").execute({
   effect: "If the target has no allies adjacent to them, this strike deals extra damage equal to your Agility score.",
   onSurgeFunc: async function(damageSurges, potencySurges) {
     if (damageSurges > 0)
-      return await game.macros.getName(`Shadow_OnSurge`).execute();
+      return await game.dsmacros.executeMacroFromCompendium(`Shadow_OnSurge`);
   },
   getExtraDamageFunc: async function() {
     const isAlone = !await Dialog.confirm({
@@ -23,6 +23,6 @@ await game.macros.getName("ShareAbility").execute({
       content: `<p>Does the target have any allies adjacent to them?</p>`,
       defaultYes: false
     });
-    return isAlone ? ` + ${await game.macros.getName(`GetCharacteristic`).execute({ characteristicName: `Agility` })}` : undefined;
+    return isAlone ? ` + ${await game.dsmacros.executeMacroFromCompendium(`GetCharacteristic`, { characteristicName: `Agility` })}` : undefined;
   }
 });

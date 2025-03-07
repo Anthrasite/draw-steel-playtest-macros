@@ -3,7 +3,7 @@
 //@img=icons/magic/unholy/silhouette-robe-evil-power.webp
 const resourceCost = 5;
 
-await game.macros.getName("ShareAbility").execute({
+await game.dsmacros.executeMacroFromCompendium("ShareAbility", {
   name: "Coup de Grace",
   flavorText: "Your blade might be the last thing they see.",
   resourceCost,
@@ -16,13 +16,13 @@ await game.macros.getName("ShareAbility").execute({
   tier2Effect: "1d6 + 11 + A damage",
   tier3Effect: "1d6 + 16 + A damage",
   getResourceCostFunc: async function() {
-    return await game.macros.getName(`Shadow_CalculateAbilityCost`).execute({ resourceCost });
+    return await game.dsmacros.executeMacroFromCompendium(`Shadow_CalculateAbilityCost`, { resourceCost });
   },
   getAllowedEdgeBaneFunc: async function(currResourceCost) {
-    return await game.macros.getName(`Shadow_GetAllowedEdgeBane`).execute({ defaultResourceCost: resourceCost, currResourceCost });
+    return await game.dsmacros.executeMacroFromCompendium(`Shadow_GetAllowedEdgeBane`, { defaultResourceCost: resourceCost, currResourceCost });
   },
   onSurgeFunc: async function(damageSurges, potencySurges) {
     if (damageSurges > 0)
-      return await game.macros.getName(`Shadow_OnSurge`).execute();
+      return await game.dsmacros.executeMacroFromCompendium(`Shadow_OnSurge`);
   }
 });

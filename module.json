@@ -12,6 +12,7 @@
   "compatibility": {
     "verified": "12"
   },
+  "esmodules": ["scripts/dsmacros.mjs"],
   "packFolders": [
     {
       "name": "Draw Steel Playtest Macros",

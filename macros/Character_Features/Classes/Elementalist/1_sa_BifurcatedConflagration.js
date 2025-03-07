@@ -1,7 +1,7 @@
 //@id=RDe2pKflgC1TL6yr
 //@name=Bifurcated Conflagration
 //@img=icons/magic/nature/beam-hand-leaves-green.webp
-await game.macros.getName("ShareAbility").execute({
+await game.dsmacros.executeMacroFromCompendium("ShareAbility", {
   name: "Bifurcated Conflagration",
   flavorText: "Two jets of flame lance out at your command.",
   type: "Action",

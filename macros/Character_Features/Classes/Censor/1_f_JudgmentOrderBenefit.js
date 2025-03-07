@@ -1,7 +1,7 @@
 //@id=iXd4yl8HCKpLoMuj
 //@name=Judgment Order Benefit
 //@img=icons/magic/holy/barrier-shield-winged-blue.webp
-await game.macros.getName("ShareFeature").execute({
+await game.dsmacros.executeMacroFromCompendium("ShareFeature", {
   name: "Judgment Order Benefit",
   description: `When you use your Judgment ability to judge another creature, you gain the following benefit based on your order.</p>
     <ul>

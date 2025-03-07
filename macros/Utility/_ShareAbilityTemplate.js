@@ -1,4 +1,4 @@
-await game.macros.getName("ShareAbility").execute({
+await game.dsmacros.executeMacroFromCompendium("ShareAbility", {
   name: "",
   resourceCost: undefined | 0,
   flavorText: undefined | "",

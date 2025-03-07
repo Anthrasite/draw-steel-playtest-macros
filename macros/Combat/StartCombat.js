@@ -2,14 +2,14 @@
 //@name=Start combat
 //@img=icons/skills/melee/hand-grip-sword-orange.webp
 try {
-  await game.macros.getName("ValidateActorAttributes").execute();
+  await game.dsmacros.executeMacroFromCompendium("ValidateActorAttributes", );
 
-  const victories = (await game.macros.getName(`GetAttribute`).execute({ attributeName: `victories` })).value;
+  const victories = (await game.dsmacros.executeMacroFromCompendium(`GetAttribute`, { attributeName: `victories` })).value;
 
-  const resource = await game.macros.getName(`UpdateAttribute`).execute({ attributeName: `resource`, value: victories });
+  const resource = await game.dsmacros.executeMacroFromCompendium(`UpdateAttribute`, { attributeName: `resource`, value: victories });
 
   const roll = await new Roll(`${victories}[victories]`).evaluate();
-  await game.macros.getName(`ShareRoll`).execute({
+  await game.dsmacros.executeMacroFromCompendium(`ShareRoll`, {
     roll,
     flavor: `Initial ${resource.label}`
   });

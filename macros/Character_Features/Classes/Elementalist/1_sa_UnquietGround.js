@@ -1,7 +1,7 @@
 //@id=o8lC71wI6z9ecp2Y
 //@name=Unquiet Ground
 //@img=icons/magic/nature/beam-hand-leaves-green.webp
-await game.macros.getName("ShareAbility").execute({
+await game.dsmacros.executeMacroFromCompendium("ShareAbility", {
   name: "Unquiet Ground",
   flavorText: "A sudden storm of detritus assaults your foes and leaves them struggling to move.",
   type: "Action",

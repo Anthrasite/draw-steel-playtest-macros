@@ -7,4 +7,4 @@ const firstSurge = await Dialog.confirm({
   defaultYes: false
 });
 if (firstSurge)
-  await game.macros.getName(`UpdateAttribute`).execute({ attributeName: `resource`, value: 1, isDelta: true });
+  await game.dsmacros.executeMacroFromCompendium(`UpdateAttribute`, { attributeName: `resource`, value: 1, isDelta: true });

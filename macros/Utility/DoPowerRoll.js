@@ -2,8 +2,8 @@
 //@name=DoPowerRoll
 //@img=icons/svg/dice-target.svg
 try {
-  const powerRollStat = await game.macros.getName(`ValidateParameter`).execute({ name: `powerRollStat`, value: scope.powerRollStat, type: `string`, nullable: true });
-  const allowedEdgeBane = await game.macros.getName(`ValidateParameter`).execute({ name: `allowedEdgeBane`, value: scope.allowedEdgeBane, type: `object`, nullable: true });
+  const powerRollStat = await game.dsmacros.executeMacroFromCompendium(`ValidateParameter`, { name: `powerRollStat`, value: scope.powerRollStat, type: `string`, nullable: true });
+  const allowedEdgeBane = await game.dsmacros.executeMacroFromCompendium(`ValidateParameter`, { name: `allowedEdgeBane`, value: scope.allowedEdgeBane, type: `object`, nullable: true });
 
   // Calculate the default modifier based on the highest allowed characteristic of the power roll
   let defaultValue = -1;
@@ -17,7 +17,7 @@ try {
     defaultValue = 2;
 
   // Show the modifier dialog
-  modifier = await game.macros.getName(`ShowSimpleInputDialog`).execute({ label: `Modifier`, defaultValue });
+  modifier = await game.dsmacros.executeMacroFromCompendium(`ShowSimpleInputDialog`, { label: `Modifier`, defaultValue });
   if (modifier === ``)
     modifier = 0;
 
@@ -87,18 +87,18 @@ try {
     : roll.total < 17 ? 2
     : 3;
   if (plusTier & tier < 3)
-     tier++;
+    tier++;
   if (minusTier & tier > 1)
-     tier--;
+    tier--;
 
   if (roll.dice[0].total + roll.dice[1].total === 20) // Always get a tier 3 result on roll of 20
-     tier = 3;
+    tier = 3;
 
   // Display the roll
   const flavorColor = tier === 1 ? `#800000`
     : tier === 2 ? `#000000`
     : `#008000`;
-  await game.macros.getName(`ShareRoll`).execute({
+  await game.dsmacros.executeMacroFromCompendium(`ShareRoll`, {
     roll,
     flavor: `<span style="color: ${flavorColor}; font-weight: bold;">${isCrit ? `Critical success! ` : ``}Tier ${tier} </span>[${getEdgeBaneLabel(edgeBane)}]`
   });
