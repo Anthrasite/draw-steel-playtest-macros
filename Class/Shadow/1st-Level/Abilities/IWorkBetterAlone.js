@@ -14,7 +14,7 @@ await game.macros.getName("ShareAbility").execute({
     return await game.macros.getName(`OnSurgeShadow`).execute();
   },
   getExtraDamageFunc: async function() {
-    const isAlone = await Dialog.confirm({
+    const isAlone = !await Dialog.confirm({
       title: `Target alone?`,
       content: `<p>Does the target have any allies adjacent to them?</p>`,
       defaultYes: false
