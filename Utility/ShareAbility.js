@@ -98,9 +98,9 @@ try {
           <li><b>17+:</b> ${highlightPotencyFunc(tier3Effect)}</li>
         </ul>
       ` : ``)}
-      ${(effect ? `<div style="margin: 0.5em 0;"><b>Effect:</b> ${effect}</div>` : ``)}
-      ${(persistentCost ? `<div style="margin: 0.5em 0;"><b>Persistent ${persistentCost}:</b> ${persistentEffect}</div>` : ``)}
-      ${(extraResourceCost ? `<div style="margin: 0.5em 0;"><b>Spend ${extraResourceCost} ${resource.label}:</b> ${extraResourceEffect}</div>` : ``)}
+      ${(effect ? `<p><b>Effect:</b> ${effect}${effect.includes(`</p>`) ? `` : `</p>`}` : ``)}
+      ${(persistentCost ? `<p><b>Persistent ${persistentCost}:</b> ${persistentEffect}${persistentEffect.includes(`</p>`) ? `` : `</p>`}` : ``)}
+      ${(extraResourceCost ? `<p><b>Spend ${extraResourceCost} ${resource.label}:</b> ${extraResourceEffect}${extraResourceEffect.includes(`</p>`) ? `` : `</p>`}` : ``)}
       ${(showUseButton ? `<button id="${buttonId}">${(canUse ? `Use` : `Not enough ${resource.label}`)}</button>` : ``)}`
   });
 
