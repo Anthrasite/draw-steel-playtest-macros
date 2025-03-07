@@ -4,9 +4,27 @@ try {
   if (!actor)
     ui.notifications.error(`No token is selected`);
   else {
-    let resourceAttribute = await game.macros.getName(`GetAttribute`).execute({ attributeName: `resource` });
+    const resourceAttribute = await game.macros.getName(`GetAttribute`).execute({ attributeName: `resource` });
 
-    const roll = await new Roll(`${resourceAttribute.value} + ${resourceRoll}`).evaluate();
+    // If a persistent ability is active, determine if the persistent cost should be paid
+    const activePersistentCost = (await game.macros.getName(`GetAttribute`).execute({ attributeName: `persistentCost` })).value;
+    let persistentCost = 0;
+    if (activePersistentCost > 0) {
+      const continuePersistent = await Dialog.confirm({
+        title: `Persistent magic`,
+        content: `<p>Continue persistent effect for ${activePersistentCost} ${resourceAttribute.label}?</p>`
+      });
+
+      if (continuePersistent)
+        persistentCost = activePersistentCost;
+      else
+        await game.macros.getName(`UpdateAttribute`).execute({
+          attributeName: `persistentCost`,
+          value: 0
+        });
+    }
+
+    const roll = await new Roll(`${resourceAttribute.value} + ${resourceRoll}${persistentCost > 0 ? ` - ${persistentCost}` : ``}`).evaluate();
     await roll.toMessage({
       speaker: ChatMessage.implementation.getSpeaker({actor}),
       flavor: resourceAttribute.label.capitalize()
