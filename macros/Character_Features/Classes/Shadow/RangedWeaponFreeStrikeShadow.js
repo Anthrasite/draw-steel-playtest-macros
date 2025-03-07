@@ -3,7 +3,6 @@
 //@img=icons/weapons/bows/shortbow-recurve.webp
 await game.dsmacros.executeMacroFromCompendium(`FreeStrikeRanged`, {
   onSurgeFunc: async function(damageSurges, potencySurges) {
-    if (damageSurges > 0)
-      return await game.dsmacros.executeMacroFromCompendium(`Shadow_OnSurge`);
+    return await game.dsmacros.executeMacroFromCompendium(`Shadow_OnSurge`, { damageSurges });
   }
 });

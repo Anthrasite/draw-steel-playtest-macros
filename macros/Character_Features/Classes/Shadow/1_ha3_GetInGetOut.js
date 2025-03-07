@@ -23,7 +23,6 @@ await game.dsmacros.executeMacroFromCompendium("ShareAbility", {
     return await game.dsmacros.executeMacroFromCompendium(`Shadow_GetAllowedEdgeBane`, { defaultResourceCost: resourceCost, currResourceCost });
   },
   onSurgeFunc: async function(damageSurges, potencySurges) {
-    if (damageSurges > 0)
-      return await game.dsmacros.executeMacroFromCompendium(`Shadow_OnSurge`);
+    return await game.dsmacros.executeMacroFromCompendium(`Shadow_OnSurge`, { damageSurges });
   }
 });
