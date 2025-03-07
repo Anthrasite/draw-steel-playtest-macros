@@ -6,9 +6,9 @@ try {
   let defaultValue = 0;
   if (powerRollStat) {
     const characteristics = actor.system.attributes.characteristics;
-    for (const charName in characteristics)
-      if (powerRollStat.toLowerCase().includes(charName) && characteristics[charName].value > defaultValue)
-        defaultValue = characteristics[charName].value;
+    for (const [charName, char] of Object.entries(characteristics))
+      if (powerRollStat.toLowerCase().includes(charName) && char.value > defaultValue)
+        defaultValue = char.value;
   }
   else
     defaultValue = 2;
@@ -59,9 +59,9 @@ try {
 
   // Remove any buttons that aren't allowed
   if (allowedEdgeBane)
-    for (const ebButton in ebButtons)
-      if (!allowedEdgeBane.includes(ebButton))
-        delete ebButtons[ebButton];
+    for (const ebButtonCode in ebButtons)
+      if (!allowedEdgeBane.includes(ebButtonCode))
+        delete ebButtons[ebButtonCode];
 
   // Show the edges and banes dialog
   const edgeBane = await Dialog.wait({
