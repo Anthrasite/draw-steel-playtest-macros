@@ -13,9 +13,6 @@ await game.dsmacros.executeMacroFromCompendium("ShareAbility", {
   tier2Effect: "6 + A damage",
   tier3Effect: "9 + A damage",
   effect: "If the target has no allies adjacent to them, this strike deals extra damage equal to your Agility score.",
-  onSurgeFunc: async function(damageSurges, potencySurges) {
-    return await game.dsmacros.executeMacroFromCompendium(`Shadow_OnSurge`, { damageSurges });
-  },
   getExtraDamageFunc: async function() {
     const isAlone = !await Dialog.confirm({
       title: `Target alone?`,
