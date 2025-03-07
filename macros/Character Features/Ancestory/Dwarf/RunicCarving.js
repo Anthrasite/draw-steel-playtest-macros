@@ -1,4 +1,4 @@
-await game.macros.getName("ShareTrait").execute({
+await game.macros.getName("ShareFeature").execute({
   name: "Runic Carving",
   description: `You can carve a rune onto your skin and the magic within your body activates it. The rune you carve determines the benefit you receive. You can change or remove this rune with 10 minutes of work while not engaged in combat.</p>
     <ul>

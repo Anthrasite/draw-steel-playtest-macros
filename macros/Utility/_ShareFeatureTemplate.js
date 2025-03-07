@@ -1,4 +1,4 @@
-await game.macros.getName("ShareTrait").execute({
+await game.macros.getName("ShareFeature").execute({
   name: "",
   description: "" | ``,
   source: "",

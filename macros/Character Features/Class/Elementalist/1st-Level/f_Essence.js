@@ -1,4 +1,4 @@
-await game.macros.getName("ShareTrait").execute({
+await game.macros.getName("ShareFeature").execute({
   name: "Essence",
   description: `The power you serve grants you a Heroic Resource called wrath, fueling your abilities as you censor those your church deems to be heretics.</p>
   <h3>Essence in Combat</h3>
