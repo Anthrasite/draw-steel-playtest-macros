@@ -1,25 +1,18 @@
 try {
-  if (!actor)
-    ui.notifications.error(`No token is selected`);
-  else {
-    let victories = (await game.macros.getName(`GetAttribute`).execute({ attributeName: `victories` })).value;
+  await game.macros.getName("ValidateActorAttributes").execute();
 
-    await game.macros.getName(`UpdateAttribute`).execute({
-      attributeName: `resource`,
-      value: victories
-    });
+  const victories = (await game.macros.getName(`GetAttribute`).execute({ attributeName: `victories` })).value;
 
-    let resourceLabel = (await game.macros.getName(`GetAttribute`).execute({ attributeName: `resource` })).label;
+  const resource = await game.macros.getName(`UpdateAttribute`).execute({ attributeName: `resource`, value: victories });
 
-    const roll = await new Roll(`${victories}[victories]`).evaluate();
-    await roll.toMessage({
-      speaker: ChatMessage.implementation.getSpeaker({actor}),
-      flavor: `Initial ${resourceLabel}`
-    });
+  const roll = await new Roll(`${victories}[victories]`).evaluate();
+  await roll.toMessage({
+    speaker: ChatMessage.implementation.getSpeaker({actor}),
+    flavor: `Initial ${resource.label}`
+  });
 
-    if (actor.sheet.rendered)
-      actor.sheet.render(true);
-  }
+  if (actor.sheet.rendered)
+    actor.sheet.render(true);
 }
 catch (error) {
   ui.notifications.error(error);

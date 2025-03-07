@@ -1,5 +1,5 @@
 try {
-  const buttonObj = await game.macros.getName(`ValidateParameter`).execute({ name: `buttonObj`, value: scope.buttonObj, type: `object` });
+  const button = await game.macros.getName(`ValidateParameter`).execute({ name: `button`, value: scope.button, type: `object` });
 
   const resourceCost = await game.macros.getName(`ValidateParameter`).execute({ name: `resourceCost`, value: scope.resourceCost, type: `number`, nullable: true });
   const extraResourceCost = await game.macros.getName(`ValidateParameter`).execute({ name: `extraResourceCost`, value: scope.extraResourceCost, type: `string`, nullable: true });
@@ -16,8 +16,8 @@ try {
   const onSurgeFunc = await game.macros.getName(`ValidateParameter`).execute({ name: `onSurgeFunc`, value: scope.onSurgeFunc, type: `function`, nullable: true });
 
   // Determine if the ability can actually be used
-  let currResource = await game.macros.getName(`GetAttribute`).execute({ attributeName: `resource` });
-  let actualResourceCost = calculateCostFunc ? await calculateCostFunc() : resourceCost;
+  const currResource = await game.macros.getName(`GetAttribute`).execute({ attributeName: `resource` });
+  const actualResourceCost = calculateCostFunc ? await calculateCostFunc() : resourceCost;
   if (actualResourceCost && currResource.value < actualResourceCost) {
     ui.notifications.info(`Not enough ${currResource.label}!`);
     return;
@@ -43,22 +43,19 @@ try {
       // Calculate the damage from the highest characteristic
       let charDamage = undefined;
       let maxCharName = undefined;
-      const characteristics = await game.macros.getName(`GetCharacteristics`).execute();
+      const characteristics = actor.system.attributes.characteristics;
       if (charDamageOptions) {
-        for (const charName in characteristics)
-          if (charDamageOptions.indexOf(charName[0].toUpperCase()) >= 0 && (!maxCharName || characteristics[charName] > charDamage)) {
+        for (const charName in actor.system.attributes.characteristics)
+          if (charDamageOptions.indexOf(charName[0].toUpperCase()) >= 0 && (!maxCharName || characteristics[charName].value > charDamage)) {
             maxCharName = charName;
-            charDamage = characteristics[maxCharName];
+            charDamage = characteristics[maxCharName].value;
           }
       }
 
       // Calculate the damage from the kit (if this isn't a kit ability)
       const isMelee = keywords.toLowerCase().includes("melee");
       const isRanged = keywords.toLowerCase().includes("ranged");
-      const kitDamage = (!isMelee && !isRanged) || isKit ? 0 : await game.macros.getName(`GetKitDamage`).execute({
-        isMelee: isMelee,
-        tier: rollResult.tier
-      });
+      const kitDamage = (!isMelee && !isRanged) || isKit ? 0 : await game.macros.getName(`GetKitDamage`).execute({ isMelee, tier: rollResult.tier });
 
       let damageRollString = ``;
       if (diceDamage)
@@ -87,7 +84,7 @@ try {
         if (surgeCount >= 3)
           surgeButtons.three = { label: `3`, callback: () => 3 };
 
-        let surgesUsed = Number(await Dialog.wait({
+        const surgesUsed = Number(await Dialog.wait({
           title: `Surges to use`,
           buttons: surgeButtons 
         }));
@@ -97,7 +94,7 @@ try {
           if (onSurgeFunc)
             await onSurgeFunc();
 
-          const maxChar = Math.max(...(Object.keys(characteristics).map((key) => characteristics[key])));
+          const maxChar = Math.max(...(Object.keys(characteristics).map((key) => characteristics[key].value)));
           const surgeDamage = (surgesUsed * maxChar);
           const surgeRoll = await new Roll(surgeDamage.toString()).evaluate();
           await surgeRoll.toMessage({
@@ -105,11 +102,7 @@ try {
             flavor: `Extra surge damage`
           });
 
-          await game.macros.getName(`UpdateAttribute`).execute({
-            attributeName: `surges`,
-            value: -surgesUsed,
-            add: true
-          });
+          await game.macros.getName(`UpdateAttribute`).execute({ attributeName: `surges`, value: -surgesUsed, isDelta: true });
         }
       }
     }
@@ -117,10 +110,7 @@ try {
 
   // Set the persistent cost, if the ability has a persistent cost
   if (persistentCost) {
-    await game.macros.getName(`UpdateAttribute`).execute({
-      attributeName: `persistentCost`,
-      value: persistentCost
-    });
+    await game.macros.getName(`UpdateAttribute`).execute({ attributeName: `persistentCost`, value: persistentCost });
   }
 
   // Subtract the resource cost, if the ability has a resource cost
@@ -133,9 +123,6 @@ try {
 
       const isExtraResourceCostVariable = extraResourceCost.endsWith(`+`);
       const minExtraResourceCost = Number(isExtraResourceCostVariable ? extraResourceCost.substring(0, extraResourceCost.length - 1) : extraResourceCost);
-
-      // Get the current resource again, as it might have been changed by a callback function
-      currResource = await game.macros.getName(`GetAttribute`).execute({ attributeName: `resource` });
 
       // If the extra resource ends with a "+", then a variable amount can be used
       if (isExtraResourceCostVariable) {
@@ -165,11 +152,7 @@ try {
     }
 
     if (totalResourceCost > 0) {
-      await game.macros.getName(`UpdateAttribute`).execute({
-        attributeName: `resource`,
-        value: -totalResourceCost,
-        add: true
-      });
+      await game.macros.getName(`UpdateAttribute`).execute({ attributeName: `resource`, value: -totalResourceCost, isDelta: true });
     }
   }
 
@@ -178,8 +161,8 @@ try {
     actor.sheet.render(true);
       
   // Disable this event and delete the button
-  buttonObj.off(`click`);
-  buttonObj.remove();
+  button.off(`click`);
+  button.remove();
 }
 catch (error) {
   if (error.message !== "The Dialog was closed without a choice being made.")

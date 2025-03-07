@@ -4,7 +4,7 @@ const allowNegative = (await game.macros.getName(`ValidateParameter`).execute({ 
 const defaultValue = (await game.macros.getName(`ValidateParameter`).execute({ name: `defaultValue`, value: scope.defaultValue, type: `number`, nullable: true })) ?? 0;
 
 return await Dialog.prompt({
-  title: title,
+  title,
   content: `
     <form>
       <div class="form-group">

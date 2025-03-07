@@ -1,4 +1,6 @@
 try {
+  await game.macros.getName("ValidateActorAttributes").execute();
+
   const name = await game.macros.getName(`ValidateParameter`).execute({ name: `name`, value: scope.name, type: `string` });
   const resourceCost = await game.macros.getName(`ValidateParameter`).execute({ name: `resourceCost`, value: scope.resourceCost, type: `number`, nullable: true });
   const flavorText = await game.macros.getName(`ValidateParameter`).execute({ name: `flavorText`, value: scope.flavorText, type: `string`, nullable: true });
@@ -103,9 +105,9 @@ try {
   // Register event for the "Use" button
   if (showUseButton) {
     $(document).on(`click`, `#${buttonId}`, async function() {
-      const buttonObj = $(this);
+      const button = $(this);
       await game.macros.getName(`UseAbility`).execute({
-        buttonObj,
+        button,
         keywords,
         isKit,
         resourceCost,

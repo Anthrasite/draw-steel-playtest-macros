@@ -5,10 +5,10 @@ try {
   // Calculate the default modifier based on the highest allowed characteristic of the power roll
   let defaultValue = 0;
   if (powerRollStat) {
-    const characteristics = await game.macros.getName(`GetCharacteristics`).execute();
+    const characteristics = actor.system.attributes.characteristics;
     for (const charName in characteristics)
-      if (powerRollStat.toLowerCase().includes(charName) && characteristics[charName] > defaultValue)
-        defaultValue = characteristics[charName];
+      if (powerRollStat.toLowerCase().includes(charName) && characteristics[charName].value > defaultValue)
+        defaultValue = characteristics[charName].value;
   }
   else
     defaultValue = 2;
@@ -88,11 +88,11 @@ try {
   if (minusTier & tier > 1)
      tier--;
 
-  if(roll.dice[0].total + roll.dice[1].total === 20) // Always get a tier 3 result on roll of 20
+  if (roll.dice[0].total + roll.dice[1].total === 20) // Always get a tier 3 result on roll of 20
      tier = 3;
 
   // Display the roll
-  let flavorColor = tier === 1 ? `#800000`
+  const flavorColor = tier === 1 ? `#800000`
     : tier === 2 ? `#000000`
     : `#008000`;
   await roll.toMessage({
