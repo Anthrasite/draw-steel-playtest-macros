@@ -22,8 +22,8 @@ try {
   }
 
   const roll = await new Roll(`${resourceAttribute.value} + ${resourceRoll}${persistentCost > 0 ? ` - ${persistentCost}` : ``}`).evaluate();
-  await roll.toMessage({
-    speaker: ChatMessage.implementation.getSpeaker({actor}),
+  await game.macros.getName(`SendRollToChat`).execute({
+    roll,
     flavor: resourceAttribute.label.capitalize()
   });
 

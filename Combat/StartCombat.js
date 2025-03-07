@@ -6,8 +6,8 @@ try {
   const resource = await game.macros.getName(`UpdateAttribute`).execute({ attributeName: `resource`, value: victories });
 
   const roll = await new Roll(`${victories}[victories]`).evaluate();
-  await roll.toMessage({
-    speaker: ChatMessage.implementation.getSpeaker({actor}),
+  await game.macros.getName(`SendRollToChat`).execute({
+    roll,
     flavor: `Initial ${resource.label}`
   });
 }

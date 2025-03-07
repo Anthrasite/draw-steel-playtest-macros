@@ -5,7 +5,8 @@ await game.macros.getName("ShareTrait").execute({
   onUseFunc: async function() {
     const barbedTailDamage = await game.macros.getName(`GetCharacteristic`).execute({ characteristicName: `Agility` });
     const roll = await new Roll(barbedTailDamage.toString()).evaluate();
-    await roll.toMessage({
+    await game.macros.getName(`SendRollToChat`).execute({
+      roll,
       flavor: `Barbed Tail damage`
     });
   }
