@@ -31,6 +31,8 @@ try {
     throw `Error: name cannot include ":" or ";"`;
   if (typeof(resourceCost) !== `undefined` && resourceCost === 0)
     throw `Error: resourceCost cannot be 0`;
+  if (typeof(trigger) !== `undefined` && !type.toLowerCase().includes("triggered"))
+    throw `Error: trigger can only be specified for triggered actions`;
   if (typeof(powerRollStat) !== typeof(tier1Effect) || typeof(powerRollStat) !== typeof(tier2Effect) || typeof(powerRollStat) !== typeof(tier3Effect))
     throw `Error: powerRollStat, tier1Effect, tier2Effect, and tier3Effect must be specified together`;
   if (typeof(extraResourceCost) !== typeof(extraResourceEffect))
