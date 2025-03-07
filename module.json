@@ -7,7 +7,16 @@
       "name": "Anthrasite"
     }
   ],
-  "system": "worldbuilding",
+  "relationships": {
+    "systems": [{
+      "id": "worldbuilding",
+      "type": "system",
+      "manifest": "https://raw.githubusercontent.com/foundryvtt/worldbuilding/master/system.json",
+      "compatibility": {
+        "verified": "0.8.2"
+      }
+    }]
+  },
   "version": "2.1.0",
   "compatibility": {
     "verified": "12"
