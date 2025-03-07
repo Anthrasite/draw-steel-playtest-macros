@@ -24,7 +24,7 @@ Get-ChildItem $PSScriptRoot -Directory -Recurse | ForEach-Object {
             { $imgPath = $imgMatches[0].Matches[0].Groups[1].Value }
         else
         {
-            $fileContents = ,"//@img=$($imgPath)" + $fileContents
+            $fileContents = ,"//@img=${imgPath}" + $fileContents
             $updateFile = $true
         }
 
@@ -35,7 +35,7 @@ Get-ChildItem $PSScriptRoot -Directory -Recurse | ForEach-Object {
             { $name = $nameMatches[0].Matches[0].Groups[1].Value }
         else
         {
-            $fileContents = ,"//@name=$($name)" + $fileContents
+            $fileContents = ,"//@name=${name}" + $fileContents
             $updateFile = $true
         }
 
@@ -49,7 +49,7 @@ Get-ChildItem $PSScriptRoot -Directory -Recurse | ForEach-Object {
             $charSet = [Char[]]'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
             $id = (Get-Random -Count 16 -InputObject $charSet) -join ''
 
-            $fileContents = ,"//@id=$($id)" + $fileContents
+            $fileContents = ,"//@id=${id}" + $fileContents
             $updateFile = $true
         }
 
@@ -58,7 +58,7 @@ Get-ChildItem $PSScriptRoot -Directory -Recurse | ForEach-Object {
             $_.replace("\", "\\").replace("`"", "\`"")
         } | Join-String -Separator "\n"
 
-        $dbFileContents = $dbFileContents + "{ `"_id`": `"$($id)`", `"name`": `"$($name)`", `"scope`": `"global`", `"type`": `"script`", `"permission`": { `"default`": 0 }, `"img`": `"$($imgPath)`", `"command`": `"$($command)`" }`n"
+        $dbFileContents = $dbFileContents + "{ `"_id`": `"${id}`", `"name`": `"${name}`", `"scope`": `"global`", `"type`": `"script`", `"permission`": { `"default`": 0 }, `"img`": `"${imgPath}`", `"command`": `"${command}`" }`n"
 
         if ($updateFile)
             { $fileContents | Set-Content $_ }
@@ -67,17 +67,19 @@ Get-ChildItem $PSScriptRoot -Directory -Recurse | ForEach-Object {
     # If the db file isn't empty (i.e. there were js files in this directory), create pack JSON and a db file
     if ($dbFileContents.length -gt 0) {
         $packPath = ($_ | Resolve-Path -Relative).substring(2)
-        $packLabel = Split-Path $_ -Leaf
-        $packName = $packLabel.replace(" - ", "_").replace(" ", "_")
-        $packDBFileName = "$($packName)_macros.db"
+
+        $packName = Split-Path $_ -Leaf
+        $packLabel = $packName.replace("_", " - ")
+        $packDBFileName = "${packName}_macros.db"
+
         $packsJson += @{
             "name" = $packName
-            "label" = "$((Split-Path $_ -Leaf).replace("_", " "))"
-            "path" = "macros\$($packPath)\$($packDBFileName)"
+            "label" = $packLabel
+            "path" = "macros\${packPath}\${packDBFileName}"
             "type" = "Macro"
         }
 
-        New-Item "$($_)\$($packDBFileName)" -ItemType File -Force -Value $dbFileContents | Out-Null
+        New-Item "$_\${packDBFileName}" -ItemType File -Force -Value $dbFileContents | Out-Null
     }
 }
 
