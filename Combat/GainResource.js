@@ -6,13 +6,13 @@ try {
   const resourceGain = Number(await game.macros.getName(`ShowSimpleInputDialog`).execute({ title: resourceLabel, label: `${resourceLabel} gained`, defaultValue: 1, allowNegative: false }));
 
   if (resourceGain > 0) {
-    await game.macros.getName(`UpdateAttribute`).execute({ attributeName: `resource`, value: resourceGain, isDelta: true });
-
     const roll = await new Roll(`${resource.value} + ${resourceGain}`).evaluate();
     await roll.toMessage({
       speaker: ChatMessage.implementation.getSpeaker({actor}),
       flavor: resourceLabel
     });
+
+    await game.macros.getName(`UpdateAttribute`).execute({ attributeName: `resource`, value: resourceGain, isDelta: true });
   }
 
   if (actor.sheet.rendered)
