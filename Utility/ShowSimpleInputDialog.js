@@ -2,6 +2,7 @@ const label = await game.macros.getName(`ValidateParameter`).execute({ name: `la
 const title = (await game.macros.getName(`ValidateParameter`).execute({ name: `label`, value: scope.label, type: `string`, nullable: true })) ?? label;
 const allowNegative = (await game.macros.getName(`ValidateParameter`).execute({ name: `allowNegative`, value: scope.allowNegative, type: `boolean`, nullable: true })) ?? true;
 const defaultValue = (await game.macros.getName(`ValidateParameter`).execute({ name: `defaultValue`, value: scope.defaultValue, type: `number`, nullable: true })) ?? 0;
+const rejectClose = (await game.macros.getName(`ValidateParameter`).execute({ name: `rejectClose`, value: scope.rejectClose, type: `boolean`, nullable: true })) ?? true;
 
 return await Dialog.prompt({
   title,
@@ -14,5 +15,6 @@ return await Dialog.prompt({
         </div>
       </div>
     </form>`,
+  rejectClose,
   callback: html => html.find('input').val()
 });
