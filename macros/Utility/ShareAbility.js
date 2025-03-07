@@ -7,11 +7,12 @@ try {
   const name = await game.dsmacros.executeMacroFromCompendium(`ValidateParameter`, { name: `name`, value: scope.name, type: `string` });
   const resourceCost = await game.dsmacros.executeMacroFromCompendium(`ValidateParameter`, { name: `resourceCost`, value: scope.resourceCost, type: `number`, nullable: true });
   const flavorText = await game.dsmacros.executeMacroFromCompendium(`ValidateParameter`, { name: `flavorText`, value: scope.flavorText, type: `string`, nullable: true });
+  const description = await game.dsmacros.executeMacroFromCompendium(`ValidateParameter`, { name: `description`, value: scope.description, type: `string`, nullable: true });
   const type = await game.dsmacros.executeMacroFromCompendium(`ValidateParameter`, { name: `type`, value: scope.type, type: `string` });
-  const keywords = await game.dsmacros.executeMacroFromCompendium(`ValidateParameter`, { name: `keywords`, value: scope.keywords, type: `string` });
+  const keywords = await game.dsmacros.executeMacroFromCompendium(`ValidateParameter`, { name: `keywords`, value: scope.keywords, type: `string`, nullable: true });
   const isKit = await game.dsmacros.executeMacroFromCompendium(`ValidateParameter`, { name: `isKit`, value: scope.isKit, type: `boolean`, nullable: true });
-  const distance = await game.dsmacros.executeMacroFromCompendium(`ValidateParameter`, { name: `distance`, value: scope.distance, type: `string` });
-  const target = await game.dsmacros.executeMacroFromCompendium(`ValidateParameter`, { name: `target`, value: scope.target, type: `string` });
+  const distance = await game.dsmacros.executeMacroFromCompendium(`ValidateParameter`, { name: `distance`, value: scope.distance, type: `string`, nullable: true });
+  const target = await game.dsmacros.executeMacroFromCompendium(`ValidateParameter`, { name: `target`, value: scope.target, type: `string`, nullable: true });
   const trigger = await game.dsmacros.executeMacroFromCompendium(`ValidateParameter`, { name: `trigger`, value: scope.trigger, type: `string`, nullable: true });
   const powerRollStat = await game.dsmacros.executeMacroFromCompendium(`ValidateParameter`, { name: `powerRollStat`, value: scope.powerRollStat, type: `string`, nullable: true });
   const tier1Effect = await game.dsmacros.executeMacroFromCompendium(`ValidateParameter`, { name: `tier1Effect`, value: scope.tier1Effect, type: `string`, nullable: true });
@@ -74,6 +75,10 @@ try {
     return tierEffect.replaceAll(/([A-Z]\s+<\s+[A-Z0-9]+)/gi, `<span style="color: red">$1</span>`);
   }
 
+  function includeClosingPIfNotClosed(text) {
+    return `${text}${text.includes(`</p>`) ? `` : `</p>`}`;
+  }
+
   // Show the ability in the chat
   await ChatMessage.create({
     user: game.user._id,
@@ -83,19 +88,26 @@ try {
       `<h2 style="border-color: ${actionColor}; border-width: 2px;">${name}${(resourceCost ? ` <span style="font-size: 80%; font-style: italic;"> (${resourceCost} ${resource.label})</span>` : ``)}</h2>
       ${(flavorText? `<p style="font-style: italic;">${flavorText}</p>` : ``)}
       <table style="border: 0px; table-layout: fixed;">
+      ${(keywords ? `
         <tr>
           <td><b>Keywords:</b> ${keywords}</td>
         </tr>
+      ` : ``)}
         <tr>
           <td><b>Type:</b> ${type}</td>
         </tr>
+      ${(distance ? `
         <tr>
           <td><b>Distance:</b> ${distance}</td>
         </tr>
+      ` : ``)}
+      ${(target ? `
         <tr>
           <td><b>Target:</b> ${target}</td>
         </tr>
+      ` : ``)}
       </table>
+      ${(description ? `<p>${includeClosingPIfNotClosed(description)}` : ``)}
       ${(trigger ? `<p><b>Trigger:</b> ${trigger}</p>` : ``)}
       ${(powerRollStat ? `
         <p style="font-weight: bold;">Power Roll + ${powerRollStat}:</p>
@@ -105,9 +117,9 @@ try {
           <li><b>17+:</b> ${highlightPotencyFunc(tier3Effect)}</li>
         </ul>
       ` : ``)}
-      ${(effect ? `<p><b>Effect:</b> ${effect}${effect.includes(`</p>`) ? `` : `</p>`}` : ``)}
-      ${(persistentCost ? `<p><b>Persistent ${persistentCost}:</b> ${persistentEffect}${persistentEffect.includes(`</p>`) ? `` : `</p>`}` : ``)}
-      ${(extraResourceCost ? `<p><b>Spend ${extraResourceCost} ${resource.label}:</b> ${extraResourceEffect}${extraResourceEffect.includes(`</p>`) ? `` : `</p>`}` : ``)}
+      ${(effect ? `<p><b>Effect:</b> ${includeClosingPIfNotClosed(effect)}` : ``)}
+      ${(persistentCost ? `<p><b>Persistent ${persistentCost}:</b> ${includeClosingPIfNotClosed(persistentEffect)}` : ``)}
+      ${(extraResourceCost ? `<p><b>Spend ${extraResourceCost} ${resource.label}:</b> ${includeClosingPIfNotClosed(extraResourceEffect)}` : ``)}
       ${(showUseButton ? `<button id="${buttonId}">${(canUse ? `Use` : `Not enough ${resource.label}`)}</button>` : ``)}`
   });
 

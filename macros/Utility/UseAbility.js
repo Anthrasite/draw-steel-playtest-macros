@@ -12,7 +12,7 @@ try {
   const tier1Effect = await game.dsmacros.executeMacroFromCompendium(`ValidateParameter`, { name: `tier1Effect`, value: scope.tier1Effect, type: `string`, nullable: true });
   const tier2Effect = await game.dsmacros.executeMacroFromCompendium(`ValidateParameter`, { name: `tier2Effect`, value: scope.tier2Effect, type: `string`, nullable: true });
   const tier3Effect = await game.dsmacros.executeMacroFromCompendium(`ValidateParameter`, { name: `tier3Effect`, value: scope.tier3Effect, type: `string`, nullable: true });
-  const keywords = await game.dsmacros.executeMacroFromCompendium(`ValidateParameter`, { name: `keywords`, value: scope.keywords, type: `string` });
+  const keywords = (await game.dsmacros.executeMacroFromCompendium(`ValidateParameter`, { name: `keywords`, value: scope.keywords, type: `string`, nullable: true })) ?? ``;
   const isKit = (await game.dsmacros.executeMacroFromCompendium(`ValidateParameter`, { name: `isKit`, value: scope.isKit, type: `boolean`, nullable: true })) ?? false;
 
   const getResourceCostFunc = await game.dsmacros.executeMacroFromCompendium(`ValidateParameter`, { name: `getResourceCostFunc`, value: scope.getResourceCostFunc, type: `function`, nullable: true });
@@ -43,7 +43,7 @@ try {
     // Calculate the damage of the ability
     const effect = [ tier1Effect, tier2Effect, tier3Effect ][rollResult.tier - 1];
     const matches = effect.match(/^(([0-9]+d[0-9]+)\s+\+\s+)?([0-9]+)(\s+\+\s+[MAIRPor,\s]+)?\s+((acid|cold|corruption|fire|holy|lightning|poison|psychic|sonic)\s+)?damage/);
-    const doesDamage = matches.length > 0;
+    const doesDamage = matches !== null;
     if (doesDamage) {
       const diceDamage = matches[2];
       const constDamage = matches[3];
