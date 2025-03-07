@@ -10,7 +10,7 @@ return await Dialog.prompt({
       <div class="form-group">
         <label>${label}:</label>
         <div class="form-fields">
-          <input type="number" onkeypress="return ((event.key >= '0' && event.key <= '9')${allowNegative ? ` || event.key === '-'` : ``})" value="${defaultValue}"/>
+          <input type="number" onkeypress="return ((event.key >= '0' && event.key <= '9')${allowNegative ? ` || event.key === '-'` : ``})" value="${defaultValue}" autofocus onFocus="this.select()"/>
         </div>
       </div>
     </form>`,

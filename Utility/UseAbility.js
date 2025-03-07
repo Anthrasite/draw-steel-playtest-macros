@@ -28,7 +28,7 @@ try {
   // Perform the power roll, if the ability has a power roll
   let rollResult = undefined;
   if (powerRollStat) {
-    rollResult = (await game.macros.getName(`PowerRoll`).execute());
+    rollResult = (await game.macros.getName(`PowerRoll`).execute({ powerRollStat }));
 
     // Calculate the damage of the ability
     const effect = [ tier1Effect, tier2Effect, tier3Effect ][rollResult.tier - 1];
