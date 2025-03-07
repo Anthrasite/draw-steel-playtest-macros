@@ -5,20 +5,25 @@ try {
 
   const resourceAttribute = await game.macros.getName(`GetAttribute`).execute({ attributeName: `resource` });
 
-  // If a persistent ability is active, determine if the persistent cost should be paid
+  // If any persistent abilities are active, show a selector for those that should be maintained, and calculate the cost
   let persistentCost = 0;
-  const activePersistentCost = (await game.macros.getName(`GetAttribute`).execute({ attributeName: `persistentCost` })).value;
-  if (activePersistentCost > 0) {
-    const continuePersistent = await Dialog.confirm({
-      title: `Persistent magic`,
-      content: `<p>Continue persistent effect for ${activePersistentCost} ${resourceAttribute.label}?</p>`,
-      rejectClose: true
-    });
+  const currPersistentCosts = await game.macros.getName(`GetPersistentCost`).execute();
+  if (Object.keys(currPersistentCosts).length) {
+    if (resourceRoll.includes("d"))
+      throw `Error: Handling of persistent effects with variable resource gain is not implemented`;
 
-    if (continuePersistent)
-      persistentCost = activePersistentCost;
-    else
-      await game.macros.getName(`UpdateAttribute`).execute({ attributeName: `persistentCost`, value: 0 });
+    const abilitiesToMaintain = await game.macros.getName("ShowPersistentCostDialog").execute({ label: `Persistent effects to maintain`, resourceLabel: resourceAttribute.label, selectByDefault: true });
+    for (const abilityName of abilitiesToMaintain)
+      persistentCost += currPersistentCosts[abilityName];
+
+    if (resourceRoll - persistentCost < 0) {
+      ui.notifications.error(`Not enough ${resourceAttribute.label} to maintain all persistent effects!`);
+      return;
+    }
+
+    for (const [abilityName, cost] of Object.entries(currPersistentCosts))
+      if (!abilitiesToMaintain.includes(abilityName))
+        await game.macros.getName(`UpdatePersistentCost`).execute({ abilityName });
   }
 
   const roll = await new Roll(`${resourceAttribute.value} + ${resourceRoll}${persistentCost > 0 ? ` - ${persistentCost}` : ``}`).evaluate();
