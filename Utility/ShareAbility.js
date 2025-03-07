@@ -23,6 +23,7 @@ try {
   const getResourceCostFunc = await game.macros.getName(`ValidateParameter`).execute({ name: `getResourceCostFunc`, value: scope.getResourceCostFunc, type: `function`, nullable: true });
   const getAllowedEdgeBaneFunc = await game.macros.getName(`ValidateParameter`).execute({ name: `getAllowedEdgeBaneFunc`, value: scope.getAllowedEdgeBaneFunc, type: `function`, nullable: true });
   const getExtraDamageFunc = await game.macros.getName(`ValidateParameter`).execute({ name: `getExtraDamageFunc`, value: scope.getExtraDamageFunc, type: `function`, nullable: true });
+  const onUseFunc = await game.macros.getName(`ValidateParameter`).execute({ name: `onUseFunc`, value: scope.onUseFunc, type: `function`, nullable: true });
   const onSurgeFunc = await game.macros.getName(`ValidateParameter`).execute({ name: `onSurgeFunc`, value: scope.onSurgeFunc, type: `function`, nullable: true });
 
   // Perform additional validation
@@ -51,7 +52,7 @@ try {
 
   const resource = await game.macros.getName(`GetAttribute`).execute({ attributeName: `resource` });
 
-  const showUseButton = resourceCost || extraResourceCost || powerRollStat;
+  const showUseButton = resourceCost || extraResourceCost || powerRollStat || onUseFunc;
   const canUse = showUseButton && (typeof(resourceCost) === `undefined` || resource.value >= resourceCost);
 
   // Calculate the colour for the ability type
@@ -121,6 +122,7 @@ try {
         getResourceCostFunc,
         getAllowedEdgeBaneFunc,
         getExtraDamageFunc,
+        onUseFunc,
         onSurgeFunc
       });
     });
