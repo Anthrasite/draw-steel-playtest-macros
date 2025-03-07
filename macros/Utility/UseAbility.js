@@ -141,7 +141,7 @@ try {
       });
 
       // If surges should be used, subtract the surges, and send an additional roll for surge damage if used for damage
-      if (surgesUsed !== `z`) {
+      if (surgesUsed && surgesUsed !== `z`) {
         const damageSurges = surgesUsed.startsWith(`d`) ? Number(surgesUsed.substring(1)) : 0;
         const potencySurges = surgesUsed.startsWith(`p`) ? Number(surgesUsed.substring(1)) : 0;
 
