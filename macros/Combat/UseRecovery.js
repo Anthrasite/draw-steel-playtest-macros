@@ -5,30 +5,30 @@ try {
   const activeActor = actor;
   await game.macros.getName("ValidateActorAttributes").execute({ activeActor });
 
-  const health = (await game.macros.getName(`GetAttribute`).execute({ activeActor, attributeName: `health` }));
+  const stamina = (await game.macros.getName(`GetAttribute`).execute({ activeActor, attributeName: `stamina` }));
 
-  if (health.value >= health.max)
-    ui.notifications.info(`Health is already full!`);
+  if (stamina.value >= stamina.max)
+    ui.notifications.info(`Stamina is already full!`);
   else {
     const recoveries = (await game.macros.getName(`GetAttribute`).execute({ activeActor, attributeName: `recoveries` }));
 
     if (recoveries.value <= 0)
       ui.notifications.info(`No recoveries left!`);
     else {
-      const recoveryValue = Math.floor(health.max / 3);
-      const newHealth = Math.min(health.value + recoveryValue, health.max);
+      const recoveryValue = Math.floor(stamina.max / 3);
+      const newStamina = Math.min(stamina.value + recoveryValue, stamina.max);
 
-      if (newHealth < health.value + recoveryValue) {
+      if (newStamina < stamina.value + recoveryValue) {
         const useRecovery = await Dialog.confirm({
           title: `Use recovery?`,
-          content: `<p>Warning: If you use a recovery, ${health.value + recoveryValue - newHealth} health will be wasted. Do you still want to use a recovery?</p>`,
+          content: `<p>Warning: If you use a Recovery, ${stamina.value + recoveryValue - newStamina} Stamina will be wasted. Do you still want to use a Recovery?</p>`,
           defaultYes: false
         });
         if (!useRecovery)
           return;
       }
 
-      await game.macros.getName(`UpdateAttribute`).execute({ activeActor, attributeName: `health`, value: newHealth });
+      await game.macros.getName(`UpdateAttribute`).execute({ activeActor, attributeName: `stamina`, value: newStamina });
       await game.macros.getName(`UpdateAttribute`).execute({ activeActor, attributeName: `recoveries`, value: -1, isDelta: true });
     }
   }
