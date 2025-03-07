@@ -23,5 +23,4 @@ try {
 catch (error) {
   if (error.message !== "The Dialog was closed without a choice being made.")
     ui.notifications.error(error);
-  throw error;
 }
