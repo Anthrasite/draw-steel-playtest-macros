@@ -67,10 +67,11 @@ Get-ChildItem $PSScriptRoot -Directory -Recurse | ForEach-Object {
     # If the db file isn't empty (i.e. there were js files in this directory), create pack JSON and a db file
     if ($dbFileContents.length -gt 0) {
         $packPath = ($_ | Resolve-Path -Relative).substring(2)
-        $packName = $packPath.replace("\", "_")
+        $packLabel = Split-Path $_ -Leaf
+        $packName = $packLabel.replace(" - ", "_").replace(" ", "_")
         $packDBFileName = "$($packName)_macros.db"
         $packsJson += @{
-            "name" = "$($packPath.replace(" ", "_").replace("\", "_"))"
+            "name" = $packName
             "label" = "$((Split-Path $_ -Leaf).replace("_", " "))"
             "path" = "macros\$($packPath)\$($packDBFileName)"
             "type" = "Macro"
