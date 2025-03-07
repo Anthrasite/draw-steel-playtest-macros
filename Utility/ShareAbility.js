@@ -15,11 +15,12 @@ try {
   const effect = await game.macros.getName(`ValidateParameter`).execute({ name: `effect`, value: scope.effect, type: `string`, nullable: true });
   const extraResourceCost = await game.macros.getName(`ValidateParameter`).execute({ name: `extraResourceCost`, value: scope.extraResourceCost, type: `string`, nullable: true });
   const extraResourceEffect = await game.macros.getName(`ValidateParameter`).execute({ name: `extraResourceEffect`, value: scope.extraResourceEffect, type: `string`, nullable: true });
-  const persistentCost = scope.persistentCost;await game.macros.getName(`ValidateParameter`).execute({ name: `persistentCost`, value: scope.persistentCost, type: `number`, nullable: true });
-  const persistentEffect = scope.persistentEffect;await game.macros.getName(`ValidateParameter`).execute({ name: `persistentEffect`, value: scope.persistentEffect, type: `string`, nullable: true });
+  const persistentCost = await game.macros.getName(`ValidateParameter`).execute({ name: `persistentCost`, value: scope.persistentCost, type: `number`, nullable: true });
+  const persistentEffect = await game.macros.getName(`ValidateParameter`).execute({ name: `persistentEffect`, value: scope.persistentEffect, type: `string`, nullable: true });
 
   const calculateCostFunc = await game.macros.getName(`ValidateParameter`).execute({ name: `calculateCostFunc`, value: scope.calculateCostFunc, type: `function`, nullable: true });
   const getAllowedEdgeBaneFunc = await game.macros.getName(`ValidateParameter`).execute({ name: `getAllowedEdgeBaneFunc`, value: scope.getAllowedEdgeBaneFunc, type: `function`, nullable: true });
+  const onSurgeFunc = await game.macros.getName(`ValidateParameter`).execute({ name: `onSurgeFunc`, value: scope.onSurgeFunc, type: `function`, nullable: true });
 
   // Perform additional validation
   if (typeof(resourceCost) !== `undefined` && resourceCost === 0)
@@ -35,10 +36,12 @@ try {
   if (typeof(persistentCost) !== `undefined` && persistentCost === 0)
     throw `Error: persistentCost cannot be 0`;
 
-  if (typeof(resourceCost) !== `undefined` && typeof(calculateCostFunc) === `function`)
+  if (typeof(resourceCost) === `undefined` && typeof(calculateCostFunc) !== `undefined`)
     throw `Error: calculateCostFunc cannot be specified if resourceCost is not specified`;
-  if (typeof(powerRollStat) !== `undefined` && typeof(getAllowedEdgeBaneFunc) === `function`)
+  if (typeof(powerRollStat) === `undefined` && typeof(getAllowedEdgeBaneFunc) !== `undefined`)
     throw `Error: getAllowedEdgeBaneFunc cannot be specified if powerRollStat is not specified`;
+  if (typeof(powerRollStat) === `undefined` && typeof(onSurgeFunc) !== `undefined`)
+    throw `Error: onSurgeFunc cannot be specified if powerRollStat is not specified`;
 
   // Calculate values for showing the "Use" button
   const buttonId = await game.macros.getName(`GetUUID`).execute();
@@ -61,7 +64,7 @@ try {
   }
 
   // Show the ability in the chat
-  ChatMessage.create({
+  await ChatMessage.create({
     user: game.user._id,
     speaker: ChatMessage.getSpeaker(),
     flags: { "core.canPopout": true },
@@ -113,7 +116,8 @@ try {
         tier2Effect,
         tier3Effect,
         calculateCostFunc,
-        getAllowedEdgeBaneFunc
+        getAllowedEdgeBaneFunc,
+        onSurgeFunc
       });
     });
   }
