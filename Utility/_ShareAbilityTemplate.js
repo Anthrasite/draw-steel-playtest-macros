@@ -18,8 +18,9 @@ await game.macros.getName("ShareAbility").execute({
   persistentCost: undefined | 0,
   persistentEffect: undefined | ""| ``,
   getResourceCostFunc: async function() { },
-  getAllowedEdgeBaneFunc: async function() { },
+  getAllowedEdgeBaneFunc: async function(resourceCost) { },
   getExtraDamageFunc: async function() { },
   onUseFunc: async function() { },
-  onSurgeFunc: async function() { }
+  onSurgeFunc: async function(damageSurges, potencySurges) { }
 });
+      
