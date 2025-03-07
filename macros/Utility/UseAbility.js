@@ -15,13 +15,23 @@ try {
   const keywords = (await game.macros.getName(`ValidateParameter`).execute({ name: `keywords`, value: scope.keywords, type: `string`, nullable: true })) ?? ``;
   const isKit = (await game.macros.getName(`ValidateParameter`).execute({ name: `isKit`, value: scope.isKit, type: `boolean`, nullable: true })) ?? false;
 
-  const getResourceCostFunc = await game.macros.getName(`ValidateParameter`).execute({ name: `getResourceCostFunc`, value: scope.getResourceCostFunc, type: `function`, nullable: true });
   const getExtraDamageFunc = await game.macros.getName(`ValidateParameter`).execute({ name: `getExtraDamageFunc`, value: scope.getExtraDamageFunc, type: `function`, nullable: true });
   const onUseFunc = await game.macros.getName(`ValidateParameter`).execute({ name: `onUseFunc`, value: scope.onUseFunc, type: `function`, nullable: true });
 
   // Determine if the ability can actually be used
   const currResource = await game.macros.getName(`GetAttribute`).execute({ attributeName: `resource` });
-  let actualResourceCost = getResourceCostFunc ? await getResourceCostFunc() : resourceCost;
+  let actualResourceCost = resourceCost;
+
+  // Handle free persistent effect
+  const persistentCosts = await game.macros.getName(`GetPersistentCost`).execute();
+  if (Object.keys(persistentCosts).length && Object.hasOwn(persistentCosts, name)) {
+    const isPersistent = await Dialog.confirm({
+      title: `Persistent effect?`,
+      content: `<p>Are you using the persistent effect of <i>${name}</i>?</p>`,
+      defaultYes: false
+    });
+    actualResourceCost = isPersistent ? 0 : resourceCost;
+  }
 
   // Handle Shadow ability cost reduction
   const className = (await game.macros.getName(`GetAttribute`).execute({ attributeName: `class` })).value;

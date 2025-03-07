@@ -24,7 +24,6 @@ try {
   const persistentCost = await game.macros.getName(`ValidateParameter`).execute({ name: `persistentCost`, value: scope.persistentCost, type: `number`, nullable: true });
   const persistentEffect = await game.macros.getName(`ValidateParameter`).execute({ name: `persistentEffect`, value: scope.persistentEffect, type: `string`, nullable: true });
 
-  const getResourceCostFunc = await game.macros.getName(`ValidateParameter`).execute({ name: `getResourceCostFunc`, value: scope.getResourceCostFunc, type: `function`, nullable: true });
   const getExtraDamageFunc = await game.macros.getName(`ValidateParameter`).execute({ name: `getExtraDamageFunc`, value: scope.getExtraDamageFunc, type: `function`, nullable: true });
   const onUseFunc = await game.macros.getName(`ValidateParameter`).execute({ name: `onUseFunc`, value: scope.onUseFunc, type: `function`, nullable: true });
 
@@ -45,9 +44,6 @@ try {
     throw `Error: persistentCost and persistentEffect must be specified together`;
   if (typeof(persistentCost) !== `undefined` && persistentCost === 0)
     throw `Error: persistentCost cannot be 0`;
-
-  if (typeof(resourceCost) === `undefined` && typeof(getResourceCostFunc) !== `undefined`)
-    throw `Error: getResourceCostFunc cannot be specified if resourceCost is not specified`;
 
   // Calculate values for showing the "Use" button
   const buttonId = await game.macros.getName(`GetUUID`).execute();
@@ -133,7 +129,6 @@ try {
         tier1Effect,
         tier2Effect,
         tier3Effect,
-        getResourceCostFunc,
         getExtraDamageFunc,
         onUseFunc
       });
