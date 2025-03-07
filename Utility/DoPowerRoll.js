@@ -3,7 +3,7 @@ try {
   const allowedEdgeBane = await game.macros.getName(`ValidateParameter`).execute({ name: `allowedEdgeBane`, value: scope.allowedEdgeBane, type: `object`, nullable: true });
 
   // Calculate the default modifier based on the highest allowed characteristic of the power roll
-  let defaultValue = 0;
+  let defaultValue = -1;
   if (powerRollStat) {
     const characteristics = actor.system.attributes.characteristics;
     for (const [charName, char] of Object.entries(characteristics))
