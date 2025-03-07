@@ -98,11 +98,11 @@ Get-ChildItem $PSScriptRoot -Directory -Recurse | ForEach-Object {
         $packsJson += @{
             "name" = $packName
             "label" = $packLabel
-            "path" = "macros\${packPath}\${packDBFileName}"
+            "path" = "packs\${packDBFileName}"
             "type" = "Macro"
         }
 
-        New-Item "$_\${packDBFileName}" -ItemType File -Force -Value $dbFileContents | Out-Null
+        New-Item "..\packs\${packDBFileName}" -ItemType File -Force -Value $dbFileContents | Out-Null
     }
 }
 
