@@ -58,7 +58,7 @@ Get-ChildItem $PSScriptRoot -Directory -Recurse | ForEach-Object {
             $_.replace("\", "\\").replace("`"", "\`"")
         } | Join-String -Separator "\n"
 
-        $dbFileContents = $dbFileContents + "{ `"_id`": `"$($id)`", `"name`": `"$($name)`", `"scope`": `"global`", `"type`": `"script`", `"permission`": { `"default`": 0 }, `"img`": `"$($imgPath)`", `"folder`": null, `"command`": `"$($command)`" }`n"
+        $dbFileContents = $dbFileContents + "{ `"_id`": `"$($id)`", `"name`": `"$($name)`", `"scope`": `"global`", `"type`": `"script`", `"permission`": { `"default`": 0 }, `"img`": `"$($imgPath)`", `"command`": `"$($command)`" }`n"
 
         if ($updateFile)
             { $fileContents | Set-Content $_ }
