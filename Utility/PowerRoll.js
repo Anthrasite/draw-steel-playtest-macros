@@ -1,7 +1,8 @@
 try {
   const powerRollStat = await game.macros.getName(`ValidateParameter`).execute({ name: `powerRollStat`, value: scope.powerRollStat, type: `string`, nullable: true });
+  const allowedEdgeBane = await game.macros.getName(`ValidateParameter`).execute({ name: `allowedEdgeBane`, value: scope.allowedEdgeBane, type: `object`, nullable: true });
 
-  // Show the modifier dialog
+  // Calculate the default modifier based on the highest allowed characteristic of the power roll
   let defaultValue = 0;
   if (powerRollStat) {
     const characteristics = await game.macros.getName(`GetCharacteristics`).execute();
@@ -12,11 +13,12 @@ try {
   else
     defaultValue = 2;
 
+  // Show the modifier dialog
   modifier = await game.macros.getName(`ShowSimpleInputDialog`).execute({ label: `Modifier`, defaultValue });
   if (modifier === ``)
     modifier = 0;
 
-  // Show the edges and banes dialog
+  // Create the buttons and CSS for the edges and banes dialog
   function getEdgeBaneLabel(eb) {
     return eb === `db` ? `Double bane`
       : eb === `b` ? `Bane`
@@ -55,6 +57,13 @@ try {
       }
     </style>`
 
+  // Remove any buttons that aren't allowed
+  if (allowedEdgeBane)
+    for (const ebButton in ebButtons)
+      if (!allowedEdgeBane.includes(ebButton))
+        delete ebButtons[ebButton];
+
+  // Show the edges and banes dialog
   const edgeBane = await Dialog.wait({
     title: `Edges & Banes`,
     buttons: ebButtons,

@@ -18,21 +18,27 @@ try {
   const persistentCost = scope.persistentCost;await game.macros.getName(`ValidateParameter`).execute({ name: `persistentCost`, value: scope.persistentCost, type: `number`, nullable: true });
   const persistentEffect = scope.persistentEffect;await game.macros.getName(`ValidateParameter`).execute({ name: `persistentEffect`, value: scope.persistentEffect, type: `string`, nullable: true });
 
-  const customCostFunc = await game.macros.getName(`ValidateParameter`).execute({ name: `customCostFunc`, value: scope.customCostFunc, type: `function`, nullable: true });
+  const calculateCostFunc = await game.macros.getName(`ValidateParameter`).execute({ name: `calculateCostFunc`, value: scope.calculateCostFunc, type: `function`, nullable: true });
+  const getAllowedEdgeBaneFunc = await game.macros.getName(`ValidateParameter`).execute({ name: `getAllowedEdgeBaneFunc`, value: scope.getAllowedEdgeBaneFunc, type: `function`, nullable: true });
 
   // Perform additional validation
   if (typeof(resourceCost) !== `undefined` && resourceCost === 0)
-    throw `Error: resourceCost must be greater than 0`;
+    throw `Error: resourceCost cannot be 0`;
   if (typeof(powerRollStat) !== typeof(tier1Effect) || typeof(powerRollStat) !== typeof(tier2Effect) || typeof(powerRollStat) !== typeof(tier3Effect))
     throw `Error: powerRollStat, tier1Effect, tier2Effect, and tier3Effect must be specified together`;
   if (typeof(extraResourceCost) !== typeof(extraResourceEffect))
     throw `Error: extraResourceCost and extraResourceEffect must be specified together`;
   if (typeof(extraResourceCost) !== `undefined` && !/[1-9][0-9]*\+?/.test(extraResourceCost))
-    throw `Error: extraResourceCost must be greater than 0`;
+    throw `Error: extraResourceCost cannot be 0`;
   if ((typeof(persistentCost) !== `undefined` || typeof(persistentEffect) !== `undefined`) && (typeof(persistentCost) !== `number` || typeof(persistentEffect) !== `string`))
     throw `Error: persistentCost and persistentEffect must be specified together`;
   if (typeof(persistentCost) !== `undefined` && persistentCost === 0)
-    throw `Error: persistentCost must be greater than 0`;
+    throw `Error: persistentCost cannot be 0`;
+
+  if (typeof(resourceCost) !== `undefined` && typeof(calculateCostFunc) === `function`)
+    throw `Error: calculateCostFunc cannot be specified if resourceCost is not specified`;
+  if (typeof(powerRollStat) !== `undefined` && typeof(getAllowedEdgeBaneFunc) === `function`)
+    throw `Error: getAllowedEdgeBaneFunc cannot be specified if powerRollStat is not specified`;
 
   // Calculate values for showing the "Use" button
   const buttonId = await game.macros.getName(`GetUUID`).execute();
@@ -97,6 +103,8 @@ try {
       const buttonObj = $(this);
       await game.macros.getName(`UseAbility`).execute({
         buttonObj,
+        keywords,
+        isKit,
         resourceCost,
         extraResourceCost,
         persistentCost,
@@ -104,9 +112,8 @@ try {
         tier1Effect,
         tier2Effect,
         tier3Effect,
-        keywords,
-        isKit,
-        customCostFunc
+        calculateCostFunc,
+        getAllowedEdgeBaneFunc
       });
     });
   }

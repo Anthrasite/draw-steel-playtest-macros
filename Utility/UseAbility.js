@@ -11,16 +11,13 @@ try {
   const keywords = await game.macros.getName(`ValidateParameter`).execute({ name: `keywords`, value: scope.keywords, type: `string` });
   const isKit = (await game.macros.getName(`ValidateParameter`).execute({ name: `isKit`, value: scope.isKit, type: `boolean`, nullable: true })) ?? false;
 
-  const customCostFunc = await game.macros.getName(`ValidateParameter`).execute({ name: `customCostFunc`, value: scope.customCostFunc, type: `function`, nullable: true });
+  const calculateCostFunc = await game.macros.getName(`ValidateParameter`).execute({ name: `calculateCostFunc`, value: scope.calculateCostFunc, type: `function`, nullable: true });
+  const getAllowedEdgeBaneFunc = await game.macros.getName(`ValidateParameter`).execute({ name: `getAllowedEdgeBaneFunc`, value: scope.getAllowedEdgeBaneFunc, type: `function`, nullable: true });
 
   // Determine if the ability can actually be used
   const currResource = await game.macros.getName(`GetAttribute`).execute({ attributeName: `resource` });
-  let actualResourceCost = customCostFunc ? await customCostFunc() : resourceCost;
-  if (customCostFunc) {
-    if (!await customCostFunc())
-      return;
-  }
-  else if (resourceCost && currResource.value < resourceCost) {
+  let actualResourceCost = calculateCostFunc ? await calculateCostFunc() : resourceCost;
+  if (actualResourceCost && currResource.value < actualResourceCost) {
     ui.notifications.info(`Not enough ${currResource.label}!`);
     return;
   }
@@ -28,7 +25,10 @@ try {
   // Perform the power roll, if the ability has a power roll
   let rollResult = undefined;
   if (powerRollStat) {
-    rollResult = (await game.macros.getName(`PowerRoll`).execute({ powerRollStat }));
+    let allowedEdgeBane = undefined;
+    if (getAllowedEdgeBaneFunc)
+      allowedEdgeBane = getAllowedEdgeBaneFunc(actualResourceCost);
+    rollResult = (await game.macros.getName(`PowerRoll`).execute({ powerRollStat, allowedEdgeBane }));
 
     // Calculate the damage of the ability
     const effect = [ tier1Effect, tier2Effect, tier3Effect ][rollResult.tier - 1];
@@ -120,8 +120,8 @@ try {
   }
 
   // Subtract the resource cost, if the ability has a resource cost
-  if (resourceCost || extraResourceCost) {
-    let totalResourceCost = resourceCost ?? 0;
+  if (actualResourceCost || extraResourceCost) {
+    let totalResourceCost = actualResourceCost ?? 0;
 
     // Determine if extra resource should be used and use it if so
     if (extraResourceCost) {
