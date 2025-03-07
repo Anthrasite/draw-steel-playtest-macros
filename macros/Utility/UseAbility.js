@@ -87,9 +87,17 @@ try {
       }
 
       // Calculate the damage from the kit (if this isn't a kit ability)
-      const isMelee = keywords.toLowerCase().includes("melee");
-      const isRanged = keywords.toLowerCase().includes("ranged");
-      const kitDamage = (!isMelee && !isRanged) || isKit ? 0 : await game.macros.getName(`GetKitDamage`).execute({ activeActor, isMelee, tier: rollResult.tier });
+      function canAddKitDamage(isMelee) {
+        return !isKit && keywords.toLowerCase().includes(isMelee ? "melee" : "ranged") && keywords.toLowerCase().includes("weapon");
+      }
+      async function getKitDamage(isMelee) {
+        return await game.macros.getName(`GetKitDamage`).execute({ activeActor, isMelee, tier: rollResult.tier });
+      }
+      const addMeleeKitDamage = canAddKitDamage(true);
+      const meleeKitDamage = addMeleeKitDamage ? await getKitDamage(true) : 0;
+      const addRangedKitDamage = canAddKitDamage(false);
+      const rangedKitDamage = addRangedKitDamage ? await getKitDamage(false) : 0;
+      const kitDamage = Math.max(meleeKitDamage, rangedKitDamage);
 
       let extraDamage = undefined;
       if (getExtraDamageFunc)
@@ -101,7 +109,7 @@ try {
       damageRollString += constDamage;
       if (charDamage)
         damageRollString += ` + ` + charDamage + `[${maxCharName[0].toUpperCase()}]`;
-      if (!isKit && (isMelee || isRanged))
+      if (addMeleeKitDamage || addRangedKitDamage)
         damageRollString += ` + ` + kitDamage + `[kit]`;
       if (extraDamage)
         damageRollString += extraDamage;
