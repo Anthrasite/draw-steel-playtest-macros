@@ -14,4 +14,4 @@ await game.macros.getName("ShareAbility").execute({
   tier3Effect: "7 damage",
   effect: "The ground beneath the area becomes difficult terrain for enemies."
 });
-      
+

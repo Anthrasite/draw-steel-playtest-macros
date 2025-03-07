@@ -8,5 +8,5 @@ await game.macros.getName("ShareAbility").execute({
   powerRollStat: "Might or Agility",
   tier1Effect: "You fail to escape the grab.",
   tier2Effect: "You can escape the grab, but if you do, the creature grabbing you can make a melee free strike against you before you are no longer grabbed.",
-  tier3Effect: "You are no longer grabbed.",  
+  tier3Effect: "You are no longer grabbed.",
 });

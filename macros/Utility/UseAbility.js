@@ -220,7 +220,7 @@ try {
       await game.macros.getName(`UpdateAttribute`).execute({ attributeName: `resource`, value: -totalResourceCost, isDelta: true });
     }
   }
-      
+
   // Disable this event and delete the button
   button.off(`click`);
   button.remove();

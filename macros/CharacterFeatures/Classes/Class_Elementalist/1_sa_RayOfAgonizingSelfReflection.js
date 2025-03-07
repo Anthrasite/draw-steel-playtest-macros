@@ -13,4 +13,4 @@ await game.macros.getName("ShareAbility").execute({
   tier2Effect: "4 + R corruption damage; R < average, slowed (save ends)",
   tier3Effect: "6 + R corruption damage; R < strong, slowed (save ends)"
 });
-      
+

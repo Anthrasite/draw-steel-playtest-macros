@@ -18,7 +18,7 @@ try {
     user: game.user._id,
     speaker: ChatMessage.getSpeaker(),
     flags: { "core.canPopout": true },
-    content: 
+    content:
       `<h2 style="border-color: black; border-width: 2px;">${name} <span style="font-size: 80%; color: gray;"> [${source}]</span></h2>
       <p>${description}${description.includes(`</p>`) ? `` : `</p>`}
       ${(onUseFunc ? `<button id="${buttonId}">Use</button>` : ``)}`
@@ -28,7 +28,7 @@ try {
   if (onUseFunc) {
     $(document).on(`click`, `#${buttonId}`, async function() {
       await onUseFunc();
-      
+
       // Disable this event and delete the button
       $(this).off(`click`);
       $(this).remove();

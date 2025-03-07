@@ -31,7 +31,7 @@ if (!nullable || typeof(value) !== `undefined`) {
   else if (type === `number`) {
     if (typeof(value) !== `number` || isNaN(value))
       throwError(name, `number`);
-  }  
+  }
   else if (type === `function`) {
     if (typeof(value) !== `function`)
       throwError(name, `function`);

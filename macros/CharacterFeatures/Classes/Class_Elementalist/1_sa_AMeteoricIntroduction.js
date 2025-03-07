@@ -13,4 +13,4 @@ await game.macros.getName("ShareAbility").execute({
   tier2Effect: "5 + R damage; push 3",
   tier3Effect: "8 + R damage; push 4"
 });
-      
+

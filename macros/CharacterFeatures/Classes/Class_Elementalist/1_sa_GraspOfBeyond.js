@@ -14,4 +14,4 @@ await game.macros.getName("ShareAbility").execute({
   tier3Effect: "9 + R corruption damage",
   effect: "You can teleport up to a number of squares equal to your Reason score."
 });
-      
+

@@ -78,7 +78,7 @@ try {
     user: game.user._id,
     speaker: ChatMessage.getSpeaker(),
     flags: { "core.canPopout": true },
-    content: 
+    content:
       `<h2 style="border-color: ${actionColor}; border-width: 2px;">${name}${(resourceCost ? ` <span style="font-size: 80%; font-style: italic;"> (${resourceCost} ${resource.label})</span>` : ``)}</h2>
       ${(flavorText? `<p style="font-style: italic;">${flavorText}</p>` : ``)}
       <table style="border: 0px; table-layout: fixed;">
