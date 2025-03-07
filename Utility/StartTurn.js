@@ -22,7 +22,7 @@ try {
   }
 
   const roll = await new Roll(`${resourceAttribute.value} + ${resourceRoll}${persistentCost > 0 ? ` - ${persistentCost}` : ``}`).evaluate();
-  await game.macros.getName(`SendRollToChat`).execute({
+  await game.macros.getName(`ShareRoll`).execute({
     roll,
     flavor: resourceAttribute.label.capitalize()
   });

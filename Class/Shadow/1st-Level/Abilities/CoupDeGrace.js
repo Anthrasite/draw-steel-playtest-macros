@@ -13,12 +13,12 @@ await game.macros.getName("ShareAbility").execute({
   tier2Effect: "1d6 + 11 + A damage",
   tier3Effect: "1d6 + 16 + A damage",
   getResourceCostFunc: async function() {
-    return await game.macros.getName(`CalculateShadowAbilityCost`).execute({ resourceCost });
+    return await game.macros.getName(`Shadow_CalculateAbilityCost`).execute({ resourceCost });
   },
   getAllowedEdgeBaneFunc: async function(currResourceCost) {
-    return await game.macros.getName(`GetShadowAllowedEdgeBane`).execute({ defaultResourceCost: resourceCost, currResourceCost });
+    return await game.macros.getName(`Shadow_GetAllowedEdgeBane`).execute({ defaultResourceCost: resourceCost, currResourceCost });
   },
   onSurgeFunc: async function() {
-    return await game.macros.getName(`OnSurgeShadow`).execute();
+    return await game.macros.getName(`Shadow_OnSurge`).execute();
   }
 });

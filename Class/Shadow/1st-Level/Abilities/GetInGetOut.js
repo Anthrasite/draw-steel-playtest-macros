@@ -14,12 +14,12 @@ await game.macros.getName("ShareAbility").execute({
   tier3Effect: "11 + A damage",
   effect: "You can shift up to your speed, dividing that movement before or after your strike as desired.",
   getResourceCostFunc: async function() {
-    return await game.macros.getName(`CalculateShadowAbilityCost`).execute({ resourceCost });
+    return await game.macros.getName(`Shadow_CalculateAbilityCost`).execute({ resourceCost });
   },
   getAllowedEdgeBaneFunc: async function(currResourceCost) {
-    return await game.macros.getName(`GetShadowAllowedEdgeBane`).execute({ defaultResourceCost: resourceCost, currResourceCost });
+    return await game.macros.getName(`Shadow_GetAllowedEdgeBane`).execute({ defaultResourceCost: resourceCost, currResourceCost });
   },
   onSurgeFunc: async function() {
-    return await game.macros.getName(`OnSurgeShadow`).execute();
+    return await game.macros.getName(`Shadow_OnSurge`).execute();
   }
 });
