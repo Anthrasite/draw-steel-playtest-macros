@@ -101,7 +101,7 @@ try {
       damageRollString += constDamage;
       if (charDamage)
         damageRollString += ` + ` + charDamage + `[${maxCharName[0].toUpperCase()}]`;
-      if (!isKit)
+      if (!isKit && (isMelee || isRanged))
         damageRollString += ` + ` + kitDamage + `[kit]`;
       if (extraDamage)
         damageRollString += extraDamage;
