@@ -32,7 +32,7 @@ function validateHasNonEmptyLabel(obj, propName, activeActor) {
 if (!activeActor)
   throw `Error: No token is selected`;
 
-for (const attr of [`resource`, `surges`, `victories`, `level`, `tempHealth`])
+for (const attr of [`resource`, `surges`, `victories`, `level`, `tempHealth`, `xp`])
   validateHasOwnOfType(activeActor.system.attributes, attr, `number`, activeActor);
 validateHasNonEmptyLabel(activeActor.system.attributes, `resource`, activeActor);
 for (const attr of [`persistentCost`, `class`])
