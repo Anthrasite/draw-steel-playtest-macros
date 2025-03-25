@@ -13,5 +13,5 @@ await game.macros.getName("ShareAbility").execute({
   powerRollStat: "Might or Agility",
   tier1Effect: "4 + M or A damage; push 1",
   tier2Effect: "7 + M or A damage; push 2",
-  tier3Effect: "9 + M or A damage; push 3; M < [strong] prone"
+  tier3Effect: "9 + M or A damage; push 3; M < strong, prone"
 });
