@@ -87,6 +87,15 @@ try {
           }
       }
 
+      // Calculate the damage from any weapon/implement enhancements
+      let enhancementDamage = undefined;
+      const weaponEnhancement = (await game.macros.getName(`GetAttribute`).execute({ activeActor, attributeName: `weaponEnhancement` }))?.value;
+      const implementEnhancement = (await game.macros.getName(`GetAttribute`).execute({ activeActor, attributeName: `implementEnhancement` }))?.value;
+      if (typeof(weaponEnhancement) !== `undefined` && keywords.toLowerCase().includes(`weapon`))
+        enhancementDamage = weaponEnhancement;
+      if (typeof(implementEnhancement) === `undefined` && (keywords.toLowerCase().includes(`magic`) || keywords.toLowerCase().includes(`psionic`)))
+        enhancementDamage = isNaN(enhancementDamage) ? implementEnhancement : Math.max(enhancementDamage, implementEnhancement);
+
       // Calculate the damage from the kit (if this isn't a kit ability)
       function canAddKitDamage(isMelee) {
         return !isKit && keywords.toLowerCase().includes(isMelee ? "melee" : "ranged") && keywords.toLowerCase().includes("weapon");
@@ -110,6 +119,8 @@ try {
       damageRollString += constDamage;
       if (charDamage)
         damageRollString += ` + ` + charDamage + `[${maxCharName[0].toUpperCase()}]`;
+      if (enhancementDamage)
+        damageRollString += ` + ` + enhancementDamage + `[enhancement]`;
       if (addMeleeKitDamage || addRangedKitDamage)
         damageRollString += ` + ` + kitDamage + `[kit]`;
       if (extraDamage)

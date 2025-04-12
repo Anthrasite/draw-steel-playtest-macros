@@ -54,3 +54,8 @@ if (Object.hasOwn(activeActor.system.groups, `kitRangedDamage`)) {
   for (const attr of [`tier1`, `tier2`, `tier3`])
     validateHasNumberWithValue(activeActor.system.attributes.kitRangedDamage, attr, activeActor);
 }
+
+if (Object.hasOwn(activeActor.system.attributes, `weaponEnhancement`))
+  validateIsType(activeActor.system.attributes, `weaponEnhancement`, `number`, activeActor);
+if (Object.hasOwn(activeActor.system.attributes, `implementEnhancement`))
+  validateIsType(activeActor.system.attributes, `implementEnhancement`, `number`, activeActor);
