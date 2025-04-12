@@ -20,12 +20,12 @@ function validateHasOwnOfType(obj, propName, type, activeActor) {
 
 function validateHasNumberWithValue(obj, propName, activeActor) {
   validateHasOwnOfType(obj, propName, `number`, activeActor, false);
-  if (!obj[propName].value)
+  if (typeof(obj[propName].value) === `undefined`)
     throw `Error: Attribute "${propName}" for actor "${activeActor.name}" has no value`;
 }
 
 function validateHasNonEmptyLabel(obj, propName, activeActor) {
-  if (!obj[propName].label)
+  if (typeof(obj[propName].label) === `undefined` || obj[propName].label === ``)
     throw `Error: Attribute "${propName}" for actor "${activeActor.name}" has no label`;
 }
 
