@@ -1,5 +1,5 @@
 //@id=hi1QF7EwgHD3eLVn
-//@name=Roll initiative
+//@name=Draw steel
 //@img=icons/skills/movement/figure-running-gray.webp
 AudioHelper.play({src: "modules/draw-steel-playtest-macros/audio/sword-drawing.mp3", volume: 1, autoplay: true, loop: false}, true);
 
