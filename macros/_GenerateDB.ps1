@@ -35,6 +35,7 @@ Get-ChildItem $PSScriptRoot -Directory -Recurse | ForEach-Object {
                 "Complications" { "icons/magic/control/debuff-chains-shackles-movement-blue.webp" }
                 "Kits" { "icons/equipment/shield/buckler-boss-iron-wood-brown.webp" }
                 "Perks" { "icons/magic/light/hand-sparks-glow-yellow.webp" }
+                "Titles" { "icons/skills/trades/academics-merchant-scribe.webp" }
                 default { "icons/svg/dice-target.svg" }
             }
 

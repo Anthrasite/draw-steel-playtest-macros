@@ -39,7 +39,8 @@
           "packs": [
             "Kits",
             "Perks",
-            "Complications"
+            "Complications",
+            "Titles"
           ],
           "folders": [
             {
@@ -102,6 +103,12 @@
       "path": "packs\\Perks_macros.db",
       "label": "Perks",
       "name": "Perks",
+      "type": "Macro"
+    },
+    {
+      "path": "packs\\Titles_macros.db",
+      "label": "Titles",
+      "name": "Titles",
       "type": "Macro"
     },
     {

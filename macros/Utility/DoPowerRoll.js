@@ -11,10 +11,7 @@ try {
   if (powerRollStat) {
     await game.macros.getName("ValidateActorAttributes").execute({ activeActor });
 
-    const characteristics = activeActor.system.attributes.characteristics;
-    for (const [charName, char] of Object.entries(characteristics))
-      if (powerRollStat.toLowerCase().includes(charName) && char.value > defaultValue)
-        defaultValue = char.value;
+    defaultValue = await game.macros.getName("GetHighestCharacteristic").execute({ activeActor, powerRollStat });
   }
   else
     defaultValue = 2;
