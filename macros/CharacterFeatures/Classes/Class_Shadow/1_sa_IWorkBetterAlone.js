@@ -14,12 +14,11 @@ await game.macros.getName("ShareAbility").execute({
   tier2Effect: "6 + A damage",
   tier3Effect: "9 + A damage",
   effect: "If the target has no allies adjacent to them, this strike deals extra damage equal to your Agility score.",
-  getExtraDamageFunc: async function() {
-    const isAlone = !await Dialog.confirm({
+  getExtraDamageFunc: async function(rollResult) {
+    const allyAdjacent = await Dialog.confirm({
       title: `Target alone?`,
-      content: `<p>Does the target have any allies adjacent to them?</p>`,
-      defaultYes: false
+      content: `<p>Does the target have any allies adjacent to them?</p>`
     });
-    return isAlone ? ` + ${await game.macros.getName(`GetCharacteristic`).execute({ activeActor: actor, characteristicName: `Agility` })}` : undefined;
+    return allyAdjacent ? undefined : ` + ${await game.macros.getName(`GetCharacteristic`).execute({ activeActor: actor, characteristicName: `Agility` })}`;
   }
 });

@@ -17,7 +17,8 @@ try {
   const isKit = (await game.macros.getName(`ValidateParameter`).execute({ name: `isKit`, value: scope.isKit, type: `boolean`, nullable: true })) ?? false;
 
   const getExtraDamageFunc = await game.macros.getName(`ValidateParameter`).execute({ name: `getExtraDamageFunc`, value: scope.getExtraDamageFunc, type: `function`, nullable: true });
-  const onUseFunc = await game.macros.getName(`ValidateParameter`).execute({ name: `onUseFunc`, value: scope.onUseFunc, type: `function`, nullable: true });
+  const beforeRollFunc = await game.macros.getName(`ValidateParameter`).execute({ name: `beforeRollFunc`, value: scope.beforeRollFunc, type: `function`, nullable: true });
+  const afterRollFunc = await game.macros.getName(`ValidateParameter`).execute({ name: `afterRollFunc`, value: scope.afterRollFunc, type: `function`, nullable: true });
 
   // Determine if the ability can actually be used
   const currResource = await game.macros.getName(`GetAttribute`).execute({ activeActor, attributeName: `resource` });
@@ -57,8 +58,8 @@ try {
     return;
   }
 
-  if (onUseFunc)
-    await onUseFunc();
+  if (beforeRollFunc)
+    await beforeRollFunc();
 
   // Perform the power roll, if the ability has a power roll
   let rollResult = undefined;
@@ -101,7 +102,7 @@ try {
 
       let extraDamage = undefined;
       if (getExtraDamageFunc)
-        extraDamage = await getExtraDamageFunc();
+        extraDamage = await getExtraDamageFunc(rollResult);
 
       let damageRollString = ``;
       if (diceDamage)
@@ -192,6 +193,9 @@ try {
       }
     }
   }
+
+  if (afterRollFunc)
+    await afterRollFunc();
 
   // Set the persistent cost, if the ability has a persistent cost
   if (persistentCost) {

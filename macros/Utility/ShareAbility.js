@@ -26,7 +26,8 @@ try {
   const persistentEffect = await game.macros.getName(`ValidateParameter`).execute({ name: `persistentEffect`, value: scope.persistentEffect, type: `string`, nullable: true });
 
   const getExtraDamageFunc = await game.macros.getName(`ValidateParameter`).execute({ name: `getExtraDamageFunc`, value: scope.getExtraDamageFunc, type: `function`, nullable: true });
-  const onUseFunc = await game.macros.getName(`ValidateParameter`).execute({ name: `onUseFunc`, value: scope.onUseFunc, type: `function`, nullable: true });
+  const beforeRollFunc = await game.macros.getName(`ValidateParameter`).execute({ name: `beforeRollFunc`, value: scope.beforeRollFunc, type: `function`, nullable: true });
+  const afterRollFunc = await game.macros.getName(`ValidateParameter`).execute({ name: `afterRollFunc`, value: scope.afterRollFunc, type: `function`, nullable: true });
 
   // Perform additional validation
   if (name.includes(`:`) || name.includes(`;`))
@@ -51,7 +52,7 @@ try {
 
   const resource = await game.macros.getName(`GetAttribute`).execute({ activeActor, attributeName: `resource` });
 
-  const showUseButton = resourceCost || extraResourceCost || powerRollStat || onUseFunc;
+  const showUseButton = resourceCost || extraResourceCost || powerRollStat || beforeRollFunc || afterRollFunc;
   const canUse = showUseButton && (typeof(resourceCost) === `undefined` || resource.value >= resourceCost);
 
   // Calculate the colour for the ability type
@@ -132,7 +133,8 @@ try {
         tier2Effect,
         tier3Effect,
         getExtraDamageFunc,
-        onUseFunc
+        beforeRollFunc,
+        afterRollFunc
       });
     });
   }

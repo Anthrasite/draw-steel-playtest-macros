@@ -14,7 +14,7 @@ await game.macros.getName("ShareAbility").execute({
   tier2Effect: "6 + A damage",
   tier3Effect: "9 + A damage",
   effect: "If an ally is adjacent to the target, the target takes extra damage equal to your Agility score.",
-  getExtraDamageFunc: async function() {
+  getExtraDamageFunc: async function(rollResult) {
     const allyAdjacent = await Dialog.confirm({
       title: `Ally adjacent?`,
       content: `<p>Is there an ally adjacent to the target?</p>`,

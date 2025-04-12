@@ -14,7 +14,7 @@ await game.macros.getName("ShareAbility").execute({
   tier2Effect: "5 + A damage",
   tier3Effect: "8 + A damage",
   effect: "As long as you have at least one ally within 5 squares of the target, you gain a surge. If you are flanking the target when you use this ability, choose one ally who is flanking with you. That ally also gain a surge.",
-  onUseFunc: async function() {
+  beforeRollFunc: async function() {
     const allyAdjacent = await Dialog.confirm({
       title: `Ally nearby?`,
       content: `<p>Is there an ally with 5 squares of the target?</p>`,

@@ -11,7 +11,7 @@ await game.macros.getName("ShareAbility").execute({
   distance: "20 squares",
   target: "One creature",
   effect: "As long as you remain within distance of the target, maintain line of effect to them, and strike no other creature first, you gain a surge and an edge on the next strike you make against the assessed creature.",
-  onUseFunc: async function() {
+  beforeRollFunc: async function() {
     await game.macros.getName("UpdateAttribute").execute({ activeActor: actor, attributeName: "surges", value: 1, isDelta: true });
   }
 });
