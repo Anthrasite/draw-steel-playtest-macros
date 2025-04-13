@@ -11,7 +11,7 @@ await game.macros.getName("ShareAbility").execute({
   distance: "Ranged 10",
   target: "1 creature",
   powerRollStat: "Might or Agility",
-  tier1Effect: "3 + M or A damage; A < [weak] slowed (save ends)",
-  tier2Effect: "5 + M or A damage; A < [average] slowed (save ends)",
-  tier3Effect: "7 + M or A damage; A < [strong] slowed (save ends)"
+  tier1Effect: "3 + M or A damage; A < weak, slowed (save ends)",
+  tier2Effect: "5 + M or A damage; A < average, slowed (save ends)",
+  tier3Effect: "7 + M or A damage; A < strong, slowed (save ends)"
 });
