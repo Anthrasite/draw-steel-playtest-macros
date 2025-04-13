@@ -88,13 +88,18 @@ try {
       }
 
       // Calculate the damage from any weapon/implement enhancements
-      let enhancementDamage = undefined;
-      const weaponEnhancement = (await game.macros.getName(`GetAttribute`).execute({ activeActor, attributeName: `weaponEnhancement` }))?.value;
-      const implementEnhancement = (await game.macros.getName(`GetAttribute`).execute({ activeActor, attributeName: `implementEnhancement` }))?.value;
-      if (typeof(weaponEnhancement) !== `undefined` && keywords.toLowerCase().includes(`weapon`))
-        enhancementDamage = weaponEnhancement;
-      if (typeof(implementEnhancement) === `undefined` && (keywords.toLowerCase().includes(`magic`) || keywords.toLowerCase().includes(`psionic`)))
-        enhancementDamage = isNaN(enhancementDamage) ? implementEnhancement : Math.max(enhancementDamage, implementEnhancement);
+      function canAddWeaponEnhancementDamage() {
+        return keywords.toLowerCase().includes(`weapon`);
+      }
+      function canAddImplementEnhancementDamage() {
+        return keywords.toLowerCase().includes(`magic`) || keywords.toLowerCase().includes(`psionic`);
+      }
+      async function getEnhancementDamage(isWeapon) {
+        return (await game.macros.getName(`GetAttribute`).execute({ activeActor, attributeName: isWeapon ? `weaponEnhancement` : `implementEnhancement` }))?.value ?? 0
+      }
+      const weaponEnhancementDamage = canAddWeaponEnhancementDamage() ? await getEnhancementDamage(true) : 0;
+      const implementEnhancementDamage = canAddImplementEnhancementDamage() ? await getEnhancementDamage(false) : 0;
+      const enhancementDamage = Math.max(weaponEnhancementDamage, implementEnhancementDamage);
 
       // Calculate the damage from the kit (if this isn't a kit ability)
       function canAddKitDamage(isMelee) {
@@ -103,10 +108,8 @@ try {
       async function getKitDamage(isMelee) {
         return await game.macros.getName(`GetKitDamage`).execute({ activeActor, isMelee, tier: rollResult.tier });
       }
-      const addMeleeKitDamage = canAddKitDamage(true);
-      const meleeKitDamage = addMeleeKitDamage ? await getKitDamage(true) : 0;
-      const addRangedKitDamage = canAddKitDamage(false);
-      const rangedKitDamage = addRangedKitDamage ? await getKitDamage(false) : 0;
+      const meleeKitDamage = canAddKitDamage(true) ? await getKitDamage(true) : 0;
+      const rangedKitDamage = canAddKitDamage(false) ? await getKitDamage(false) : 0;
       const kitDamage = Math.max(meleeKitDamage, rangedKitDamage);
 
       let extraDamage = undefined;
@@ -120,7 +123,7 @@ try {
       if (charDamage)
         damageRollString += ` + ` + charDamage + `[${maxCharName[0].toUpperCase()}]`;
       if (enhancementDamage)
-        damageRollString += ` + ` + enhancementDamage + `[enhancement]`;
+        damageRollString += ` + ` + enhancementDamage + `[enh]`;
       if (addMeleeKitDamage || addRangedKitDamage)
         damageRollString += ` + ` + kitDamage + `[kit]`;
       if (extraDamage)
