@@ -124,7 +124,7 @@ try {
         damageRollString += ` + ` + charDamage + `[${maxCharName[0].toUpperCase()}]`;
       if (enhancementDamage)
         damageRollString += ` + ` + enhancementDamage + `[enh]`;
-      if (addMeleeKitDamage || addRangedKitDamage)
+      if (kitDamage)
         damageRollString += ` + ` + kitDamage + `[kit]`;
       if (extraDamage)
         damageRollString += extraDamage;
