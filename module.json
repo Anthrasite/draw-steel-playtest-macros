@@ -17,7 +17,7 @@
       }
     }]
   },
-  "version": "2.3.1",
+  "version": "2.4.0",
   "compatibility": {
     "verified": "12"
   },
@@ -178,7 +178,7 @@
   ],
   "url": "https://github.com/Anthrasite/draw-steel-playtest-macros",
   "manifest": "https://raw.githubusercontent.com/Anthrasite/draw-steel-playtest-macros/master/module.json",
-  "download": "https://github.com/Anthrasite/draw-steel-playtest-macros/archive/refs/tags/v2.3.1.zip",
+  "download": "https://github.com/Anthrasite/draw-steel-playtest-macros/archive/refs/tags/v2.4.0.zip",
   "license": "https://raw.githubusercontent.com/Anthrasite/draw-steel-playtest-macros/master/LICENSE",
   "readme": "https://raw.githubusercontent.com/Anthrasite/draw-steel-playtest-macros/master/README.md",
   "changelog": "https://github.com/Anthrasite/draw-steel-playtest-macros/releases"
