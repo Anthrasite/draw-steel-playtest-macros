@@ -66,6 +66,16 @@
           ]
         }
       ]
+    },
+    {
+      "name": "Draw Steel Playtest - Items",
+      "sorting": "a",
+      "color": "#2F4F4F",
+      "packs": [
+        "Consumables",
+        "Trinkets",
+        "LeveledTreasure"
+      ]
     }
   ],
   "packs": [
@@ -146,6 +156,24 @@
       "label": "Class - Shadow",
       "name": "Class_Shadow",
       "type": "Macro"
+    },
+    {
+      "path": "packs\\Consumables_items.db",
+      "label": "Consumables",
+      "name": "Consumables",
+      "type": "Item"
+    },
+    {
+      "path": "packs\\Trinkets_items.db",
+      "label": "Trinkets",
+      "name": "Trinkets",
+      "type": "Item"
+    },
+    {
+      "path": "packs\\Leveled_Treasure_items.db",
+      "label": "Leveled Treasure",
+      "name": "LeveledTreasure",
+      "type": "Item"
     }
   ],
   "url": "https://github.com/Anthrasite/draw-steel-playtest-macros",
