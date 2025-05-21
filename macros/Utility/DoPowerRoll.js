@@ -74,7 +74,8 @@ try {
   const edgeBane = await Dialog.wait({
     title: `Edges & Banes`,
     buttons: ebButtons,
-    content: ebButtonStyles
+    content: ebButtonStyles,
+    default: `n`
   });
 
   // Perform the roll and calculate the tier

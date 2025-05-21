@@ -186,6 +186,7 @@ try {
         title: `Surges to use`,
         buttons: surgeButtons,
         content: surgeButtonStyles,
+        default: `z`,
         close: () => { return 0; }
       });
 
