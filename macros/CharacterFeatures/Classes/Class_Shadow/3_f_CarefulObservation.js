@@ -5,7 +5,6 @@ await game.macros.getName("ShareAbility").execute({
   activeActor: actor,
   name: "Careful Observation",
   flavorText: "A moment of focus leaves a foe firmly in your sights.",
-  resourceCost: 5,
   keywords: "-",
   type: "Maneuver",
   distance: "20 squares",
