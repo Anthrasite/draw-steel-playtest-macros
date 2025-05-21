@@ -142,29 +142,43 @@ try {
     const surgeCount = (await game.macros.getName(`GetAttribute`).execute({ activeActor, attributeName: `surges` })).value;
     if (doesDamage && surgeCount > 0 || hasPotency && surgeCount >= 2) {
       let surgeButtons = {
-        z: { label: `0` }
+        z: { label: `0` },
+        d1: { label: `1 (damage)`, color: `darkred`, disabled: true },
+        d2: { label: `2 (damage)`, color: `darkred`, disabled: true },
+        p2: { label: `2 (potency)`, color: `darkblue`, disabled: true },
+        d3: { label: `3 (damage)`, color: `darkred`, disabled: true }
       }
       if (doesDamage)
-        surgeButtons.d1 = { label: `1 (damage)` };
+        surgeButtons.d1.disabled = false;
       if (surgeCount >= 2) {
         if (doesDamage)
-          surgeButtons.d2 = { label: `2 (damage)` };
+          surgeButtons.d2.disabled = false;
         if (hasPotency)
-          surgeButtons.p2 = { label: `2 (potency)` };
+          surgeButtons.p2.disabled = false;
       }
       if (surgeCount >= 3)
-        surgeButtons.d3 = { label: `3 (damage)` };
+        surgeButtons.d3.disabled = false;
+
+      function getSurgeButtonColor(button) {
+        return button.disabled ? `var(--color-text-dark-secondary)` : button.color;
+      }
 
       const surgeButtonStyles = `
         <style>
           .dialog-buttons {
             white-space: nowrap;
           }
-          button.d1, button.d2, button.d3 {
-            color: darkred;
+          button.d1 {
+            color: ${getSurgeButtonColor(surgeButtons.d1)};
+          }
+          button.d2 {
+            color: ${getSurgeButtonColor(surgeButtons.d2)};
+          }
+          button.d3 {
+            color: ${getSurgeButtonColor(surgeButtons.d3)};
           }
           button.p2 {
-            color: darkblue;
+            color: ${getSurgeButtonColor(surgeButtons.p2)};
           }
         </style>`;
 

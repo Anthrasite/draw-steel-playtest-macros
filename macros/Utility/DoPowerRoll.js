@@ -38,33 +38,37 @@ try {
     de: { label: getEdgeBaneLabel(`de`), color: `#006400` }
   };
 
+  // Remove any buttons that aren't allowed
+  if (allowedEdgeBane)
+    for (const ebButtonCode in ebButtons)
+      if (!allowedEdgeBane.includes(ebButtonCode))
+        ebButtons[ebButtonCode].disabled = true;
+
+  function getEdgeBaneButtonColor(button) {
+    return button.disabled ? `var(--color-text-dark-secondary)` : button.color;
+  }
+
   const ebButtonStyles = `
     <style>
       .dialog-buttons {
         white-space: nowrap;
       }
       button.db {
-        color: ${ebButtons.db.color};
+        color: ${getEdgeBaneButtonColor(ebButtons.db)};
       }
       button.b {
-        color: ${ebButtons.b.color};
+        color: ${getEdgeBaneButtonColor(ebButtons.b)};
       }
       button.n {
-        color: ${ebButtons.n.color};
+        color: ${getEdgeBaneButtonColor(ebButtons.n)};
       }
       button.e {
-        color: ${ebButtons.e.color};
+        color: ${getEdgeBaneButtonColor(ebButtons.e)};
       }
       button.de {
-        color: ${ebButtons.de.color};
+        color: ${getEdgeBaneButtonColor(ebButtons.de)};
       }
     </style>`
-
-  // Remove any buttons that aren't allowed
-  if (allowedEdgeBane)
-    for (const ebButtonCode in ebButtons)
-      if (!allowedEdgeBane.includes(ebButtonCode))
-        delete ebButtons[ebButtonCode];
 
   // Show the edges and banes dialog
   const edgeBane = await Dialog.wait({
