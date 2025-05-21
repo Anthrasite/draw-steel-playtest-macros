@@ -13,7 +13,7 @@ try {
   await game.macros.getName(`ShareRoll`).execute({
     activeActor,
     roll,
-    flavor: `Initial ${resource.label}`
+    flavor: `${resource.label.capitalize()} [Combat start]`
   });
 }
 catch (error) {

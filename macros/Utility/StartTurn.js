@@ -34,7 +34,7 @@ try {
   await game.macros.getName(`ShareRoll`).execute({
     activeActor,
     roll,
-    flavor: resourceAttribute.label.capitalize()
+    flavor: `${resourceAttribute.label.capitalize()} [Turn start]`
   });
 
   await game.macros.getName(`UpdateAttribute`).execute({ activeActor, attributeName: `resource`, value: roll.total });
