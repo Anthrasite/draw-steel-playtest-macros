@@ -4,6 +4,6 @@
 await game.macros.getName("ShareFeature").execute({
   activeActor: actor,
   name: "Improved Hands of the Maker",
-  description: "When you use Hands of the Maker, you can create an object that is size 2 or smaller.",
+  description: "When you use your Hands of the Maker ability, you can create a mundane object that is size 2 or smaller.",
   source: "Class"
 });

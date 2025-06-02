@@ -4,6 +4,6 @@
 await game.macros.getName("ShareFeature").execute({
   activeActor: actor,
   name: "Great Fortitude",
-  description: "Your hearty constitution prevents you from losing strength. You can’t be weakened.",
+  description: "Your hearty constitution prevents you from losing strength. You can’t be made weakened.",
   source: "Ancestry"
 });

@@ -9,10 +9,10 @@ await game.macros.getName("ShareAbility").execute({
   isKit: true,
   type: "Action",
   distance: "Melee 1",
-  target: "2 creatures or objects",
+  target: "Two creatures or objects",
   powerRollStat: "Might or Agility",
   tier1Effect: "4 damage",
   tier2Effect: "6 damage",
   tier3Effect: "8 damage",
-  effect: "If you use this ability on your turn, you can target one creature or object with it then use your maneuver and move action for that turn before targeting a second creature or object. You still use the same power roll for both targets."
+  effect: "If you use this ability on your turn, you can use it against one target, then use your maneuver and your move action for that turn before using the ability against a second target. You still use the same power roll for both targets."
 });

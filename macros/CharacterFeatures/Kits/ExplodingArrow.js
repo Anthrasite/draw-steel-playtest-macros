@@ -11,12 +11,12 @@ await game.macros.getName("ShareAbility").execute({
   isKit: true,
   type: "Action",
   distance: "Ranged 15",
-  target: "1 creature or object",
+  target: "One creature or object",
   powerRollStat,
   tier1Effect: "5 + A, R, I, or P fire damage",
   tier2Effect: "7 + A, R, I, or P fire damage",
   tier3Effect: "10 + A, R, I, or P fire damage",
-  effect: "A creature or object within 2 squares of your target takes fire damage equal to the characteristic score you added to this ability’s power roll.",
+  effect: "One creature or object of your choice within 2 squares of the target takes fire damage equal to the characteristic score used for this ability’s power roll.",
   afterRollFunc: async function() {
     const isOtherTarget = await Dialog.confirm({
       title: `Other target within 2 squares?`,

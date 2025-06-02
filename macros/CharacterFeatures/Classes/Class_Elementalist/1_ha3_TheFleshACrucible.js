@@ -5,9 +5,9 @@ await game.macros.getName("ShareAbility").execute({
   activeActor: actor,
   name: "The Flesh, a Crucible",
   resourceCost: 3,
-  flavorText: "Fire engulfs a target of your choice and burns at your command.",
+  flavorText: "Fire engulfs your target and continues to churn.",
   keywords: "Fire, Magic, Ranged, Strike",
-  type: "Action",
+  type: "Main Action",
   distance: "Ranged 10",
   target: "One creature or object",
   powerRollStat: "Reason",
@@ -15,5 +15,5 @@ await game.macros.getName("ShareAbility").execute({
   tier2Effect: "8 + R fire damage",
   tier3Effect: "11 + R fire damage",
   persistentCost: 1,
-  persistentEffect: "If the target is within distance at the start of your turn, make a power roll for this ability again."
+  persistentEffect: "If the target is within distance at the start of your turn, you can make the power roll again without spending essence."
 });

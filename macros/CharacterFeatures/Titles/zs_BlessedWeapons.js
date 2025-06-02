@@ -4,6 +4,6 @@
 await game.macros.getName("ShareFeature").execute({
   activeActor: actor,
   name: "Blessed Weapons",
-  description: `When you use an ability that deals damage that has no type, you can deal holy damage instead.`,
+  description: `Whenever you use a damage-dealing weapon ability, that ability can deal holy damage instead of its usual damage type.`,
   source: "Title"
 });

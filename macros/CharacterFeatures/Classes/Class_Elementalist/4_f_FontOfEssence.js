@@ -4,6 +4,6 @@
 await game.macros.getName("ShareFeature").execute({
   activeActor: actor,
   name: "Font of Essence",
-  description: "When you gain essence from a creature within 10 squares of you taking damage that isn’t holy or untyped, you gain 1 additional essence.",
+  description: "The first time each combat round that you or a creature within 10 squares takes damage that isn’t untyped or holy damage, you gain 2 essence instead of 1.",
   source: "Class"
 });

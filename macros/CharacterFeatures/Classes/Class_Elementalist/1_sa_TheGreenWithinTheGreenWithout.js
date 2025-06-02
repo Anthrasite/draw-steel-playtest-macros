@@ -6,7 +6,7 @@ await game.macros.getName("ShareAbility").execute({
   name: "The Green Within, The Green Without",
   flavorText: "Whipping vines erupt from a foe’s body to grasp at another close by.",
   keywords: "Green, Magic, Ranged, Strike",
-  type: "Action",
+  type: "Main Action",
   distance: "Ranged 10",
   target: "One creature",
   powerRollStat: "Reason",

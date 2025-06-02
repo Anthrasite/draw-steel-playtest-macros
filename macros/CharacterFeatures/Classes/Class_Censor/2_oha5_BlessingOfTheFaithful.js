@@ -10,5 +10,5 @@ await game.macros.getName("ShareAbility").execute({
   type: "Maneuver",
   distance: "3 aura",
   target: "Self and each ally in the area",
-  effect: "Until the end of the encounter or you are dying, each target in the aura gains a surge at the end of each of your turns."
+  effect: "Until the end of the encounter or until you are dying, each target gains 1 surge at the end of each of your turns."
 });

@@ -4,10 +4,6 @@
 await game.macros.getName("ShareFeature").execute({
   activeActor: actor,
   name: "Harmonizer",
-  description: `For you, music is a universal language.</p>
-    <ul>
-      <li>You can make a Presence test with the music skill to influence creatures even if you don’t share a language.</li>
-      <li>Once during a negotiation when an ally makes an argument, you can play music to give them an edge on their test.</li>
-    </ul>`,
+  description: `You can make a Presence test using the Music skill to influence creatures who don’t have emotions or can’t understand you. Additionally, once during a negotiation when an ally makes an argument, you can play music to give that ally an edge on their test.`,
   source: "Perk"
 });

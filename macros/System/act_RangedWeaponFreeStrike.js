@@ -7,7 +7,7 @@ await game.macros.getName("ShareAbility").execute({
   keywords: "Ranged, Strike, Weapon",
   type: "Action",
   distance: "Ranged 5",
-  target: "1 creature or object",
+  target: "One creature or object",
   powerRollStat: "Might or Agility",
   tier1Effect: "2 + M or A damage",
   tier2Effect: "4 + M or A damage",

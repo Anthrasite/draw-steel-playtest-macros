@@ -4,6 +4,6 @@
 await game.macros.getName("ShareFeature").execute({
   activeActor: actor,
   name: "Hellsight",
-  description: "Your eyes let you see through the dark, fog, and other types of concealment. You don’t take a bane on strikes against concealed, unhidden creatures.",
+  description: "Your eyes let you see through darkness, fog, and other obscuring effects. You don’t take a bane on strikes made against creatures with concealment.",
   source: "Ancestry"
 });

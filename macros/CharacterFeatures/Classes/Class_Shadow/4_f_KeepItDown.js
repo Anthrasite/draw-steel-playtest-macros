@@ -4,6 +4,6 @@
 await game.macros.getName("ShareFeature").execute({
   activeActor: actor,
   name: "Keep It Down",
-  description: "While conversing with a creature you share a language with, you can decide whether anyone else beyond the two of you can perceive what you’re conveying, even while yelling.",
+  description: "While conversing with any creature you share a language with, you can decide whether anyone else can perceive what you’re conveying, even while yelling.",
   source: "Class"
 });

@@ -4,6 +4,6 @@
 await game.macros.getName("ShareFeature").execute({
   activeActor: actor,
   name: "Impressive Horns",
-  description: "Your cherished horns are larger than the average devil and a hardened representation of your force of will, allowing you to succeed on a roll of 5 or higher with saving throws.",
+  description: "Your cherished horns are larger than the average devil’s, and a hardened representation of your force of will. Whenever you make a saving throw, you succeed on a roll of 5 or higher.",
   source: "Ancestry"
 });

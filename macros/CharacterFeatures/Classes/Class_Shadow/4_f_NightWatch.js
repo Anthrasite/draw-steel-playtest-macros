@@ -8,7 +8,7 @@ await game.macros.getName("ShareAbility").execute({
   keywords: "Ranged, Weapon",
   type: "Triggered",
   distance: "Ranged 5",
-  target: "1 ally",
+  target: "One ally",
   trigger: "The target takes damage from another creature’s ability while you are hidden.",
-  effect: "The damage is halved. You remain hidden."
+  effect: "The target takes half the damage. You remain hidden."
 });

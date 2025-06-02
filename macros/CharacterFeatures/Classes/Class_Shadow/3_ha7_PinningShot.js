@@ -7,7 +7,7 @@ await game.macros.getName("ShareAbility").execute({
   flavorText: "One missile—placed well and placed hard.",
   resourceCost: 7,
   keywords: "Ranged, Strike, Weapon",
-  type: "Action",
+  type: "Main Action",
   distance: "Ranged 5",
   target: "One creature",
   powerRollStat: "Agility",

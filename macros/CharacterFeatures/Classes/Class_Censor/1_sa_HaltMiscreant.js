@@ -1,12 +1,12 @@
 //@id=bKCjDd1YTrnyi0sa
-//@name=Halt, Miscreant!
+//@name=Halt Miscreant!
 //@img=icons/magic/holy/barrier-shield-winged-blue.webp
 await game.macros.getName("ShareAbility").execute({
   activeActor: actor,
-  name: "Halt, Miscreant!",
-  flavorText: "\"Your race is run!\"",
+  name: "Halt Miscreant!",
+  flavorText: "You infuse your weapon with holy magic that makes it difficult for your foe to get away.",
   keywords: "Melee, Strike, Weapon",
-  type: "Action",
+  type: "Main Action",
   distance: "Melee 1",
   target: "One creature or object",
   powerRollStat: "Might",

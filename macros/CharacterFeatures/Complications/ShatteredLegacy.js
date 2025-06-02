@@ -4,8 +4,8 @@
 await game.macros.getName("ShareFeature").execute({
   activeActor: actor,
   name: "Shattered Legacy",
-  description: `You’re the heir to a powerful magical treasure that has been in your family for generations. The only problem: it’s broken. Some ancestor of yours broke it while saving the world, or maybe they tripped and smashed it on a rock. It’s your job to fix it.</p>
-    <p><b>Benefit:</b> You learn a language of your choice. You gain a leveled item of your choice.</p>
-    <p><b>Drawback:</b> The leveled item you gain from this complication is broken and completely inoperative. Repairing the item requires using the Craft Treasure project, and the goal is half what it would normally be to create such an item. You have the project source you need to fix the item, but not the item prerequisite.</p>`,
+  description: `You’re the heir to a powerful supernatural treasure that has been in your family for generations. One problem, though: that treasure is broken. Some ancestor of yours sundered it while saving the world. Or maybe they tripped and smashed it on a rock. Either way, it’s your job to fix it.</p>
+    <p><b>Benefit:</b> You know one language of your choice. Additionally, you have one leveled treasure of your choice.</p>
+    <p><b>Drawback:</b> The chosen leveled treasure is broken and completely inoperative. Repairing the treasure requires that you complete the Craft Treasure project for it. The project goal is half of what it would cost to create such an item, and you already have the project source you need. You must seek out any item prerequisite.</p>`,
   source: "Complication"
 });

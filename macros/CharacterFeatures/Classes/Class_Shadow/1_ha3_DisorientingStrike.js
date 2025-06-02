@@ -7,7 +7,7 @@ await game.macros.getName("ShareAbility").execute({
   flavorText: "Your attack leaves them reeling, allowing you to follow up.",
   resourceCost: 3,
   keywords: "Melee, Strike, Weapon",
-  type: "Action",
+  type: "Main Action",
   distance: "Melee 1",
   target: "One creature",
   powerRollStat: "Agility",

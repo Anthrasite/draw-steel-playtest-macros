@@ -7,12 +7,12 @@ await game.macros.getName("ShareAbility").execute({
   resourceCost: 5,
   flavorText: "Judged and sentenced.",
   keywords: "Melee, Strike, Weapon",
-  type: "Action",
+  type: "Main Action",
   distance: "Melee 1",
   target: "One creature",
   powerRollStat: "Might",
   tier1Effect: "2 + M holy damage",
   tier2Effect: "3 + M holy damage",
   tier3Effect: "5 + M holy damage",
-  effect: "If a target who is not a leader or a solo creature is winded after the damage is resolved, they die."
+  effect: "When a target who is not a leader or solo creature is made winded by this ability, they are reduced to 0 Stamina."
 });

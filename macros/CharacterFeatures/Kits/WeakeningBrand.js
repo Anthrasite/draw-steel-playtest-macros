@@ -9,10 +9,10 @@ await game.macros.getName("ShareAbility").execute({
   isKit: true,
   type: "Action",
   distance: "Melee 1",
-  target: "1 creature or object",
+  target: "One creature or object",
   powerRollStat: "Might, Reason, Intuition, or Presence",
-  tier1Effect: "3 + M, R, I or P holy damage",
-  tier2Effect: "5 + M, R, I or P holy damage",
-  tier3Effect: "8 + M, R, I or P holy damage",
-  effect: "The target has damage weakness equal to the characteristic score you used on this ability’s power roll (EoT)."
+  tier1Effect: "3 + M, R, I, or P holy damage",
+  tier2Effect: "5 + M, R, I, or P holy damage",
+  tier3Effect: "8 + M, R, I, or P holy damage",
+  effect: "Until the end of the target’s next turn, they have damage weakness equal to the characteristic score used for this ability’s power roll."
 });

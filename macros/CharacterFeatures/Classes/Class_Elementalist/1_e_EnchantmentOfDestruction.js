@@ -4,6 +4,6 @@
 await game.macros.getName("ShareFeature").execute({
   activeActor: actor,
   name: "Enchantment of Destruction",
-  description: "You harness the destructive power of flame inside your mind, allowing you to focus your magic on destroying your enemies. You gain a +1 rolled damage bonus with magic abilities.",
+  description: "You gain a +1 bonus to rolled damage with magic abilities.",
   source: "Class"
 });

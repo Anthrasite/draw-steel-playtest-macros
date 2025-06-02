@@ -9,12 +9,12 @@ await game.macros.getName("ShareAbility").execute({
   isKit: true,
   type: "Action",
   distance: "Melee 1",
-  target: "1 creature",
+  target: "One creature",
   powerRollStat: "Might or Agility",
   tier1Effect: "5 + M or A damage",
   tier2Effect: "8 + M or A damage; you swap places with the target",
   tier3Effect: "11 + M or A damage; you swap places with the target",
-  effect: "If you roll a 12 or better and can’t swap places with the target because one or both of you is too big to fit into the swapped space, you both remain in your original spaces and the target takes 1 extra damage.",
+  effect: "If you obtain a tier 2 or tier 3 outcome and can’t swap places with the target because one or both of you is too big to fit into the swapped space, you both remain in your original spaces and the target takes an extra 1 damage.",
   getExtraDamageFunc: async function(rollResult) {
     const doFailedSwapDamage = rollResult.tier >= 2 && await Dialog.confirm({
       title: `Swapped?`,

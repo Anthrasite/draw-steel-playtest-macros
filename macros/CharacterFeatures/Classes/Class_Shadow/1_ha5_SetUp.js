@@ -1,13 +1,13 @@
 //@id=HKGiFY9uxe6LIJmb
-//@name=Set-Up
+//@name=Setup
 //@img=icons/magic/unholy/silhouette-robe-evil-power.webp
 await game.macros.getName("ShareAbility").execute({
   activeActor: actor,
-  name: "Set-Up",
+  name: "Setup",
   flavorText: "Your friends will thank you.",
   resourceCost: 5,
   keywords: "Ranged, Strike, Weapon",
-  type: "Action",
+  type: "Main Action",
   distance: "Ranged 5",
   target: "One creature",
   powerRollStat: "Agility",

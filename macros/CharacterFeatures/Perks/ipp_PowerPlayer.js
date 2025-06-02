@@ -4,6 +4,6 @@
 await game.macros.getName("ShareFeature").execute({
   activeActor: actor,
   name: "Power Player",
-  description: `When you make a test that uses the Brag, Flirt, or Intimidate skills, you can use Might in place of another characteristic used as part of the test.`,
+  description: `Whenever you make a test that uses the Brag, Flirt, or Intimidate skills, you can use Might in place of any other characteristic the test calls for.`,
   source: "Perk"
 });

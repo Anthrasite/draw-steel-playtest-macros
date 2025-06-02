@@ -7,7 +7,7 @@ await game.macros.getName("ShareAbility").execute({
   resourceCost: 3,
   flavorText: "You open a rift into the void to harry your foes.",
   keywords: "Area, Magic, Ranged, Void",
-  type: "Action",
+  type: "Main Action",
   distance: "3 cube within 10",
   target: "Each enemy in the area",
   powerRollStat: "Reason",

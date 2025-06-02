@@ -10,7 +10,7 @@ await game.macros.getName("ShareAbility").execute({
   type: "Maneuver",
   distance: "Ranged 10",
   target: "Self or one ally",
-  effect: "Until the start of your next turn, the target can move through solid matter, ignores difficult terrain, and their movement can’t provoke opportunity attacks. If the target ends their turn inside solid matter, they are shunted out into the space where they entered it and this effect ends.",
+  effect: "Until the start of your next turn, the target can move through solid matter, they ignore difficult terrain, and their movement can’t provoke opportunity attacks. If the target ends their turn inside solid matter, they are shunted out into the space where they entered it and this effect ends.",
   persistentCost: 1,
   persistentEffect: "The effect lasts until the start of your next turn."
 });

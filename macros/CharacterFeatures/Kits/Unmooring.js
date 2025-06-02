@@ -9,9 +9,10 @@ await game.macros.getName("ShareAbility").execute({
   isKit: true,
   type: "Action",
   distance: "Melee 1",
-  target: "1 creature",
+  target: "One creature",
   powerRollStat: "Might, Reason, Intuition, or Presence",
-  tier1Effect: "5 + M, R, I, or P damage; stability reduced by 2 (EoT)",
-  tier2Effect: "8 + M, R, I, or P damage; stability reduced by 3 (EoT)",
-  tier3Effect: "11 + M, R, I, or P damage; stability reduced by 4 (EoT)"
+  tier1Effect: "5 + M, R, I, or P damage",
+  tier2Effect: "8 + M, R, I, or P damage",
+  tier3Effect: "11 + M, R, I, or P damage",
+  effect: "Until the end of the target’s next turn, any forced movement that affects the target has its distance increased by 2."
 });

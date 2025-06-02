@@ -9,7 +9,7 @@ await game.macros.getName("ShareAbility").execute({
   isKit: true,
   type: "Action",
   distance: "Ranged 10",
-  target: "1 creature",
+  target: "One creature",
   powerRollStat: "Might or Agility",
   tier1Effect: "3 + M or A damage; A < weak, slowed (save ends)",
   tier2Effect: "5 + M or A damage; A < average, slowed (save ends)",

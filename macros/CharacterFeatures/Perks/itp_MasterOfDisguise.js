@@ -4,6 +4,6 @@
 await game.macros.getName("ShareFeature").execute({
   activeActor: actor,
   name: "Master of Disguise",
-  description: `You can don or remove a disguise as part of any Hide test you make or while taking the Hide maneuver.`,
+  description: `You can don or remove a disguise as part of any test you make using the Hide skill, or while using the Hide maneuver.`,
   source: "Perk"
 });

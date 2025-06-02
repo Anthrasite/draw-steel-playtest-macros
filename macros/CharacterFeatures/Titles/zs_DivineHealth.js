@@ -4,6 +4,6 @@
 await game.macros.getName("ShareFeature").execute({
   activeActor: actor,
   name: "Divine Health",
-  description: `You gain corruption immunity equal to your highest characteristic score. You can’t be turned into an undead creature.`,
+  description: `You gain corruption immunity equal to your highest characteristic score. Additionally, you can’t be turned into an undead creature.`,
   source: "Title"
 });

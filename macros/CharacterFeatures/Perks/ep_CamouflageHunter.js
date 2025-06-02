@@ -4,6 +4,6 @@
 await game.macros.getName("ShareFeature").execute({
   activeActor: actor,
   name: "Camouflage Hunter",
-  description: "While in the wilderness, once you are hidden from a creature, you don’t need cover or concealment from them to stay hidden.",
+  description: "Whenever you are in wilderness, once you are hidden from a creature, you don’t need cover or concealment to stay hidden from them.",
   source: "Perk"
 });

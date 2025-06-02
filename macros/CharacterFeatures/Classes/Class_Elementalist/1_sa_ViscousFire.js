@@ -4,8 +4,8 @@
 await game.macros.getName("ShareAbility").execute({
   activeActor: actor,
   name: "Viscous Fire",
-  flavorText: "A jet of heavy fire erupts with elemental fury where it strikes.",
-  type: "Action",
+  flavorText: "A jet of heavy fire erupts where you strike.",
+  type: "Main Action",
   keywords: "Fire, Magic, Ranged, Strike",
   distance: "Ranged 10",
   target: "One creature or object",

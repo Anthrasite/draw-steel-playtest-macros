@@ -7,7 +7,7 @@ await game.macros.getName("ShareAbility").execute({
   flavorText: "There’s no recovering from this.",
   resourceCost: 7,
   keywords: "Melee, Ranged, Strike, Weapon",
-  type: "Action",
+  type: "Main Action",
   distance: "Melee 1 or ranged 5",
   target: "One creature",
   powerRollStat: "Agility",

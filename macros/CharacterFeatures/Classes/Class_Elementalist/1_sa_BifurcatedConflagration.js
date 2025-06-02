@@ -1,11 +1,11 @@
 //@id=RDe2pKflgC1TL6yr
-//@name=Bifurcated Conflagration
+//@name=Bifurcated Incineration
 //@img=icons/magic/nature/beam-hand-leaves-green.webp
 await game.macros.getName("ShareAbility").execute({
   activeActor: actor,
-  name: "Bifurcated Conflagration",
+  name: "Bifurcated Incineration",
   flavorText: "Two jets of flame lance out at your command.",
-  type: "Action",
+  type: "Main Action",
   keywords: "Fire, Magic, Ranged, Strike",
   distance: "Ranged 10",
   target: "Two creatures or objects",

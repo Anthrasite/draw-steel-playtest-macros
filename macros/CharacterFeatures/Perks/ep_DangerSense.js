@@ -4,6 +4,6 @@
 await game.macros.getName("ShareFeature").execute({
   activeActor: actor,
   name: "Danger Sense",
-  description: "When in a natural environment that isn’t in a settlement, you have an edge on all tests made with the Alertness skill, and you cannot be surprised. Additionally, you’re attuned to the instincts of wildlife and know if a natural disaster is imminent within the next 72 hours. You don’t know exactly what it will entail.",
+  description: "Whenever you are in a natural environment (but not in a settlement in that environment), you gain an edge on tests made using the Alertness skill, and you can’t be surprised. Additionally, you have a connection to nature that warns you if any natural disaster is imminent within the next 72 hours, though you don’t know exactly what it will entail (an earthquake, a wildfire, and so forth).",
   source: "Perk"
 });

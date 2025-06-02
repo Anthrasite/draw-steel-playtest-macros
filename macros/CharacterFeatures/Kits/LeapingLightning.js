@@ -11,12 +11,12 @@ await game.macros.getName("ShareAbility").execute({
   isKit: true,
   type: "Action",
   distance: "Melee 1",
-  target: "1 creature or object",
+  target: "One creature or object",
   powerRollStat,
-  tier1Effect: "5 + M, R, I or P lightning damage",
-  tier2Effect: "8 + M, R, I or P lightning damage",
-  tier3Effect: "11 + M, R, I or P lightning damage",
-  effect: "A creature or object within 2 squares of your target takes lightning damage equal to the characteristic you used for this ability’s power roll.",
+  tier1Effect: "5 + M, R, I, or P lightning damage",
+  tier2Effect: "8 + M, R, I, or P lightning damage",
+  tier3Effect: "11 + M, R, I, or P lightning damage",
+  effect: "A creature or object of your choice within 2 squares of the target takes lightning damage equal to the characteristic score used for this ability’s power roll.",
   afterRollFunc: async function() {
     const isOtherTarget = await Dialog.confirm({
       title: `Other target within 2 squares?`,

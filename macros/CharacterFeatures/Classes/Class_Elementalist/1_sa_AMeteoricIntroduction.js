@@ -1,12 +1,12 @@
 //@id=YwpDuNX84dehER5K
-//@name=A Meteoric Introduction
+//@name=Meteoric Introduction
 //@img=icons/magic/nature/beam-hand-leaves-green.webp
 await game.macros.getName("ShareAbility").execute({
   activeActor: actor,
-  name: "A Meteoric Introduction",
-  flavorText: "You give your enemy a gentle tap like an asteroid impact.",
-  type: "Action",
-  keywords: "Attack, Earth, Magic, Melee, Strike",
+  name: "Meteoric Introduction",
+  flavorText: "You give your enemy a gentle tap—like an asteroid impact.",
+  type: "Main Action",
+  keywords: "Earth, Magic, Melee, Strike",
   distance: "Melee 1",
   target: "One creature or object",
   powerRollStat: "Reason",

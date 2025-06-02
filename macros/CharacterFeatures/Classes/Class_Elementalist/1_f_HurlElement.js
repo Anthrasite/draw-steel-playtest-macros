@@ -4,9 +4,9 @@
 await game.macros.getName("ShareAbility").execute({
   activeActor: actor,
   name: "Hurl Element",
-  flavorText: "You cast a ball of elemental energy at an unsuspecting foe.",
+  flavorText: "You cast a ball of elemental energy at a foe.",
   keywords: "Magic, Ranged, Strike",
-  type: "Action",
+  type: "Main Action",
   distance: "Ranged 10",
   target: "One creature or object",
   powerRollStat: "Reason",

@@ -9,10 +9,10 @@ await game.macros.getName("ShareAbility").execute({
   isKit: true,
   type: "Action",
   distance: "Melee 1",
-  target: "1 creature",
+  target: "One creature",
   powerRollStat: "Might or Agility",
   tier1Effect: "5 + M or A damage",
   tier2Effect: "8 + M or A damage",
   tier3Effect: "11 + M or A damage",
-  effect: "The target is taunted (EoT)."
+  effect: "The target is taunted until the end of their next turn."
 });

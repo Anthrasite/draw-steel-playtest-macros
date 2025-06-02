@@ -10,7 +10,7 @@ await game.macros.getName("ShareAbility").execute({
   keywords: "Area, Fire, Magic, Ranged",
   distance: "10 wall within 10",
   target: "Special",
-  effect: "The wall lasts until the start of your next turn, and can be placed in occupied squares. Creatures can enter and pass through the wall. When an enemy enters or starts their turn in a square of the wall, they take fire damage equal to your Reason score.",
+  effect: "The wall lasts until the start of your next turn, and can be placed in occupied squares. Creatures can enter and pass through the wall. Each enemy who enters the area for the first time in a combat round or starts their turn there takes fire damage equal to your Reason score.",
   persistentCost: 1,
-  persistentEffect: "The effect lasts until the start of your next turn, and you can add a number of squares to the wall equal to your Reason score."
+  persistentEffect: "The wall lasts until the start of your next turn, and you can add a number of squares to the wall equal to your Reason score."
 });

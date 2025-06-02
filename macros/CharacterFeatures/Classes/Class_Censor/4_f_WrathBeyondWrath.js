@@ -4,6 +4,6 @@
 await game.macros.getName("ShareFeature").execute({
   activeActor: actor,
   name: "Wrath Beyond Wrath",
-  description: "The first time in a round that you deal damage to a judged creature, you gain 2 wrath instead of 1.",
+  description: "The first time each combat round that you deal damage to a creature judged by you, you gain 2 wrath instead of 1.",
   source: "Class"
 });

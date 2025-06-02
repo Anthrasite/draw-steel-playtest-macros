@@ -7,7 +7,7 @@ await game.macros.getName("ShareAbility").execute({
   flavorText: "Move unexpectedly, strike fast, and be gone!",
   resourceCost: 3,
   keywords: "Melee, Strike, Weapon",
-  type: "Action",
+  type: "Main Action",
   distance: "Melee 1",
   target: "One creature",
   powerRollStat: "Agility",

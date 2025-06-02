@@ -7,7 +7,7 @@ await game.macros.getName("ShareAbility").execute({
   resourceCost: 5,
   flavorText: "A storm of fire descends upon your enemies.",
   keywords: "Area, Fire, Magic, Ranged",
-  type: "Action",
+  type: "Main Action",
   distance: "3 cube within 10",
   target: "Each enemy in the area",
   powerRollStat: "Reason",

@@ -9,10 +9,10 @@ await game.macros.getName("ShareAbility").execute({
   isKit: true,
   type: "Action",
   distance: "Melee 1",
-  target: "1 creature",
+  target: "One creature",
   powerRollStat: "Might or Agility",
   tier1Effect: "3 + M or A damage",
   tier2Effect: "6 + M or A damage; slide 1",
   tier3Effect: "8 + M or A damage; slide 2",
-  effect: "You can shift into any square your target leaves after you slide them."
+  effect: "You can shift into any square the target leaves after you slide them."
 });

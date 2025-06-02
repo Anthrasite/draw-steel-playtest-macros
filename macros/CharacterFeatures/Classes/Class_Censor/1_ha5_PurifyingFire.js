@@ -7,7 +7,7 @@ await game.macros.getName("ShareAbility").execute({
   resourceCost: 5,
   flavorText: "The gods judge, fire cleanses.",
   keywords: "Magic, Melee, Ranged, Strike, Weapon",
-  type: "Action",
+  type: "Main Action",
   distance: "Melee 1 or ranged 5",
   target: "One creature",
   powerRollStat: "Might",

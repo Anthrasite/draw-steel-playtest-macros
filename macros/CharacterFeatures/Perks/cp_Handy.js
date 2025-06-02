@@ -4,6 +4,6 @@
 await game.macros.getName("ShareFeature").execute({
   activeActor: actor,
   name: "Handy",
-  description: `When you make a test to craft something and don’t have a skill that applies, you gain a +1 bonus to the roll.`,
+  description: `Whenever you make a test to craft something and don’t have a skill that applies to the test, you gain a +1 bonus to the power roll.`,
   source: "Perk"
 });

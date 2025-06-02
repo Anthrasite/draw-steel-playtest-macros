@@ -7,7 +7,7 @@ await game.macros.getName("ShareAbility").execute({
   flavorText: "A bargain.",
   resourceCost: 3,
   keywords: "Melee, Ranged, Strike, Weapon",
-  type: "Action",
+  type: "Main Action",
   distance: "Melee 1 or ranged 5",
   target: "Two creatures or objects",
   powerRollStat: "Agility",

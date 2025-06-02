@@ -8,11 +8,11 @@ await game.macros.getName("ShareAbility").execute({
   keywords: "Melee, Ranged, Strike, Weapon",
   isKit: true,
   type: "Action",
-  distance: "Melee 1 or Ranged 10",
-  target: "1 creature",
+  distance: "Melee 1 or ranged 10",
+  target: "One creature",
   powerRollStat: "Might or Agility",
   tier1Effect: "3 + M or A damage",
   tier2Effect: "6 + M or A damage",
   tier3Effect: "8 + M or A damage",
-  effect: "The target has a bane on their next power roll made before the end of their next turn."
+  effect: "The target takes a bane on their next power roll made before the end of their next turn."
 });

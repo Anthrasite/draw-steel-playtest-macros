@@ -11,12 +11,12 @@ await game.macros.getName("ShareAbility").execute({
   isKit: true,
   type: "Action",
   distance: "Melee 1",
-  target: "1 creature",
+  target: "One creature",
   powerRollStat,
   tier1Effect: "3 + M or A damage",
   tier2Effect: "5 + M or A damage",
   tier3Effect: "13 + M or A damage",
-  effect: "If the target dealt damage to you since the end of your last turn, this strike deals additional damage equal to your Might or Agility score (your choice).",
+  effect: `If the target dealt damage to you since the end of your last turn, this strike deals extra damage equal to your ${powerRollStat} score (your choice).`,
   getExtraDamageFunc: async function(rollResult) {
     const dealtDamage = await Dialog.confirm({
       title: `Dealt damage?`,

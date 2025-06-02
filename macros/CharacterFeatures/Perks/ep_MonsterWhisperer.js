@@ -4,6 +4,6 @@
 await game.macros.getName("ShareFeature").execute({
   activeActor: actor,
   name: "Monster Whisperer",
-  description: "You can use the Handle Animals skill to interact with non-sapient monsters who are not animals.",
+  description: "You can use the Handle Animals skill to interact with nonsapient creatures who are not animals.",
   source: "Perk"
 });

@@ -4,11 +4,11 @@
 await game.macros.getName("ShareFeature").execute({
   activeActor: actor,
   name: "Judgment Order Benefit",
-  description: `When you use your Judgment ability to judge another creature, you gain the following benefit based on your order.</p>
+  description: `The first time on a turn that you use your Judgment ability to judge a creature, you gain the following benefit based on your order:</p>
     <ul>
       <li><b>Exorcist:</b> You can teleport up to a number of squares equal to twice your Presence score. This movement must take you closer to the judged creature. You do not need line of effect to your destination.</li>
-      <li><b>Oracle:</b> You deal holy damage equal to twice your Presence score to the target.</li>
-      <li><b>Paragon:</b> You vertically pull the target up to a number of squares equal to twice your Presence score.
+      <li><b>Oracle:</b> You can deal holy damage equal to twice your Presence score to the judged creature.</li>
+      <li><b>Paragon:</b> You can vertical pull the judged creature up to a number of squares equal to twice your Presence score.</li>
     </ul>`,
   source: "Class"
 });

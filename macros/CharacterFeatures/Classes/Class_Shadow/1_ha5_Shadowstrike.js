@@ -7,8 +7,8 @@ await game.macros.getName("ShareAbility").execute({
   flavorText: "They have no idea what the college taught you.",
   resourceCost: 5,
   keywords: "Magic, Melee, Ranged",
-  type: "Action",
+  type: "Main Action",
   distance: "Self; see below",
   target: "Self",
-  effect: "You make two signature strikes."
+  effect: "You use a strike signature ability twice."
 });

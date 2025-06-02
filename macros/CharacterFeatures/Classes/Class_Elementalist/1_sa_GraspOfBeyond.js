@@ -5,7 +5,7 @@ await game.macros.getName("ShareAbility").execute({
   activeActor: actor,
   name: "Grasp of Beyond",
   flavorText: "You absorb the life energy of another creature and use it to teleport.",
-  type: "Action",
+  type: "Main Action",
   keywords: "Magic, Melee, Strike, Void",
   distance: "Melee 1",
   target: "One creature",

@@ -29,7 +29,7 @@ try {
   if (Object.keys(persistentCosts).length && Object.hasOwn(persistentCosts, name)) {
     const isPersistent = await Dialog.confirm({
       title: `Persistent effect?`,
-      content: `<p>Are you using the persistent effect of <i>${name}</i>?</p>`,
+      content: `<p>Are you using the persistent effect of ${name}?</p>`,
       defaultYes: false
     });
     actualResourceCost = isPersistent ? 0 : resourceCost;

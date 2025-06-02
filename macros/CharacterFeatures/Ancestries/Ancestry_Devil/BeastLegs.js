@@ -4,6 +4,6 @@
 await game.macros.getName("ShareFeature").execute({
   activeActor: actor,
   name: "Beast Legs",
-  description: "Your powerful legs improve your speed. Your speed becomes 6.",
+  description: "Your powerful legs make you faster. You have a speed of 6.",
   source: "Ancestry"
 });

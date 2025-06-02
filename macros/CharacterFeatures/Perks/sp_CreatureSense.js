@@ -4,6 +4,6 @@
 await game.macros.getName("ShareFeature").execute({
   activeActor: actor,
   name: "Creature Sense",
-  description: `As a maneuver, you can magically learn the keywords a creature of lower level within 10 squares of you has in their stat block (e.g. "Demon," "Humanoid," or "Undead").`,
+  description: `As a maneuver, choose a creature within 10 squares. If that creature is your level or lower, you learn the keywords in their stat block (Demon, Humanoid, Undead, and so forth).`,
   source: "Perk"
 });

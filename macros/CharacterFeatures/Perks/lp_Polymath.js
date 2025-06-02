@@ -4,6 +4,6 @@
 await game.macros.getName("ShareFeature").execute({
   activeActor: actor,
   name: "Polymath",
-  description: `When you make a test to recall lore and don’t have a skill that applies to the test, you gain a +1 bonus to the test.`,
+  description: `Whenever you make a test to recall lore and don’t have a skill that applies to the test, you gain a +1 bonus to the power roll.`,
   source: "Perk"
 });

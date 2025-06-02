@@ -4,22 +4,24 @@
 await game.macros.getName("ShareAbility").execute({
   activeActor: actor,
   name: "Teamwork Has Its Place",
-  flavorText: "You attack an enemy, distracting them long enough for an ally to stab them.",
+  flavorText: "You attack an enemy as an ally exposes their weakness.",
   keywords: "Melee, Ranged, Strike, Weapon",
-  type: "Action",
+  type: "Main Action",
   distance: "Melee 1 or ranged 5",
   target: "One creature or object",
   powerRollStat: "Agility",
   tier1Effect: "3 + A damage",
   tier2Effect: "6 + A damage",
   tier3Effect: "9 + A damage",
-  effect: "If an ally is adjacent to the target, the target takes extra damage equal to your Agility score.",
-  getExtraDamageFunc: async function(rollResult) {
+  effect: "If any ally is adjacent to the target, you gain 1 surge before making the power roll.",
+  beforeRollFunc: async function() {
     const allyAdjacent = await Dialog.confirm({
       title: `Ally adjacent?`,
       content: `<p>Is there an ally adjacent to the target?</p>`,
       defaultYes: false
     });
-    return allyAdjacent ? ` + ${await game.macros.getName(`GetCharacteristic`).execute({ activeActor: actor, characteristicName: `Agility` })}` : undefined;
+
+    if (allyAdjacent)
+      await game.macros.getName("UpdateAttribute").execute({ activeActor: actor, attributeName: "surges", value: 1, isDelta: true });
   }
 });
